@@ -1,4 +1,4 @@
-return require('packer').startup(function(use)
+require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'
 
 	use 'williamboman/mason.nvim'
@@ -44,5 +44,10 @@ end)
 
 
 
--- LOAD CONFIGS
+--[[ LOAD CONFIGS ]]--
+require("plugins.config.manson")
+require("plugins.config.which_key")
+require("plugins.config.nvim_tree")
+require("plugins.config.cmp")
+require("plugins.config.treesitter")
 
