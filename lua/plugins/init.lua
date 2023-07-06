@@ -6,18 +6,7 @@ require('packer').startup(function(use)
 
 	use 'neovim/nvim-lspconfig'
 
-	use {
-		"folke/which-key.nvim",
-			config = function()
-			vim.o.timeout = true
-			vim.o.timeoutlen = 300
-			require("which-key").setup {
-				-- your configuration comes here
-				-- or leave it empty to use the default settings
-				-- refer to the configuration section below
-			}
-		end
-		}
+	use "folke/which-key.nvim"	
 
 	use { 'nvim-tree/nvim-tree.lua', requires = { 'nvim-tree/nvim-web-devicons', }, }
 
@@ -36,18 +25,18 @@ require('packer').startup(function(use)
 	use 'hrsh7th/cmp-buffer'                            
 	use 'hrsh7th/vim-vsnip'     
 
+	use { 'akinsho/toggleterm.nvim', tag = '*' } 
 
-  if packer_bootstrap then
-    require('packer').sync()
-  end
+	use { 'phaazon/hop.nvim', branch = 'v2', config = function() require'hop'.setup { keys = 'etovxqpdygfblzhckisuran' } end }
+
+  if packer_bootstrap then require('packer').sync() end
 end)
-
-
 
 --[[ LOAD CONFIGS ]]--
 require("plugins.config.manson")
-require("plugins.config.which_key")
+require("plugins.config.toggleterm")
 require("plugins.config.nvim_tree")
 require("plugins.config.cmp")
 require("plugins.config.treesitter")
 
+require("plugins.config.which_key")

@@ -1,3 +1,5 @@
-vim.g.mapleader = "<Space>"
-vim.keymap.set('n', '<Leader>w', '<cmd>write<cr>', {desc = 'Save'})
+vim.g.mapleader = " "
+vim.g.mapleaderlocal = " "
+
+vim.keymap.set('n', '<leader>w', '<cmd>write<cr>', {desc = 'Save'})
 

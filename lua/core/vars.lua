@@ -8,8 +8,14 @@ vim.opt.wrap = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 
+
 vim.opt.shell = 'fish'
 
+vim.opt.clipboard = 'unnamedplus'
+
+-- Treesitter folding 
+vim.wo.foldmethod = 'expr'
+vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
 
 --Set completeopt to have a better completion experience
 -- :help completeopt
