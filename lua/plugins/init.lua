@@ -33,6 +33,8 @@ require('packer').startup(function(use)
 
 	use {'akinsho/bufferline.nvim', tag = "*", requires = 'nvim-tree/nvim-web-devicons'}
 
+	use 'tiagovla/scope.nvim'
+
 	use 'tamton-aquib/staline.nvim'
 
   if packer_bootstrap then require('packer').sync() end
@@ -49,6 +51,7 @@ require("plugins.config.which_key")
 require("plugins.config.winbar")
 require("plugins.config.bufferline")
 require("plugins.config.staline")
+require("plugins.config.scope")
 
 
 --[[ Load Plugin Keymap ]]--

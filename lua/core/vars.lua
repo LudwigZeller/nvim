@@ -14,6 +14,13 @@ vim.opt.shell = 'fish'
 
 vim.opt.clipboard = 'unnamedplus'
 
+-- Scope save to Session
+vim.opt.sessionoptions = { -- required
+    "buffers",
+    "tabpages",
+    "globals",
+}
+
 -- Treesitter folding 
 vim.wo.foldmethod = 'expr'
 vim.wo.foldexpr = 'nvim_treesitter#foldexpr()'
