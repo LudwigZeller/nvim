@@ -1,11 +1,8 @@
 --[[ Neovide ]]--
 if vim.g.neovide then require("core.neovide") end
 
---[[ Bootstraping ]]--
-require("core.bootstrap")
-
 --[[ Variables ]]--
-require("core.vars")
+require("core.opts")
 
 --[[ Mappings ]]--
 require("core.keymap")
