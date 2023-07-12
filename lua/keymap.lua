@@ -22,10 +22,10 @@ vim.keymap.set('n', '<leader><tab>c', '<cmd>tabclose<cr>', { desc = 'Close Tab' 
 --[[ Hop ]]--
 local hop = require('hop')
 local directions = require('hop.hint').HintDirection
-vim.keymap.set('', 'f', function() hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true }) end, { desc = "Find on line after cursor", remap = true })
-vim.keymap.set('', 'F', function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true }) end, { desc = "Find on line before cursor", remap=true })
-vim.keymap.set('', 't', function() hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false }) end, { desc = "Find after cursor", remap=true })
-vim.keymap.set('', 'T', function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false }) end, { desc = "Find before cursor", remap=true })
+vim.keymap.set('', '<leader>fl', function() hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = true }) end, { desc = "Find on line after cursor", remap = true })
+vim.keymap.set('', '<leader>fh', function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = true }) end, { desc = "Find on line before cursor", remap=true })
+vim.keymap.set('', '<leader>f<S-l>', function() hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false }) end, { desc = "Find after cursor", remap=true })
+vim.keymap.set('', '<leader>f<S-h>', function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false }) end, { desc = "Find before cursor", remap=true })
 
 --[[ Toggleterm ]]--
 local Terminal = require('toggleterm.terminal').Terminal

@@ -19,8 +19,11 @@ return {
 				sidebars = "transparent", -- style for sidebars, see below
 				floats = "normal", -- style for floating windows
 			},
-			sidebars = { "qf", },
+			sidebars = { },
 		},
+		config = function ()
+			vim.cmd[[colorscheme tokyonight]]
+		end
   },
 
   --[[ catppuccin ]]--
