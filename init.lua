@@ -21,4 +21,4 @@ require("core")
 
 require('lazy').setup('plugins')
 
-require("plugins")
+require('keymap')
