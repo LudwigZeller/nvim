@@ -27,9 +27,22 @@ return {
 
 	--[[ Trouble ]]--
 	{
-	 "folke/trouble.nvim",
-	 dependencies = { "nvim-tree/nvim-web-devicons" },
-	 opts = {
-	 },
+	 	'folke/trouble.nvim',
+	 	dependencies = { "nvim-tree/nvim-web-devicons" },
+	 	opts = {
+ 		},
 	},
+
+	--[[ Alpha ]]--
+	{
+    'goolord/alpha-nvim',
+    event = "VimEnter",
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+		--opts = require('alpha.themes.dashboard').config,
+    config = function ()
+			require('alpha').setup(
+				require('alpha.themes.dashboard').config
+			)
+    end
+ 	},
 }

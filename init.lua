@@ -11,14 +11,14 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.g.loaded_netrw       = 1
-vim.g.loaded_netrwPlugin = 1
+--[[ Neovide ]]--
+if vim.g.neovide then require("neovide") end
 
-vim.g.mapleader = " "
-vim.g.mapleaderlocal = " "
+--[[ Variables ]]--
+require("opts")
 
-require("core")
-
+--[[ Lazy ]]--
 require('lazy').setup('plugins')
 
+--[[ Keymap ]]--
 require('keymap')

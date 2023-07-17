@@ -1,3 +1,11 @@
+vim.g.loaded_netrw       = 1
+vim.g.loaded_netrwPlugin = 1
+
+vim.g.mapleader = " "
+vim.g.mapleaderlocal = " "
+
+vim.opt.termguicolors = true
+
 vim.opt.breakindent = true
 vim.opt.hlsearch = false
 vim.opt.ignorecase = true
@@ -20,6 +28,8 @@ vim.opt.sessionoptions = { -- required
     "tabpages",
     "globals",
 }
+
+vim.opt.winblend = 40
 
 -- Treesitter folding 
 vim.wo.foldmethod = 'expr'
