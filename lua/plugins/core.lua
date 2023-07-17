@@ -4,7 +4,7 @@ return  {
 		'williamboman/mason.nvim',
 		dependencies = { 'williamboman/mason-lspconfig.nvim', 'neovim/nvim-lspconfig', 'simrat39/rust-tools.nvim' },
 
-		config = function()
+		opts = function()
 			require("mason").setup({
 				ui = {
 						icons = {

@@ -2,7 +2,7 @@
 return {
 	'nvim-treesitter/nvim-treesitter',
 	build = ':TSUpdate',
-	optgs = {
+	opts = {
 		ensure_installed = { "lua" },
 		auto_install = true,
 		highlight = {

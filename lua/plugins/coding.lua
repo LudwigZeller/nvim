@@ -41,7 +41,7 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 
 null_ls.setup({
     -- add your sources / config options here
-    sources = ...,
+    -- sources = ...,
     debug = false,
     on_attach = function(client, bufnr)
         if client.supports_method("textDocument/formatting") then
@@ -127,4 +127,4 @@ null_ls.setup({
 	},
 
 
-}
+}}
