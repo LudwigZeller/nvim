@@ -8,7 +8,7 @@ vim.keymap.set('n', '<leader>b<S-l>', '<cmd>blast<cr>', { desc = 'Last Buffer' }
 vim.keymap.set('n', '<leader>bn', '<cmd>enew<cr>', { desc = 'New Buffer' })
 vim.keymap.set('n', '<leader>bc', '<cmd>bdelete<cr>', { desc = 'Close Buffer' })
 vim.keymap.set('n', '<leader>bp', '<cmd>BufferLinePick<cr>', { desc = 'Pick Buffer' })
-vim.keymap.set('n', '<leader>bx', '<cmd>BufferLinePickClose<cr>', { desc = 'Pick and Close Buffer' })
+vim.keymap.set('n', '<leader>bk', '<cmd>BufferLinePickClose<cr>', { desc = 'Pick and Close Buffer' })
 vim.keymap.set('n', '<leader>bx', '<cmd>BufferLineCloseOther<cr>', { desc = 'Close other Buffers' })
 
 --[[ Tabs ]]--

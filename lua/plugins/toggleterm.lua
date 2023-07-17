@@ -1,12 +1,14 @@
 return {
 	'akinsho/toggleterm.nvim',
+	version = '*',
 	opts = {
-		shade_terminals = true,
-		winbar = {
-			enabled = true,
-			name_formatter = function(term) --  term: Terminal
-				return term.name
+		size = function(term)
+			if term.direction == "vertical" then
+				return vim.o.columns * 0.4
+			elseif term.direction == "horizontal" then
+				return 15
 			end
-		},
+		end,
+		shade_terminals = false,
 	}
 }

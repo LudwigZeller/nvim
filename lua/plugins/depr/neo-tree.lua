@@ -6,9 +6,9 @@ return {
 		'nvim-tree/nvim-web-devicons',
 		'MunifTanjim/nui.nvim',
 	},
-	keys = { "n", "<leader>ft", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
+	--keys = { "n", "<leader>ft", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
 	opts = {
-		close_if_last_window = false,
+		close_if_last_window = true,
 		source_selector = {
 			winbar = false,
 			statusline = false

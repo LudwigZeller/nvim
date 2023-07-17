@@ -1,4 +1,24 @@
 return {
+	--[[ Treesitter ]]--
+	{
+		'nvim-treesitter/nvim-treesitter',
+		build = ':TSUpdate',
+		opts = {
+			ensure_installed = { "lua" },
+			auto_install = true,
+			highlight = {
+				enable = true,
+				additional_vim_regex_highlighting=false,
+			},
+			ident = { enable = true },
+			rainbow = {
+				enable = true,
+				extended_mode = true,
+				max_file_lines = nil,
+			}
+		},
+	},
+
 	--[[ Statusline ]]--
 	{
 		'nvim-lualine/lualine.nvim',
@@ -10,8 +30,21 @@ return {
 				component_separators = { left = '', right = ''},
 				section_separators = { left = '', right = ''},
 				disabled_filetypes = {
-					statusline = {},
-					winbar = {},
+					statusline = {
+						'help',
+						'startify',
+						'dashboard',
+						'packer',
+						'neogitstatus',
+						'NvimTree',
+						'Trouble',
+						'alpha',
+						'lir',
+						'Outline',
+						'spectre_panel',
+						'toggleterm',
+						'qf',
+					},
 				},
 				ignore_focus = {},
 				always_divide_middle = true,
@@ -38,9 +71,6 @@ return {
 				lualine_y = {},
 				lualine_z = {}
 			},
-			tabline = {},
-			winbar = {},
-			inactive_winbar = {},
 			extensions = {}
 		}
 	},

@@ -14,4 +14,7 @@ return {
 
   --[[ makes plugins dot-repeatable ]]--
   { "tpope/vim-repeat", event = "VeryLazy" },
+
+	--[[ Lua + Nvim ]]--
+	{ 'folke/neodev.nvim', }
 }

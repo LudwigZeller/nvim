@@ -4,7 +4,8 @@ return {
     "folke/tokyonight.nvim",
     name = "tokyonight",
 		priority=1000,
-    opts = {
+		config = function ()
+			require("tokyonight").setup({
 			style = "storm",
 			transparent = true,
 			terminal_colors = true, -- Configure the colors used when opening a `:terminal` in [Neovim](https://github.com/neovim/neovim)
@@ -19,9 +20,8 @@ return {
 				sidebars = "transparent", -- style for sidebars, see below
 				floats = "normal", -- style for floating windows
 			},
-			sidebars = { },
-		},
-		config = function ()
+			sidebars = { 'qf', },
+		})
 			vim.cmd[[colorscheme tokyonight]]
 		end
   },
