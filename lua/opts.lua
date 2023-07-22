@@ -29,7 +29,7 @@ vim.opt.sessionoptions = { -- required
     "globals",
 }
 
-vim.opt.winblend = 40
+vim.opt.winblend = 30
 
 vim.opt.completeopt = {'menuone', 'noselect', 'noinsert'}
 vim.opt.shortmess = vim.opt.shortmess + { c = true}

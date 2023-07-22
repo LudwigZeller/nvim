@@ -27,31 +27,3 @@ vim.keymap.set('', '<leader>fh', function() hop.hint_char1({ direction = directi
 vim.keymap.set('', '<leader>f<S-l>', function() hop.hint_char1({ direction = directions.AFTER_CURSOR, current_line_only = false }) end, { desc = "Find after cursor", remap=true })
 vim.keymap.set('', '<leader>f<S-h>', function() hop.hint_char1({ direction = directions.BEFORE_CURSOR, current_line_only = false }) end, { desc = "Find before cursor", remap=true })
 
---[[ Toggleterm ]]--
-local Terminal = require('toggleterm.terminal').Terminal
-
-local horizontal = Terminal:new({ direction = "horizontal" })
-function _Horizontal_toggle() horizontal:toggle() end
-vim.api.nvim_set_keymap("n", "<leader>th", "<cmd>lua _Horizontal_toggle()<CR>", { desc = 'Horizontal Terminal', noremap = true, silent = true })
-
-local vertical = Terminal:new({ direction = "vertical" })
-function _Vertical_toggle() vertical:toggle() end
-vim.api.nvim_set_keymap("n", "<leader>tv", "<cmd>lua _Vertical_toggle()<CR>", { desc = 'Verical Terminal', noremap = true, silent = true })
-
-local float = Terminal:new({ direction = "float" })
-function _Float_toggle() float:toggle() end
-vim.api.nvim_set_keymap("n", "<leader>tf", "<cmd>lua _Float_toggle()<CR>", { desc = 'Floating Terminal', noremap = true, silent = true })
-
-local htop = Terminal:new({ cmd = "htop", hidden = true, direction = "float" })
-function _Htop_toggle() htop:toggle() end
-vim.api.nvim_set_keymap("n", "<leader>ts", "<cmd>lua _Htop_toggle()<CR>", { desc = 'HTop', noremap = true, silent = true })
-
-local ncspot = Terminal:new({ cmd = "ncspot", hidden = true, direction = "float" })
-function _Ncspot_toggle() ncspot:toggle() end
-vim.api.nvim_set_keymap("n", "<leader>tm", "<cmd>lua _Ncspot_toggle()<CR>", { desc = 'NcSpot', noremap = true, silent = true })
-
-local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
-function _Lazygit_toggle() lazygit:toggle() end
-vim.api.nvim_set_keymap("n", "<leader>gl", "<cmd>lua _Lazygit_toggle()<CR>", { desc = 'LazyGit', noremap = true, silent = true })
-
-
