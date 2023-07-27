@@ -7,35 +7,170 @@ return {
 		version = false, -- telescope did only one release, so use HEAD for now
 		keys = {
 			-- find
-			{ "<leader>fb", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Buffers" },
-			{ "<leader>ff", "<cmd>lua require('telescope.builtin').find_files({ cwd=vim.lsp.buf.list_workspace_folders()[1] })<cr>", desc = "Find Files (root dir)" },
-			{ "<leader>fF", "<cmd>Telescope find_files<cr>", desc = "Find Files (cwd)" },
-			{ "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
-			{ "<leader>fR", "<cmd>lua require('telescope.builtin').oldfiles({ cwd=vim.loop.cwd() })<cr>", desc = "Recent (cwd)" },
+			{
+				"<leader>fb",
+				"<cmd>Telescope buffers show_all_buffers=true<cr>",
+				desc =
+				"Buffers"
+			},
+			{
+				"<leader>ff",
+				"<cmd>lua require('telescope.builtin').find_files({ cwd=vim.lsp.buf.list_workspace_folders()[1] })<cr>",
+				desc =
+				"Find Files (root dir)"
+			},
+			{
+				"<leader>fF",
+				"<cmd>Telescope find_files<cr>",
+				desc =
+				"Find Files (cwd)"
+			},
+			{
+				"<leader>fr",
+				"<cmd>Telescope oldfiles<cr>",
+				desc =
+				"Recent"
+			},
+			{
+				"<leader>fR",
+				"<cmd>lua require('telescope.builtin').oldfiles({ cwd=vim.loop.cwd() })<cr>",
+				desc =
+				"Recent (cwd)"
+			},
 			-- git
-			{ "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
-			{ "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
+			{
+				"<leader>gc",
+				"<cmd>Telescope git_commits<CR>",
+				desc =
+				"commits"
+			},
+			{
+				"<leader>gs",
+				"<cmd>Telescope git_status<CR>",
+				desc =
+				"status"
+			},
 			-- search
-			{ "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
-			{ "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
-			{ "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Command History" },
-			{ "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
-			{ "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document diagnostics" },
-			{ "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace diagnostics" },
-			{ "<leader>sg", "<cmd>lua require('telescope.builtin').live_grep({ cwd=vim.lsp.buf.list_workspace_folders()[1] })<cr>", desc = "Grep (root dir)" },
-			{ "<leader>sG", "<cmd>Telescope live_grep<cr>", desc = "Grep (cwd)" },
-			{ "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
-			{ "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
-			{ "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
-			{ "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
-			{ "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
-			{ "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
-			{ "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
-			{ "<leader>sw", "<cmd>Telescope grep_string<cr>", desc = "Word (root dir)" },
-			{ "<leader>sW", "<cmd>Telescope grep_string<cr>", desc = "Word (cwd)" },
-			{ "<leader>uC", "<cmd>Telescope colorscheme enable_preview=true", desc = "Colorscheme with preview" },
-			{ "<leader>ss", "<cmd>lua require('telescope.builtin').lsp_document_symbols({ symbols = { \"Class\", \"Function\", \"Method\", \"Constructor\", \"Interface\", \"Module\", \"Struct\", \"Trait\", \"Field\", \"Property\", }, })<cr>", desc = "Goto Symbol", },
-			{ "<leader>sS", "lsp_dynamic_workspace_symbols", desc = "Goto Symbol (Workspace)", },
+			{
+				"<leader>sa",
+				"<cmd>Telescope autocommands<cr>",
+				desc =
+				"Auto Commands"
+			},
+			{
+				"<leader>sb",
+				"<cmd>Telescope current_buffer_fuzzy_find<cr>",
+				desc =
+				"Buffer"
+			},
+			{
+				"<leader>sc",
+				"<cmd>Telescope command_history<cr>",
+				desc =
+				"Command History"
+			},
+			{
+				"<leader>sC",
+				"<cmd>Telescope commands<cr>",
+				desc =
+				"Commands"
+			},
+			{
+				"<leader>sd",
+				"<cmd>Telescope diagnostics bufnr=0<cr>",
+				desc =
+				"Document diagnostics"
+			},
+			{
+				"<leader>sD",
+				"<cmd>Telescope diagnostics<cr>",
+				desc =
+				"Workspace diagnostics"
+			},
+			{
+				"<leader>sg",
+				"<cmd>lua require('telescope.builtin').live_grep({ cwd=vim.lsp.buf.list_workspace_folders()[1] })<cr>",
+				desc =
+				"Grep (root dir)"
+			},
+			{
+				"<leader>sG",
+				"<cmd>Telescope live_grep<cr>",
+				desc =
+				"Grep (cwd)"
+			},
+			{
+				"<leader>sh",
+				"<cmd>Telescope help_tags<cr>",
+				desc =
+				"Help Pages"
+			},
+			{
+				"<leader>sH",
+				"<cmd>Telescope highlights<cr>",
+				desc =
+				"Search Highlight Groups"
+			},
+			{
+				"<leader>sk",
+				"<cmd>Telescope keymaps<cr>",
+				desc =
+				"Key Maps"
+			},
+			{
+				"<leader>sM",
+				"<cmd>Telescope man_pages<cr>",
+				desc =
+				"Man Pages"
+			},
+			{
+				"<leader>sm",
+				"<cmd>Telescope marks<cr>",
+				desc =
+				"Jump to Mark"
+			},
+			{
+				"<leader>so",
+				"<cmd>Telescope vim_options<cr>",
+				desc =
+				"Options"
+			},
+			{
+				"<leader>sR",
+				"<cmd>Telescope resume<cr>",
+				desc =
+				"Resume"
+			},
+			{
+				"<leader>sw",
+				"<cmd>Telescope grep_string<cr>",
+				desc =
+				"Word (root dir)"
+			},
+			{
+				"<leader>sW",
+				"<cmd>Telescope grep_string<cr>",
+				desc =
+				"Word (cwd)"
+			},
+			{
+				"<leader>uC",
+				"<cmd>Telescope colorscheme enable_preview=true",
+				desc =
+				"Colorscheme with preview"
+			},
+			{
+				"<leader>ss",
+				"<cmd>lua require('telescope.builtin').lsp_document_symbols({ symbols = { \"Class\", \"Function\", \"Method\", \"Constructor\", \"Interface\", \"Module\", \"Struct\", \"Trait\", \"Field\", \"Property\", }, })<cr>",
+				desc =
+				"Goto Symbol",
+			},
+			{
+				"<leader>sS",
+				"lsp_dynamic_workspace_symbols",
+				desc =
+				"Goto Symbol (Workspace)",
+			},
 		},
 		opts = {
 			defaults = {
@@ -121,7 +256,31 @@ return {
 			filters = {
 				dotfiles = true,
 			},
-		}
+		},
+		config = function()
+			vim.api.nvim_create_autocmd("QuitPre", {
+				callback = function()
+					local tree_wins = {}
+					local floating_wins = {}
+					local wins = vim.api.nvim_list_wins()
+					for _, w in ipairs(wins) do
+						local bufname = vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(w))
+						if bufname:match("NvimTree_") ~= nil then
+							table.insert(tree_wins, w)
+						end
+						if vim.api.nvim_win_get_config(w).relative ~= '' then
+							table.insert(floating_wins, w)
+						end
+					end
+					if 1 == #wins - #floating_wins - #tree_wins then
+						-- Should quit, so we close all invalid windows.
+						for _, w in ipairs(tree_wins) do
+							vim.api.nvim_win_close(w, true)
+						end
+					end
+				end
+			})
+		end
 	},
 
 	--[[ Gitsigns ]] --
@@ -134,7 +293,7 @@ return {
 				function()
 					if vim.wo.diff then return ']c' end
 					vim.schedule(function() gs.next_hunk() end)
-				return '<Ignore>'
+					return '<Ignore>'
 				end, { expr = true, desc = "Next Hunk" })
 			vim.keymap.set('n', '[c',
 				function()
@@ -144,8 +303,10 @@ return {
 				end, { expr = true, desc = "Previos Hunk" })
 			vim.keymap.set('n', '<leader>ghs', gs.stage_hunk, { desc = "Stage Hunk" })
 			vim.keymap.set('n', '<leader>ghr', gs.reset_hunk, { desc = "Reset Hunk" })
-			vim.keymap.set('v', '<leader>ghs', function() gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end, { desc = "Stage Hunk" })
-			vim.keymap.set('v', '<leader>ghr', function() gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end, { desc = "Reset Hunk" })
+			vim.keymap.set('v', '<leader>ghs', function() gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end,
+				{ desc = "Stage Hunk" })
+			vim.keymap.set('v', '<leader>ghr', function() gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end,
+				{ desc = "Reset Hunk" })
 			vim.keymap.set('n', '<leader>ghS', gs.stage_buffer, { desc = "Stage Buffer" })
 			vim.keymap.set('n', '<leader>ghu', gs.undo_stage_hunk, { desc = "Undo Stage Hunk" })
 			vim.keymap.set('n', '<leader>ghR', gs.reset_buffer, { desc = "Reset Buffer" })
