@@ -74,7 +74,6 @@ vim.keymap.set("n", "<leader>wd", "<C-W>c", { desc = "Delete window", remap = tr
 vim.keymap.set("n", "<leader>wh", "<C-W>s", { desc = "Split window below", remap = true })
 vim.keymap.set("n", "<leader>wv", "<C-W>v", { desc = "Split window right", remap = true })
 vim.keymap.set("n", "<leader>wo", "<C-W>o", { desc = "Close all other windows", remap = true })
-vim.keymap.set("n", "<leader>|", "<C-W>v", { desc = "Split window right", remap = true })
 
 --[[ Buffers ]]
 vim.keymap.set("n", "<S-h>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
