@@ -22,6 +22,4 @@ vim.g.neovide_transparency = 0.95
 vim.g.neovide_remember_window_size = true
 vim.g.neovide_theme = 'auto'
 -- vim.g.neovide_underline_automatic_scaling = true
-vim.o.guifont = "FiraCode Nerd Font Mono:h12:#e-subpixelantialias"
-vim.opt.linespace = 1
 

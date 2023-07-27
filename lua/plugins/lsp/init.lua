@@ -1,3 +1,12 @@
+local format_on_save = true
+
+local function toggle_format_on_save()
+	format_on_save = not format_on_save
+	vim.notify("Format on Save: " .. (format_on_save and "ON" or "OFF"), vim.log.levels.INFO)
+end
+
+vim.keymap.set('n', 'ttt', toggle_format_on_save, { desc = 'Toggle Formatting on Save' })
+
 return {
 	{
 		'williamboman/mason.nvim',
@@ -29,7 +38,6 @@ return {
 				end
 			}
 		end,
-
 	},
 	{
 		{
@@ -38,9 +46,8 @@ return {
 			opts = {},
 			config = function()
 				local null_ls = require('null-ls')
-				local async_formatting = require('plugins.lsp.util')
-				local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 				local formatting = null_ls.builtins.formatting
+				local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 				null_ls.setup({
 					-- add your sources / config options here
 					sources = {
@@ -52,18 +59,19 @@ return {
 					on_attach = function(client, bufnr)
 						if client.supports_method("textDocument/formatting") then
 							vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-							vim.api.nvim_create_autocmd("BufWritePost", {
+							vim.api.nvim_create_autocmd("BufWritePre", {
 								group = augroup,
 								buffer = bufnr,
 								callback = function()
-									async_formatting(bufnr)
+									-- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
+									-- on later neovim version, you should use vim.lsp.buf.format({ async = false }) instead
+									vim.lsp.buf.formatting_sync()
 								end,
 							})
 						end
 					end,
 				})
 			end,
-
 			--[[ CMP Support ]] --
 			{
 				'hrsh7th/nvim-cmp',
@@ -131,7 +139,5 @@ return {
 					})
 				end,
 			},
-
-
 		} }
 }

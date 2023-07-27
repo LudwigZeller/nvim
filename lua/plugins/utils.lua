@@ -22,6 +22,40 @@ return {
 		end
 	},
 
+	--[[ Improved Macros ]] --
+	{
+		"chrisgrieser/nvim-recorder",
+		dependencies = "rcarriga/nvim-notify", -- optional
+		opts = {
+			slots = { "a", "b", "c", "d", "e" },
+			mapping = {
+				startStopRecording = "q",
+				playMacro = "Q",
+				switchSlot = "<C-q>",
+				editMacro = "cq",
+				yankMacro = "yq",
+				addBreakPoint = "##", -- ⚠️ this should be a string you don't use in insert mode during a macro
+			},
+			clear = true,
+			logLevel = vim.log.levels.INFO,
+			lessNotifications = false,
+			useNerdfontIcons = true,
+			performanceOpts = {
+				countThreshold = 100,
+				lazyredraw = true,  -- enable lazyredraw (see `:h lazyredraw`)
+				noSystemClipboard = true, -- remove `+`/`*` from clipboard option
+				autocmdEventsIgnore = { -- temporarily ignore these autocmd events
+					"TextChangedI",
+					"TextChanged",
+					"InsertLeave",
+					"InsertEnter",
+					"InsertCharPre",
+				},
+			},
+			dapSharedKeymaps = false,
+		},
+	},
+
 	--[[ makes plugins dot-repeatable ]] --
 	{ "tpope/vim-repeat",  event = "VeryLazy" },
 

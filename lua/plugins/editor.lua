@@ -5,37 +5,162 @@ return {
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
-		dependencies = { 'nvim-lua/plenary.nvim' },
+		dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-symbols.nvim' },
 		version = false, -- telescope did only one release, so use HEAD for now
 		keys = {
 			-- find
-			{ "<leader>fb", "<cmd>Telescope buffers show_all_buffers=true<cr>",       desc = "Buffers" },
-			{ "<leader>ff", Util.telescope("files"),                                  desc = "Find Files (root dir)" },
-			{ "<leader>fF", Util.telescope("files", { cwd = false }),                 desc = "Find Files (cwd)" },
-			{ "<leader>fr", "<cmd>Telescope oldfiles<cr>",                            desc = "Recent" },
-			{ "<leader>fR", Util.telescope("oldfiles", { cwd = vim.loop.cwd() }),     desc = "Recent (cwd)" },
+			{
+				"<leader>fb",
+				"<cmd>Telescope buffers show_all_buffers=true<cr>",
+				desc =
+				"Buffers"
+			},
+			{
+				"<leader>ff",
+				"<cmd>lua require('telescope.builtin').find_files({ cwd=vim.lsp.buf.list_workspace_folders()[1] })<cr>",
+				desc =
+				"Find Files (root dir)"
+			},
+			{
+				"<leader>fF",
+				"<cmd>Telescope find_files<cr>",
+				desc =
+				"Find Files (cwd)"
+			},
+			{
+				"<leader>fr",
+				"<cmd>Telescope oldfiles<cr>",
+				desc =
+				"Recent"
+			},
+			{
+				"<leader>fR",
+				"<cmd>lua require('telescope.builtin').oldfiles({ cwd=vim.lsp.buf.list_workspace_folders()[1] })<cr>",
+				desc =
+				"Recent (root)"
+			},
 			-- git
-			{ "<leader>gc", "<cmd>Telescope git_commits<CR>",                         desc = "commits" },
-			{ "<leader>gs", "<cmd>Telescope git_status<CR>",                          desc = "status" },
+			{
+				"<leader>gc",
+				"<cmd>Telescope git_commits<CR>",
+				desc =
+				"commits"
+			},
+			{
+				"<leader>gs",
+				"<cmd>Telescope git_status<CR>",
+				desc =
+				"status"
+			},
 			-- search
-			{ "<leader>sa", "<cmd>Telescope autocommands<cr>",                        desc = "Auto Commands" },
-			{ "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>",           desc = "Buffer" },
-			{ "<leader>sc", "<cmd>Telescope command_history<cr>",                     desc = "Command History" },
-			{ "<leader>sC", "<cmd>Telescope commands<cr>",                            desc = "Commands" },
-			{ "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>",                 desc = "Document diagnostics" },
-			{ "<leader>sD", "<cmd>Telescope diagnostics<cr>",                         desc = "Workspace diagnostics" },
-			{ "<leader>sg", Util.telescope("live_grep"),                              desc = "Grep (root dir)" },
-			{ "<leader>sG", Util.telescope("live_grep", { cwd = false }),             desc = "Grep (cwd)" },
-			{ "<leader>sh", "<cmd>Telescope help_tags<cr>",                           desc = "Help Pages" },
-			{ "<leader>sH", "<cmd>Telescope highlights<cr>",                          desc = "Search Highlight Groups" },
-			{ "<leader>sk", "<cmd>Telescope keymaps<cr>",                             desc = "Key Maps" },
-			{ "<leader>sM", "<cmd>Telescope man_pages<cr>",                           desc = "Man Pages" },
-			{ "<leader>sm", "<cmd>Telescope marks<cr>",                               desc = "Jump to Mark" },
-			{ "<leader>so", "<cmd>Telescope vim_options<cr>",                         desc = "Options" },
-			{ "<leader>sR", "<cmd>Telescope resume<cr>",                              desc = "Resume" },
-			{ "<leader>sw", Util.telescope("grep_string"),                            desc = "Word (root dir)" },
-			{ "<leader>sW", Util.telescope("grep_string", { cwd = false }),           desc = "Word (cwd)" },
-			{ "<leader>uC", Util.telescope("colorscheme", { enable_preview = true }), desc = "Colorscheme with preview" },
+			{
+				"<leader>sa",
+				"<cmd>Telescope autocommands<cr>",
+				desc =
+				"Auto Commands"
+			},
+			{
+				"<leader>sb",
+				"<cmd>Telescope current_buffer_fuzzy_find<cr>",
+				desc =
+				"Buffer"
+			},
+			{
+				"<leader>sc",
+				"<cmd>Telescope command_history<cr>",
+				desc =
+				"Command History"
+			},
+			{
+				"<leader>sC",
+				"<cmd>Telescope commands<cr>",
+				desc =
+				"Commands"
+			},
+			{
+				"<leader>sd",
+				"<cmd>Telescope diagnostics bufnr=0<cr>",
+				desc =
+				"Document diagnostics"
+			},
+			{
+				"<leader>sD",
+				"<cmd>Telescope diagnostics<cr>",
+				desc =
+				"Workspace diagnostics"
+			},
+			{
+				"<leader>sg",
+				"<cmd>lua require('telescope.builtin').live_grep({ cwd=vim.lsp.buf.list_workspace_folders()[1] })<cr>",
+				desc =
+				"Grep (root dir)"
+			},
+			{
+				"<leader>sG",
+				"<cmd>Telescope live_grep<cr>",
+				desc =
+				"Grep (cwd)"
+			},
+			{
+				"<leader>sh",
+				"<cmd>Telescope help_tags<cr>",
+				desc =
+				"Help Pages"
+			},
+			{
+				"<leader>sH",
+				"<cmd>Telescope highlights<cr>",
+				desc =
+				"Search Highlight Groups"
+			},
+			{
+				"<leader>sk",
+				"<cmd>Telescope keymaps<cr>",
+				desc =
+				"Key Maps"
+			},
+			{
+				"<leader>sM",
+				"<cmd>Telescope man_pages<cr>",
+				desc =
+				"Man Pages"
+			},
+			{
+				"<leader>sm",
+				"<cmd>Telescope marks<cr>",
+				desc =
+				"Jump to Mark"
+			},
+			{
+				"<leader>so",
+				"<cmd>Telescope vim_options<cr>",
+				desc =
+				"Options"
+			},
+			{
+				"<leader>sR",
+				"<cmd>Telescope resume<cr>",
+				desc =
+				"Resume"
+			},
+			{
+				"<leader>sw",
+				"<cmd>Telescope grep_string<cr>",
+				desc =
+				"Word (root dir)"
+			},
+			{
+				"<leader>sW",
+				"<cmd>Telescope grep_string<cr>",
+				desc =
+				"Word (cwd)"
+			},
+			{
+				"<leader>uC",
+				"<cmd>Telescope colorscheme enable_preview=true",
+				desc =
+				"Colorscheme with preview"
+			},
 			{
 				"<leader>ss",
 				Util.telescope("lsp_document_symbols", {
@@ -56,20 +181,7 @@ return {
 			},
 			{
 				"<leader>sS",
-				Util.telescope("lsp_dynamic_workspace_symbols", {
-					symbols = {
-						"Class",
-						"Function",
-						"Method",
-						"Constructor",
-						"Interface",
-						"Module",
-						"Struct",
-						"Trait",
-						"Field",
-						"Property",
-					},
-				}),
+				"lsp_dynamic_workspace_symbols",
 				desc = "Goto Symbol (Workspace)",
 			},
 		},
@@ -117,6 +229,27 @@ return {
 			},
 		},
 	},
+
+	--[[ Treesitter ]] --
+	{
+		'nvim-treesitter/nvim-treesitter',
+		build = ':TSUpdate',
+		opts = {
+			ensure_installed = { "lua" },
+			auto_install = true,
+			highlight = {
+				enable = true,
+				additional_vim_regex_highlighting = false,
+			},
+			ident = { enable = true },
+			rainbow = {
+				enable = true,
+				extended_mode = true,
+				max_file_lines = nil,
+			}
+		},
+	},
+
 	--[[ Nvim-Tree ]] --
 	{
 		"nvim-tree/nvim-tree.lua",
@@ -137,6 +270,45 @@ return {
 				dotfiles = true,
 			},
 		}
+	},
+
+	--[[ Gitsigns ]] --
+	{
+		'lewis6991/gitsigns.nvim',
+		config = function()
+			local gs = require("gitsigns")
+
+			vim.keymap.set('n', ']c',
+				function()
+					if vim.wo.diff then return ']c' end
+					vim.schedule(function() gs.next_hunk() end)
+					return '<Ignore>'
+				end, { expr = true, desc = "Next Hunk" })
+			vim.keymap.set('n', '[c',
+				function()
+					if vim.wo.diff then return '[c' end
+					vim.schedule(function() gs.prev_hunk() end)
+					return '<Ignore>'
+				end, { expr = true, desc = "Previos Hunk" })
+			vim.keymap.set('n', '<leader>ghs', gs.stage_hunk, { desc = "Stage Hunk" })
+			vim.keymap.set('n', '<leader>ghr', gs.reset_hunk, { desc = "Reset Hunk" })
+			vim.keymap.set('v', '<leader>ghs',
+				function() gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end, { desc = "Stage Hunk" })
+			vim.keymap.set('v', '<leader>ghr',
+				function() gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end, { desc = "Reset Hunk" })
+			vim.keymap.set('n', '<leader>ghS', gs.stage_buffer, { desc = "Stage Buffer" })
+			vim.keymap.set('n', '<leader>ghu', gs.undo_stage_hunk, { desc = "Undo Stage Hunk" })
+			vim.keymap.set('n', '<leader>ghR', gs.reset_buffer, { desc = "Reset Buffer" })
+			vim.keymap.set('n', '<leader>ghp', gs.preview_hunk, { desc = "Preview Hunk" })
+			vim.keymap.set('n', '<leader>ghb', function() gs.blame_line { full = true } end,
+				{ desc = "Blame Line" })
+			vim.keymap.set('n', '<leader>gtb', gs.toggle_current_line_blame,
+				{ desc = "Current Blame Line" })
+			vim.keymap.set('n', '<leader>ghd', gs.diffthis, { desc = "Diffthis" })
+			vim.keymap.set('n', '<leader>ghD', function() gs.diffthis('~') end, { desc = "Diffthis (~)" })
+			vim.keymap.set('n', '<leader>gtd', gs.toggle_deleted, { desc = "Deleted" })
+			vim.keymap.set({ 'o', 'x' }, 'ih', '<cmd><C-U>Gitsigns select_hunk<CR>')
+		end,
 	},
 
 	--[[ Toggleterm ]] --
@@ -196,59 +368,5 @@ return {
 		},
 	},
 
-	--[[ Alpha ]] --
-	{
-		'goolord/alpha-nvim',
-		event = "VimEnter",
-		enabled = false,
-		dependencies = { 'nvim-tree/nvim-web-devicons' },
-		--opts = require('alpha.themes.dashboard').config,
-		config = function()
-			require('alpha').setup(
-				require('alpha.themes.dashboard').config
-			)
-		end
-	},
 
-	{
-		'glepnir/dashboard-nvim',
-		event = 'VimEnter',
-		config = function()
-			require('dashboard').setup {
-				theme = 'doom',        --  theme is doom and hyper default is hyper
-				disable_move = false,  --  default is false disable move keymap for hyper
-				shortcut_type = 'letter', --  shorcut type 'letter' or 'number'
-				change_to_vcs_root = true, -- default is false,for open file in hyper mru. it will change to the root of vcs
-				config = {
-					header = {},         --  config used for theme
-					center = {
-						{
-							icon = ' ',
-							icon_hl = 'Title',
-							desc = 'Find File           ',
-							desc_hl = 'String',
-							key = 'b',
-							keymap = 'SPC f f',
-							key_hl = 'Number',
-							action = 'lua print(2)'
-						},
-						{
-							icon = ' ',
-							desc = 'Find Dotfiles',
-							key = 'f',
-							keymap = 'SPC f d',
-							action = 'lua print(3)'
-						},
-					},
-					footer = {} --your footer
-				},
-				hide = {
-					statusline = true, -- hide statusline default is true
-					tabline = true, -- hide the tabline
-					winbar = true, -- hide winbar
-				},
-			}
-		end,
-		dependencies = { { 'nvim-tree/nvim-web-devicons' } }
-	},
 }

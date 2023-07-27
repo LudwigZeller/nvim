@@ -4,6 +4,9 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.mapleader = " "
 vim.g.mapleaderlocal = " "
 
+vim.o.guifont = "FiraCode Nerd Font Mono:h14:#e-subpixelantialias"
+vim.opt.linespace = 2
+
 vim.opt.termguicolors = true
 
 vim.opt.breakindent = true
@@ -15,11 +18,9 @@ vim.opt.smartcase = true
 vim.opt.wrap = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
-
 vim.opt.relativenumber = true
 
 vim.opt.shell = 'fish'
-
 vim.opt.clipboard = 'unnamedplus'
 
 -- Scope save to Session
