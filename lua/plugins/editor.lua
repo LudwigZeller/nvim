@@ -40,13 +40,13 @@ return {
 			-- git
 			{
 				"<leader>gc",
-				"<cmd>Telescope git_commits<CR>",
+				"<cmd>Telescope git_commits<cr>",
 				desc =
 				"commits"
 			},
 			{
 				"<leader>gs",
-				"<cmd>Telescope git_status<CR>",
+				"<cmd>Telescope git_status<cr>",
 				desc =
 				"status"
 			},
@@ -155,7 +155,7 @@ return {
 			},
 			{
 				"<leader>uC",
-				"<cmd>Telescope colorscheme enable_preview=true",
+				"<cmd>Telescope colorscheme enable_preview=true<cr>",
 				desc =
 				"Colorscheme with preview"
 			},
@@ -319,6 +319,13 @@ return {
 		'lewis6991/gitsigns.nvim',
 		config = function()
 			local gs = require("gitsigns")
+
+			gs.setup({
+				signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
+				numhl      = true, -- Toggle with `:Gitsigns toggle_numhl`
+				linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
+				word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
+			})
 
 			vim.keymap.set('n', ']c',
 				function()
