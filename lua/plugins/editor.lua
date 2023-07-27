@@ -354,20 +354,19 @@ return {
 	--[[ Toggleterm ]] --
 	{
 		'akinsho/toggleterm.nvim',
-		opts = {
-			size = function(term)
-				if term.direction == "horizontal" then
-					return 15
-				elseif term.direction == "vertical" then
-					return vim.o.columns * 0.4
-				end
-				return 20
-			end,
-			shade_terminals = false,
-		},
 		config = function()
-			--[[ Toggleterm ]]
-			--
+			require("toggleterm").setup({
+				size = function(term)
+					if term.direction == "horizontal" then
+						return 10
+					elseif term.direction == "vertical" then
+						return vim.o.columns * 0.3
+					end
+					return 20
+				end,
+				shade_terminals = false,
+			})
+
 			local Terminal = require('toggleterm.terminal').Terminal
 
 			local horizontal = Terminal:new({ direction = "horizontal" })

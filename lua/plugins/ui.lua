@@ -28,8 +28,8 @@ return {
 				["<leader>q"] = { name = "+quit/session" },
 				["<leader>s"] = { name = "+search" },
 				["<leader>u"] = { name = "+ui" },
-				--["<leader>w"] = { name = "+windows" },
-				--["<leader>x"] = { name = "+diagnostics/quickfix" },
+				["<leader>w"] = { name = "+windows" },
+				["<leader>x"] = { name = "+diagnostics/quickfix" },
 			},
 		},
 		config = function(_, opts)
@@ -332,7 +332,7 @@ return {
 							icon_hl = 'Title',
 							desc = 'Find File',
 							desc_hl = 'String',
-							key = 'h',
+							key = 'a',
 							key_hl = 'Number',
 							action = 'Telescope find_files'
 						},
@@ -341,7 +341,7 @@ return {
 							icon_hl = 'Title',
 							desc = 'Recent Files',
 							desc_hl = 'String',
-							key = 'j',
+							key = 's',
 							key_hl = 'Number',
 							action = 'Telescope oldfiles'
 						},
@@ -349,7 +349,7 @@ return {
 							icon = ' ',
 							desc = 'Find Dotfiles',
 							desc_hl = 'String',
-							key = 'k',
+							key = 'd',
 							key_hl = 'Number',
 							action = 'cd ~/.config/nvim | edit .'
 						},
