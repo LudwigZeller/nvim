@@ -1,4 +1,5 @@
 vim.keymap.set('i', 'jk', '<ESC>', { nowait = true, desc = 'Normal Mode' })
+vim.keymap.set({'n', 'i'} , '<C-s>', '<cmd>write<cr>', { nowait = true, desc = 'Save File' })
 
 --[[ Buffers ]]--
 vim.keymap.set('n', '<leader>bh', '<cmd>bprevious<cr>', { desc = 'Previos Buffer' })

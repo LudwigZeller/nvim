@@ -1,5 +1,3 @@
-local Util = require("util")
-
 return {
 	--[[ Telescope ]] --
 	{
@@ -9,181 +7,35 @@ return {
 		version = false, -- telescope did only one release, so use HEAD for now
 		keys = {
 			-- find
-			{
-				"<leader>fb",
-				"<cmd>Telescope buffers show_all_buffers=true<cr>",
-				desc =
-				"Buffers"
-			},
-			{
-				"<leader>ff",
-				"<cmd>lua require('telescope.builtin').find_files({ cwd=vim.lsp.buf.list_workspace_folders()[1] })<cr>",
-				desc =
-				"Find Files (root dir)"
-			},
-			{
-				"<leader>fF",
-				"<cmd>Telescope find_files<cr>",
-				desc =
-				"Find Files (cwd)"
-			},
-			{
-				"<leader>fr",
-				"<cmd>Telescope oldfiles<cr>",
-				desc =
-				"Recent"
-			},
-			{
-				"<leader>fR",
-				"<cmd>lua require('telescope.builtin').oldfiles({ cwd=vim.lsp.buf.list_workspace_folders()[1] })<cr>",
-				desc =
-				"Recent (root)"
-			},
+			{ "<leader>fb", "<cmd>Telescope buffers show_all_buffers=true<cr>", desc = "Buffers" },
+			{ "<leader>ff", "<cmd>lua require('telescope.builtin').find_files({ cwd=vim.lsp.buf.list_workspace_folders()[1] })<cr>", desc = "Find Files (root dir)" },
+			{ "<leader>fF", "<cmd>Telescope find_files<cr>", desc = "Find Files (cwd)" },
+			{ "<leader>fr", "<cmd>Telescope oldfiles<cr>", desc = "Recent" },
+			{ "<leader>fR", "<cmd>lua require('telescope.builtin').oldfiles({ cwd=vim.loop.cwd() })<cr>", desc = "Recent (cwd)" },
 			-- git
-			{
-				"<leader>gc",
-				"<cmd>Telescope git_commits<CR>",
-				desc =
-				"commits"
-			},
-			{
-				"<leader>gs",
-				"<cmd>Telescope git_status<CR>",
-				desc =
-				"status"
-			},
+			{ "<leader>gc", "<cmd>Telescope git_commits<CR>", desc = "commits" },
+			{ "<leader>gs", "<cmd>Telescope git_status<CR>", desc = "status" },
 			-- search
-			{
-				"<leader>sa",
-				"<cmd>Telescope autocommands<cr>",
-				desc =
-				"Auto Commands"
-			},
-			{
-				"<leader>sb",
-				"<cmd>Telescope current_buffer_fuzzy_find<cr>",
-				desc =
-				"Buffer"
-			},
-			{
-				"<leader>sc",
-				"<cmd>Telescope command_history<cr>",
-				desc =
-				"Command History"
-			},
-			{
-				"<leader>sC",
-				"<cmd>Telescope commands<cr>",
-				desc =
-				"Commands"
-			},
-			{
-				"<leader>sd",
-				"<cmd>Telescope diagnostics bufnr=0<cr>",
-				desc =
-				"Document diagnostics"
-			},
-			{
-				"<leader>sD",
-				"<cmd>Telescope diagnostics<cr>",
-				desc =
-				"Workspace diagnostics"
-			},
-			{
-				"<leader>sg",
-				"<cmd>lua require('telescope.builtin').live_grep({ cwd=vim.lsp.buf.list_workspace_folders()[1] })<cr>",
-				desc =
-				"Grep (root dir)"
-			},
-			{
-				"<leader>sG",
-				"<cmd>Telescope live_grep<cr>",
-				desc =
-				"Grep (cwd)"
-			},
-			{
-				"<leader>sh",
-				"<cmd>Telescope help_tags<cr>",
-				desc =
-				"Help Pages"
-			},
-			{
-				"<leader>sH",
-				"<cmd>Telescope highlights<cr>",
-				desc =
-				"Search Highlight Groups"
-			},
-			{
-				"<leader>sk",
-				"<cmd>Telescope keymaps<cr>",
-				desc =
-				"Key Maps"
-			},
-			{
-				"<leader>sM",
-				"<cmd>Telescope man_pages<cr>",
-				desc =
-				"Man Pages"
-			},
-			{
-				"<leader>sm",
-				"<cmd>Telescope marks<cr>",
-				desc =
-				"Jump to Mark"
-			},
-			{
-				"<leader>so",
-				"<cmd>Telescope vim_options<cr>",
-				desc =
-				"Options"
-			},
-			{
-				"<leader>sR",
-				"<cmd>Telescope resume<cr>",
-				desc =
-				"Resume"
-			},
-			{
-				"<leader>sw",
-				"<cmd>Telescope grep_string<cr>",
-				desc =
-				"Word (root dir)"
-			},
-			{
-				"<leader>sW",
-				"<cmd>Telescope grep_string<cr>",
-				desc =
-				"Word (cwd)"
-			},
-			{
-				"<leader>uC",
-				"<cmd>Telescope colorscheme enable_preview=true",
-				desc =
-				"Colorscheme with preview"
-			},
-			{
-				"<leader>ss",
-				Util.telescope("lsp_document_symbols", {
-					symbols = {
-						"Class",
-						"Function",
-						"Method",
-						"Constructor",
-						"Interface",
-						"Module",
-						"Struct",
-						"Trait",
-						"Field",
-						"Property",
-					},
-				}),
-				desc = "Goto Symbol",
-			},
-			{
-				"<leader>sS",
-				"lsp_dynamic_workspace_symbols",
-				desc = "Goto Symbol (Workspace)",
-			},
+			{ "<leader>sa", "<cmd>Telescope autocommands<cr>", desc = "Auto Commands" },
+			{ "<leader>sb", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Buffer" },
+			{ "<leader>sc", "<cmd>Telescope command_history<cr>", desc = "Command History" },
+			{ "<leader>sC", "<cmd>Telescope commands<cr>", desc = "Commands" },
+			{ "<leader>sd", "<cmd>Telescope diagnostics bufnr=0<cr>", desc = "Document diagnostics" },
+			{ "<leader>sD", "<cmd>Telescope diagnostics<cr>", desc = "Workspace diagnostics" },
+			{ "<leader>sg", "<cmd>lua require('telescope.builtin').live_grep({ cwd=vim.lsp.buf.list_workspace_folders()[1] })<cr>", desc = "Grep (root dir)" },
+			{ "<leader>sG", "<cmd>Telescope live_grep<cr>", desc = "Grep (cwd)" },
+			{ "<leader>sh", "<cmd>Telescope help_tags<cr>", desc = "Help Pages" },
+			{ "<leader>sH", "<cmd>Telescope highlights<cr>", desc = "Search Highlight Groups" },
+			{ "<leader>sk", "<cmd>Telescope keymaps<cr>", desc = "Key Maps" },
+			{ "<leader>sM", "<cmd>Telescope man_pages<cr>", desc = "Man Pages" },
+			{ "<leader>sm", "<cmd>Telescope marks<cr>", desc = "Jump to Mark" },
+			{ "<leader>so", "<cmd>Telescope vim_options<cr>", desc = "Options" },
+			{ "<leader>sR", "<cmd>Telescope resume<cr>", desc = "Resume" },
+			{ "<leader>sw", "<cmd>Telescope grep_string<cr>", desc = "Word (root dir)" },
+			{ "<leader>sW", "<cmd>Telescope grep_string<cr>", desc = "Word (cwd)" },
+			{ "<leader>uC", "<cmd>Telescope colorscheme enable_preview=true", desc = "Colorscheme with preview" },
+			{ "<leader>ss", "<cmd>lua require('telescope.builtin').lsp_document_symbols({ symbols = { \"Class\", \"Function\", \"Method\", \"Constructor\", \"Interface\", \"Module\", \"Struct\", \"Trait\", \"Field\", \"Property\", }, })<cr>", desc = "Goto Symbol", },
+			{ "<leader>sS", "lsp_dynamic_workspace_symbols", desc = "Goto Symbol (Workspace)", },
 		},
 		opts = {
 			defaults = {
@@ -200,12 +52,12 @@ return {
 						["<a-i>"] = function()
 							local action_state = require("telescope.actions.state")
 							local line = action_state.get_current_line()
-							Util.telescope("find_files", { no_ignore = true, default_text = line })()
+							require('telescope.builtin').find_files({ no_ignore = true, default_text = line })
 						end,
 						["<a-h>"] = function()
 							local action_state = require("telescope.actions.state")
 							local line = action_state.get_current_line()
-							Util.telescope("find_files", { hidden = true, default_text = line })()
+							require('telescope.builtin').find_files({ hidden = true, default_text = line })
 						end,
 						["<C-Down>"] = function(...)
 							return require("telescope.actions").cycle_history_next(...)
@@ -255,7 +107,7 @@ return {
 		"nvim-tree/nvim-tree.lua",
 		lazy = false,
 		keys = {
-			{ "<leader>ft", "NvimTreeToggle", desc = "Toggle Filetree" },
+			{ "<leader>ft", "<cmd>NvimTreeToggle<cr>", desc = "Toggle Filetree" },
 		},
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
@@ -282,7 +134,7 @@ return {
 				function()
 					if vim.wo.diff then return ']c' end
 					vim.schedule(function() gs.next_hunk() end)
-					return '<Ignore>'
+				return '<Ignore>'
 				end, { expr = true, desc = "Next Hunk" })
 			vim.keymap.set('n', '[c',
 				function()
@@ -292,18 +144,14 @@ return {
 				end, { expr = true, desc = "Previos Hunk" })
 			vim.keymap.set('n', '<leader>ghs', gs.stage_hunk, { desc = "Stage Hunk" })
 			vim.keymap.set('n', '<leader>ghr', gs.reset_hunk, { desc = "Reset Hunk" })
-			vim.keymap.set('v', '<leader>ghs',
-				function() gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end, { desc = "Stage Hunk" })
-			vim.keymap.set('v', '<leader>ghr',
-				function() gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end, { desc = "Reset Hunk" })
+			vim.keymap.set('v', '<leader>ghs', function() gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end, { desc = "Stage Hunk" })
+			vim.keymap.set('v', '<leader>ghr', function() gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end, { desc = "Reset Hunk" })
 			vim.keymap.set('n', '<leader>ghS', gs.stage_buffer, { desc = "Stage Buffer" })
 			vim.keymap.set('n', '<leader>ghu', gs.undo_stage_hunk, { desc = "Undo Stage Hunk" })
 			vim.keymap.set('n', '<leader>ghR', gs.reset_buffer, { desc = "Reset Buffer" })
 			vim.keymap.set('n', '<leader>ghp', gs.preview_hunk, { desc = "Preview Hunk" })
-			vim.keymap.set('n', '<leader>ghb', function() gs.blame_line { full = true } end,
-				{ desc = "Blame Line" })
-			vim.keymap.set('n', '<leader>gtb', gs.toggle_current_line_blame,
-				{ desc = "Current Blame Line" })
+			vim.keymap.set('n', '<leader>ghb', function() gs.blame_line { full = true } end, { desc = "Blame Line" })
+			vim.keymap.set('n', '<leader>gtb', gs.toggle_current_line_blame, { desc = "Current Blame Line" })
 			vim.keymap.set('n', '<leader>ghd', gs.diffthis, { desc = "Diffthis" })
 			vim.keymap.set('n', '<leader>ghD', function() gs.diffthis('~') end, { desc = "Diffthis (~)" })
 			vim.keymap.set('n', '<leader>gtd', gs.toggle_deleted, { desc = "Deleted" })

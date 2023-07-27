@@ -310,7 +310,7 @@ return {
 							desc_hl = 'String',
 							key = 'k',
 							key_hl = 'Number',
-							action = 'cd ~/.config/nvim | edit init.lua'
+							action = 'cd ~/.config/nvim | edit .'
 						},
 					},
 					footer = {} --your footer
