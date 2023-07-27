@@ -245,19 +245,19 @@ return {
 			{ "<leader>ft", "<cmd>NvimTreeToggle<cr>", desc = "Toggle Filetree" },
 		},
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {
-			sort_by = "case_sensitive",
-			view = {
-				width = 30,
-			},
-			renderer = {
-				group_empty = true,
-			},
-			filters = {
-				dotfiles = true,
-			},
-		},
 		config = function()
+			require("nvim-tree").setup({
+				sort_by = "case_sensitive",
+				view = {
+					width = 30,
+				},
+				renderer = {
+					group_empty = true,
+				},
+				filters = {
+					dotfiles = true,
+				},
+			})
 			vim.api.nvim_create_autocmd("QuitPre", {
 				callback = function()
 					local tree_wins = {}
@@ -281,6 +281,37 @@ return {
 				end
 			})
 		end
+	},
+
+	--[[ Comment ]] --
+	{
+		'numToStr/Comment.nvim',
+		config = function()
+			require('Comment').setup({
+				padding = true,
+				sticky = true,
+				ignore = nil,
+				toggler = {
+					line = 'gcc',
+					block = 'gbc',
+				},
+				opleader = {
+					line = 'gc',
+					block = 'gb',
+				},
+				extra = {
+					above = 'gcO',
+					below = 'gco',
+					eol = 'gcA',
+				},
+				mappings = {
+					basic = true,
+					extra = true,
+				},
+				pre_hook = nil,
+				post_hook = nil,
+			})
+		end,
 	},
 
 	--[[ Gitsigns ]] --
@@ -324,6 +355,14 @@ return {
 	{
 		'akinsho/toggleterm.nvim',
 		opts = {
+			size = function(term)
+				if term.direction == "horizontal" then
+					return 15
+				elseif term.direction == "vertical" then
+					return vim.o.columns * 0.4
+				end
+				return 20
+			end,
 			shade_terminals = false,
 		},
 		config = function()

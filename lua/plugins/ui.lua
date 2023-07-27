@@ -39,17 +39,48 @@ return {
 		end,
 	},
 
+	--[[ Indent-Blankline ]] --
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		config = function()
+			vim.g.indent_blankline_filetype_exclude = {
+				'help',
+				'startify',
+				'dashboard',
+				'packer',
+				'neogitstatus',
+				'NvimTree',
+				'Trouble',
+				'alpha',
+				'lir',
+				'Outline',
+				'spectre_panel',
+				'toggleterm',
+				'qf',
+				'lspinfo',
+				'checkhealth',
+				'man',
+				''
+			}
+			require("indent_blankline").setup {
+				show_current_context = true,
+				show_current_context_start = false,
+				indent_blankline_use_treesitter = true,
+			}
+		end
+	},
+
 	--[[ Noice ]] --
 	{
-		"folke/noice.nvim",
-		event = "VeryLazy",
+		'folke/noice.nvim',
+		event = 'VeryLazy',
 		opts = {
 			lsp = {
 				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
 				override = {
-					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-					["vim.lsp.util.stylize_markdown"] = true,
-					["cmp.entry.get_documentation"] = true,
+					['vim.lsp.util.convert_input_to_markdown_lines'] = true,
+					['vim.lsp.util.stylize_markdown'] = true,
+					['cmp.entry.get_documentation'] = true,
 				},
 			},
 			-- you can enable a preset for easier configuration
@@ -62,21 +93,21 @@ return {
 			},
 		},
 		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"rcarriga/nvim-notify",
+			'MunifTanjim/nui.nvim',
+			'rcarriga/nvim-notify',
 		}
 	},
 
 	--[[ Notify ]] --
 	{
-		"rcarriga/nvim-notify",
+		'rcarriga/nvim-notify',
 		keys = {
 			{
-				"<leader>un",
+				'<leader>un',
 				function()
-					require("notify").dismiss({ silent = true, pending = true })
+					require('notify').dismiss({ silent = true, pending = true })
 				end,
-				desc = "Dismiss all Notifications",
+				desc = 'Dismiss all Notifications',
 			},
 		},
 		opts = {
@@ -89,38 +120,47 @@ return {
 			end,
 		},
 		init = function()
-			vim.notify = require("notify")
+			vim.notify = require('notify')
 		end,
 	},
 
 	--[[ Dressing ]] --
 	{
-		"stevearc/dressing.nvim",
+		'stevearc/dressing.nvim',
 		lazy = true,
 		init = function()
 			---@diagnostic disable-next-line: duplicate-set-field
 			vim.ui.select = function(...)
-				require("lazy").load({ plugins = { "dressing.nvim" } })
+				require('lazy').load({ plugins = { 'dressing.nvim' } })
 				return vim.ui.select(...)
 			end
 			---@diagnostic disable-next-line: duplicate-set-field
 			vim.ui.input = function(...)
-				require("lazy").load({ plugins = { "dressing.nvim" } })
+				require('lazy').load({ plugins = { 'dressing.nvim' } })
 				return vim.ui.input(...)
 			end
 		end,
 	},
+
+	--[[ Todo Comments ]] --
 	{
-		"folke/twilight.nvim",
+		"folke/todo-comments.nvim",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		opts = {}
+	},
+
+	--[[ Twilight ]] --
+	{
+		'folke/twilight.nvim',
 		keys = {
-			{ "<leader>ut", "<cmd>Twilight<cr>", desc = "Toggle Twilight" },
+			{ '<leader>ut', '<cmd>Twilight<cr>', desc = 'Toggle Twilight' },
 		},
 		opts = {
 			dimming = {
 				alpha = 0.25, -- amount of dimming
 				-- we try to get the foreground from the highlight groups or fallback color
-				color = { "Normal", "#ffffff" },
-				term_bg = "#000000", -- if guibg=NONE, this will be used to calculate text color
+				color = { 'Normal', '#ffffff' },
+				term_bg = '#000000', -- if guibg=NONE, this will be used to calculate text color
 				inactive = false, -- when true, other windows will be fully dimmed (unless they contain the same buffer)
 			},
 			context = 10,      -- amount of lines we will try to show around the current line
@@ -128,14 +168,15 @@ return {
 			-- treesitter is used to automatically expand the visible text,
 			-- but you can further control the types of nodes that should always be fully expanded
 			expand = { -- for treesitter, we we always try to expand to the top-most ancestor with these types
-				"function",
-				"method",
-				"table",
-				"if_statement",
+				'function',
+				'method',
+				'table',
+				'if_statement',
 			},
 			exclude = {}, -- exclude these filetypes
 		}
 	},
+
 	--[[ Statusline ]] --
 	{
 		'nvim-lualine/lualine.nvim',
@@ -176,8 +217,8 @@ return {
 				lualine_a = { 'mode' },
 				lualine_b = { 'branch', 'diff', 'diagnostics' },
 				lualine_c = { 'filename' },
-				lualine_x = { function() return require("recorder").displaySlots() end,
-					function() return require("recorder").recordingStatus() end },
+				lualine_x = { function() return require('recorder').displaySlots() end,
+					function() return require('recorder').recordingStatus() end },
 				lualine_y = { 'encoding', 'fileformat', 'filetype' },
 				lualine_z = { 'progress', 'location' }
 			},
