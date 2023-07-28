@@ -1,12 +1,13 @@
 return {
-	--[[ WhichKey ]] --
+	--[[ WhichKey ]]
+	--
 	{
-		'folke/which-key.nvim',
+		"folke/which-key.nvim",
 		opts = {
 			window = {
 				border = "shadow",     -- none, single, double, shadow
 				position = "bottom",   -- bottom, top
-				margin = { 2, 10, 2, 10 }, -- extra window margin [top, right, bottom, left]. When between 0 and 1, will be treated as a percentage of the screen size.
+				margin = { 2, 10, 2, 10 }, -- extra window margin [top, right, bottom, left].
 				padding = { 1, 2, 1, 2 }, -- extra window padding [top, right, bottom, left]
 				zindex = 1000,         -- positive value to position WhichKey above other floating windows.
 			},
@@ -39,48 +40,50 @@ return {
 		end,
 	},
 
-	--[[ Indent-Blankline ]] --
+	--[[ Indent-Blankline ]]
+	--
 	{
 		"lukas-reineke/indent-blankline.nvim",
 		config = function()
 			vim.g.indent_blankline_filetype_exclude = {
-				'help',
-				'startify',
-				'dashboard',
-				'packer',
-				'neogitstatus',
-				'NvimTree',
-				'Trouble',
-				'alpha',
-				'lir',
-				'Outline',
-				'spectre_panel',
-				'toggleterm',
-				'qf',
-				'lspinfo',
-				'checkhealth',
-				'man',
-				''
+				"help",
+				"startify",
+				"dashboard",
+				"packer",
+				"neogitstatus",
+				"NvimTree",
+				"Trouble",
+				"alpha",
+				"lir",
+				"Outline",
+				"spectre_panel",
+				"toggleterm",
+				"qf",
+				"lspinfo",
+				"checkhealth",
+				"man",
+				"",
 			}
-			require("indent_blankline").setup {
+			require("indent_blankline").setup({
 				show_current_context = true,
 				show_current_context_start = false,
 				indent_blankline_use_treesitter = true,
-			}
-		end
+			})
+		end,
 	},
 
-	--[[ Noice ]] --
+	--[[ Noice ]]
+	--
 	{
-		'folke/noice.nvim',
-		event = 'VeryLazy',
+		"folke/noice.nvim",
+		event = "VeryLazy",
 		opts = {
 			lsp = {
 				-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
 				override = {
-					['vim.lsp.util.convert_input_to_markdown_lines'] = true,
-					['vim.lsp.util.stylize_markdown'] = true,
-					['cmp.entry.get_documentation'] = true,
+					["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+					["vim.lsp.util.stylize_markdown"] = true,
+					["cmp.entry.get_documentation"] = true,
 				},
 			},
 			-- you can enable a preset for easier configuration
@@ -93,21 +96,22 @@ return {
 			},
 		},
 		dependencies = {
-			'MunifTanjim/nui.nvim',
-			'rcarriga/nvim-notify',
-		}
+			"MunifTanjim/nui.nvim",
+			"rcarriga/nvim-notify",
+		},
 	},
 
-	--[[ Notify ]] --
+	--[[ Notify ]]
+	--
 	{
-		'rcarriga/nvim-notify',
+		"rcarriga/nvim-notify",
 		keys = {
 			{
-				'<leader>un',
+				"<leader>un",
 				function()
-					require('notify').dismiss({ silent = true, pending = true })
+					require("notify").dismiss({ silent = true, pending = true })
 				end,
-				desc = 'Dismiss all Notifications',
+				desc = "Dismiss all Notifications",
 			},
 		},
 		opts = {
@@ -120,47 +124,50 @@ return {
 			end,
 		},
 		init = function()
-			vim.notify = require('notify')
+			vim.notify = require("notify")
 		end,
 	},
 
-	--[[ Dressing ]] --
+	--[[ Dressing ]]
+	--
 	{
-		'stevearc/dressing.nvim',
+		"stevearc/dressing.nvim",
 		lazy = true,
 		init = function()
 			---@diagnostic disable-next-line: duplicate-set-field
 			vim.ui.select = function(...)
-				require('lazy').load({ plugins = { 'dressing.nvim' } })
+				require("lazy").load({ plugins = { "dressing.nvim" } })
 				return vim.ui.select(...)
 			end
 			---@diagnostic disable-next-line: duplicate-set-field
 			vim.ui.input = function(...)
-				require('lazy').load({ plugins = { 'dressing.nvim' } })
+				require("lazy").load({ plugins = { "dressing.nvim" } })
 				return vim.ui.input(...)
 			end
 		end,
 	},
 
-	--[[ Todo Comments ]] --
+	--[[ Todo Comments ]]
+	--
 	{
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
-		opts = {}
+		opts = {},
 	},
 
-	--[[ Twilight ]] --
+	--[[ Twilight ]]
+	--
 	{
-		'folke/twilight.nvim',
+		"folke/twilight.nvim",
 		keys = {
-			{ '<leader>ut', '<cmd>Twilight<cr>', desc = 'Toggle Twilight' },
+			{ "<leader>ut", "<cmd>Twilight<cr>", desc = "Toggle Twilight" },
 		},
 		opts = {
 			dimming = {
 				alpha = 0.25, -- amount of dimming
 				-- we try to get the foreground from the highlight groups or fallback color
-				color = { 'Normal', '#ffffff' },
-				term_bg = '#000000', -- if guibg=NONE, this will be used to calculate text color
+				color = { "Normal", "#ffffff" },
+				term_bg = "#000000", -- if guibg=NONE, this will be used to calculate text color
 				inactive = false, -- when true, other windows will be fully dimmed (unless they contain the same buffer)
 			},
 			context = 10,      -- amount of lines we will try to show around the current line
@@ -168,40 +175,41 @@ return {
 			-- treesitter is used to automatically expand the visible text,
 			-- but you can further control the types of nodes that should always be fully expanded
 			expand = { -- for treesitter, we we always try to expand to the top-most ancestor with these types
-				'function',
-				'method',
-				'table',
-				'if_statement',
+				"function",
+				"method",
+				"table",
+				"if_statement",
 			},
 			exclude = {}, -- exclude these filetypes
-		}
+		},
 	},
 
-	--[[ Statusline ]] --
+	--[[ Statusline ]]
+	--
 	{
-		'nvim-lualine/lualine.nvim',
-		dependencies = { 'nvim-tree/nvim-web-devicons', 'chrisgrieser/nvim-recorder' },
+		"nvim-lualine/lualine.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons", "chrisgrieser/nvim-recorder" },
 		opts = {
 			options = {
 				icons_enabled = true,
-				theme = 'auto',
-				component_separators = { left = '', right = '' },
-				section_separators = { left = '', right = '' },
+				theme = "auto",
+				component_separators = { left = "", right = "" },
+				section_separators = { left = "", right = "" },
 				disabled_filetypes = {
 					statusline = {
-						'help',
-						'startify',
-						'dashboard',
-						'packer',
-						'neogitstatus',
-						'NvimTree',
-						'Trouble',
-						'alpha',
-						'lir',
-						'Outline',
-						'spectre_panel',
-						'toggleterm',
-						'qf',
+						"help",
+						"startify",
+						"dashboard",
+						"packer",
+						"neogitstatus",
+						"NvimTree",
+						"Trouble",
+						"alpha",
+						"lir",
+						"Outline",
+						"spectre_panel",
+						"toggleterm",
+						"qf",
 					},
 				},
 				ignore_focus = {},
@@ -211,96 +219,117 @@ return {
 					statusline = 1000,
 					tabline = 1000,
 					winbar = 1000,
-				}
+				},
 			},
 			sections = {
-				lualine_a = { 'mode' },
-				lualine_b = { 'branch', 'diff', 'diagnostics' },
-				lualine_c = { 'filename' },
-				lualine_x = { function() return require('recorder').displaySlots() end,
-					function() return require('recorder').recordingStatus() end },
-				lualine_y = { 'encoding', 'fileformat', 'filetype' },
-				lualine_z = { 'progress', 'location' }
+				lualine_a = { "mode" },
+				lualine_b = { "branch", "diff", "diagnostics" },
+				lualine_c = { "filename" },
+				lualine_x = {
+					function()
+						return require("recorder").displaySlots()
+					end,
+					function()
+						return require("recorder").recordingStatus()
+					end,
+				},
+				lualine_y = { "encoding", "fileformat", "filetype" },
+				lualine_z = { "progress", "location" },
 			},
 			inactive_sections = {
 				lualine_a = {},
 				lualine_b = {},
-				lualine_c = { 'filename' },
-				lualine_x = { 'location' },
+				lualine_c = { "filename" },
+				lualine_x = { "location" },
 				lualine_y = {},
-				lualine_z = {}
+				lualine_z = {},
 			},
-			extensions = {}
-		}
+			extensions = {},
+		},
 	},
 
-	--[[ Bufferline ]] --
+	--[[ Bufferline ]]
+	--
 	{
-		'akinsho/bufferline.nvim',
-		dependencies = { 'nvim-tree/nvim-web-devicons' },
+		"akinsho/bufferline.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {},
 	},
 
-	--[[ Winbar ]] --
+	--[[ Winbar ]]
+	--
 	{
-		'fgheng/winbar.nvim',
-		dependencies = { 'nvim-tree/nvim-web-devicons', 'SmiteshP/nvim-navic' },
+		"fgheng/winbar.nvim",
+		dependencies = { "nvim-tree/nvim-web-devicons", "SmiteshP/nvim-navic" },
 		opts = {
 			enabled = true,
 			show_file_path = true,
 			show_symbols = true,
 			colors = {
-				path = '', -- You can customize colors like #c946fd
-				file_name = '',
-				symbols = '',
+				path = "", -- You can customize colors like #c946fd
+				file_name = "",
+				symbols = "",
 			},
 			icons = {
-				file_icon_default = '',
-				seperator = '>',
-				editor_state = '●',
-				lock_icon = '',
+				file_icon_default = "",
+				seperator = ">",
+				editor_state = "●",
+				lock_icon = "",
 			},
 			exclude_filetype = {
-				'help',
-				'startify',
-				'dashboard',
-				'packer',
-				'neogitstatus',
-				'NvimTree',
-				'Trouble',
-				'alpha',
-				'lir',
-				'Outline',
-				'spectre_panel',
-				'toggleterm',
-				'qf',
-			}
-		}
+				"help",
+				"startify",
+				"dashboard",
+				"packer",
+				"neogitstatus",
+				"NvimTree",
+				"Trouble",
+				"alpha",
+				"lir",
+				"Outline",
+				"spectre_panel",
+				"toggleterm",
+				"qf",
+			},
+		},
 	},
 
-	--[[ Alpha ]] --
+	--[[ Highlight Words ]]
 	{
-		'goolord/alpha-nvim',
+		"RRethy/vim-illuminate",
+		lazy = false,
+		keys = {
+			{ "<leader>ui", "<cmd>IlluminateToggle<cr>", desc = "Toggle Illuminate" },
+		},
+		config = function()
+			require("illuminate").configure({
+				providers = {
+					"lsp",
+					"treesitter",
+					"regex",
+				},
+				delay = 100,
+				filetypes_denylist = {
+					"dirvish",
+					"fugitive",
+				},
+				under_cursor = true,
+				large_file_cutoff = 10000,
+				large_file_overrides = nil,
+				min_count_to_highlight = 1,
+			})
+		end,
+	},
+
+	--[[ Dashboard ]]
+	{
+		"glepnir/dashboard-nvim",
 		event = "VimEnter",
-		enabled = false,
-		dependencies = { 'nvim-tree/nvim-web-devicons' },
-		--opts = require('alpha.themes.dashboard').config,
 		config = function()
-			require('alpha').setup(
-				require('alpha.themes.dashboard').config
-			)
-		end
-	},
-
-	--[[ Dashboard ]] --
-	{
-		'glepnir/dashboard-nvim',
-		event = 'VimEnter',
-		config = function()
-			require('dashboard').setup {
-				theme = 'doom',        --  theme is doom and hyper default is hyper
+			require("dashboard").setup({
+				theme = "doom",        --  theme is doom and hyper default is hyper
 				disable_move = false,  --  default is false disable move keymap for hyper
-				shortcut_type = 'letter', --  shorcut type 'letter' or 'number'
+				shortcut_type = "letter", --  shorcut type 'letter' or 'number'
 				change_to_vcs_root = true, -- default is false,for open file in hyper mru. it will change to the root of vcs
 				config = {
 					header = {
@@ -328,48 +357,58 @@ return {
 					}, --  config used for theme
 					center = {
 						{
-							icon = ' ',
-							icon_hl = 'Title',
-							desc = 'Find File',
-							desc_hl = 'String',
-							key = 'a',
-							key_hl = 'Number',
-							action = 'Telescope find_files'
+							icon = " ",
+							icon_hl = "Title",
+							desc = "Find File",
+							desc_hl = "String",
+							key = "a",
+							key_hl = "Number",
+							action = "Telescope find_files",
 						},
 						{
-							icon = ' ',
-							icon_hl = 'Title',
-							desc = 'Recent Files',
-							desc_hl = 'String',
-							key = 's',
-							key_hl = 'Number',
-							action = 'Telescope oldfiles'
+							icon = " ",
+							icon_hl = "Title",
+							desc = "Recent Files",
+							desc_hl = "String",
+							key = "s",
+							key_hl = "Number",
+							action = "Telescope oldfiles",
 						},
 						{
-							icon = ' ',
-							desc = 'Find Dotfiles',
-							desc_hl = 'String',
-							key = 'd',
-							key_hl = 'Number',
-							action = 'cd ~/.config/nvim | edit .'
+							icon = " ",
+							icon_hl = "Title",
+							desc = "Saved Sessions",
+							desc_hl = "String",
+							key = "d",
+							key_hl = "Number",
+							action = "Autosession search",
+						},
+						{
+							icon = " ",
+							desc = "Find Dotfiles",
+							desc_hl = "String",
+							key = "f",
+							key_hl = "Number",
+							action = "cd ~/.config/nvim | edit .",
 						},
 					},
-					footer = {} --your footer
+					footer = {}, --your footer
 				},
 				hide = {
 					statusline = true, -- hide statusline default is true
 					tabline = true, -- hide the tabline
 					winbar = true, -- hide winbar
 				},
-			}
+			})
 		end,
-		dependencies = { { 'nvim-tree/nvim-web-devicons' } }
+		dependencies = { { "nvim-tree/nvim-web-devicons" } },
 	},
 
-	--[[ Screensaver ]] --
+	--[[ Screensaver ]]
+	--
 	{
-		'folke/drop.nvim',
-		event = 'VimEnter',
+		"folke/drop.nvim",
+		event = "VimEnter",
 		opts = {
 			theme = "snow",           -- can be one of rhe default themes, or a custom theme
 			max = 40,                 -- maximum number of drops on the screen
@@ -377,6 +416,6 @@ return {
 			screensaver = 2 * 60 * 1000, -- show after 5 minutes. Set to false, to disable
 			filetypes = {},           -- will enable/disable automatically for the following filetypes
 			winblend = 100,           -- winblend for the drop window
-		}
+		},
 	},
 }

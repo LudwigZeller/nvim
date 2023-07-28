@@ -1,175 +1,149 @@
 return {
-	--[[ Telescope ]] --
+	--[[ Telescope ]]
+	--
 	{
 		"nvim-telescope/telescope.nvim",
 		cmd = "Telescope",
-		dependencies = { 'nvim-lua/plenary.nvim', 'nvim-telescope/telescope-symbols.nvim' },
+		dependencies = { "nvim-lua/plenary.nvim", "nvim-telescope/telescope-symbols.nvim" },
 		version = false, -- telescope did only one release, so use HEAD for now
 		keys = {
 			-- find
 			{
 				"<leader>fb",
 				"<cmd>Telescope buffers show_all_buffers=true<cr>",
-				desc =
-				"Buffers"
+				desc = "Buffers",
 			},
 			{
 				"<leader>ff",
 				"<cmd>lua require('telescope.builtin').find_files({ cwd=vim.lsp.buf.list_workspace_folders()[1] })<cr>",
-				desc =
-				"Find Files (root dir)"
+				desc = "Find Files (root dir)",
 			},
 			{
 				"<leader>fF",
 				"<cmd>Telescope find_files<cr>",
-				desc =
-				"Find Files (cwd)"
+				desc = "Find Files (cwd)",
 			},
 			{
 				"<leader>fr",
 				"<cmd>Telescope oldfiles<cr>",
-				desc =
-				"Recent"
+				desc = "Recent",
 			},
 			{
 				"<leader>fR",
 				"<cmd>lua require('telescope.builtin').oldfiles({ cwd=vim.loop.cwd() })<cr>",
-				desc =
-				"Recent (cwd)"
+				desc = "Recent (cwd)",
 			},
 			-- git
 			{
 				"<leader>gc",
 				"<cmd>Telescope git_commits<cr>",
-				desc =
-				"commits"
+				desc = "commits",
 			},
 			{
 				"<leader>gs",
 				"<cmd>Telescope git_status<cr>",
-				desc =
-				"status"
+				desc = "status",
 			},
 			-- search
 			{
 				"<leader>sa",
 				"<cmd>Telescope autocommands<cr>",
-				desc =
-				"Auto Commands"
+				desc = "Auto Commands",
 			},
 			{
 				"<leader>sb",
 				"<cmd>Telescope current_buffer_fuzzy_find<cr>",
-				desc =
-				"Buffer"
+				desc = "Buffer",
 			},
 			{
 				"<leader>sc",
 				"<cmd>Telescope command_history<cr>",
-				desc =
-				"Command History"
+				desc = "Command History",
 			},
 			{
 				"<leader>sC",
 				"<cmd>Telescope commands<cr>",
-				desc =
-				"Commands"
+				desc = "Commands",
 			},
 			{
 				"<leader>sd",
 				"<cmd>Telescope diagnostics bufnr=0<cr>",
-				desc =
-				"Document diagnostics"
+				desc = "Document diagnostics",
 			},
 			{
 				"<leader>sD",
 				"<cmd>Telescope diagnostics<cr>",
-				desc =
-				"Workspace diagnostics"
+				desc = "Workspace diagnostics",
 			},
 			{
 				"<leader>sg",
 				"<cmd>lua require('telescope.builtin').live_grep({ cwd=vim.lsp.buf.list_workspace_folders()[1] })<cr>",
-				desc =
-				"Grep (root dir)"
+				desc = "Grep (root dir)",
 			},
 			{
 				"<leader>sG",
 				"<cmd>Telescope live_grep<cr>",
-				desc =
-				"Grep (cwd)"
+				desc = "Grep (cwd)",
 			},
 			{
 				"<leader>sh",
 				"<cmd>Telescope help_tags<cr>",
-				desc =
-				"Help Pages"
+				desc = "Help Pages",
 			},
 			{
 				"<leader>sH",
 				"<cmd>Telescope highlights<cr>",
-				desc =
-				"Search Highlight Groups"
+				desc = "Search Highlight Groups",
 			},
 			{
 				"<leader>sk",
 				"<cmd>Telescope keymaps<cr>",
-				desc =
-				"Key Maps"
+				desc = "Key Maps",
 			},
 			{
 				"<leader>sM",
 				"<cmd>Telescope man_pages<cr>",
-				desc =
-				"Man Pages"
+				desc = "Man Pages",
 			},
 			{
 				"<leader>sm",
 				"<cmd>Telescope marks<cr>",
-				desc =
-				"Jump to Mark"
+				desc = "Jump to Mark",
 			},
 			{
 				"<leader>so",
 				"<cmd>Telescope vim_options<cr>",
-				desc =
-				"Options"
+				desc = "Options",
 			},
 			{
 				"<leader>sR",
 				"<cmd>Telescope resume<cr>",
-				desc =
-				"Resume"
+				desc = "Resume",
 			},
 			{
 				"<leader>sw",
 				"<cmd>Telescope grep_string<cr>",
-				desc =
-				"Word (root dir)"
+				desc = "Word (root dir)",
 			},
 			{
 				"<leader>sW",
 				"<cmd>Telescope grep_string<cr>",
-				desc =
-				"Word (cwd)"
+				desc = "Word (cwd)",
 			},
 			{
 				"<leader>uC",
 				"<cmd>Telescope colorscheme enable_preview=true<cr>",
-				desc =
-				"Colorscheme with preview"
+				desc = "Colorscheme with preview",
 			},
 			{
 				"<leader>ss",
-				"<cmd>lua require('telescope.builtin').lsp_document_symbols({ symbols = { \"Class\", \"Function\", \"Method\", \"Constructor\", \"Interface\", \"Module\", \"Struct\", \"Trait\", \"Field\", \"Property\", }, })<cr>",
-				desc =
-				"Goto Symbol",
+				'<cmd>lua require(\'telescope.builtin\').lsp_document_symbols({ symbols = { "Class", "Function", "Method", "Constructor", "Interface", "Module", "Struct", "Trait", "Field", "Property", }, })<cr>',
+				desc = "Goto Symbol",
 			},
 			{
 				"<leader>sS",
 				"lsp_dynamic_workspace_symbols",
-				desc =
-				"Goto Symbol (Workspace)",
+				desc = "Goto Symbol (Workspace)",
 			},
 		},
 		opts = {
@@ -187,12 +161,12 @@ return {
 						["<a-i>"] = function()
 							local action_state = require("telescope.actions.state")
 							local line = action_state.get_current_line()
-							require('telescope.builtin').find_files({ no_ignore = true, default_text = line })
+							require("telescope.builtin").find_files({ no_ignore = true, default_text = line })
 						end,
 						["<a-h>"] = function()
 							local action_state = require("telescope.actions.state")
 							local line = action_state.get_current_line()
-							require('telescope.builtin').find_files({ hidden = true, default_text = line })
+							require("telescope.builtin").find_files({ hidden = true, default_text = line })
 						end,
 						["<C-Down>"] = function(...)
 							return require("telescope.actions").cycle_history_next(...)
@@ -217,11 +191,12 @@ return {
 		},
 	},
 
-	--[[ Treesitter ]] --
+	--[[ Treesitter ]]
+	--
 	{
-		'nvim-treesitter/nvim-treesitter',
-		dependencies = { 'nvim-treesitter/nvim-treesitter-textobjects', },
-		build = ':TSUpdate',
+		"nvim-treesitter/nvim-treesitter",
+		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
+		build = ":TSUpdate",
 		opts = {
 			ensure_installed = { "lua" },
 			auto_install = true,
@@ -234,11 +209,12 @@ return {
 				enable = true,
 				extended_mode = true,
 				max_file_lines = nil,
-			}
+			},
 		},
 	},
 
-	--[[ Nvim-Tree ]] --
+	--[[ Nvim-Tree ]]
+	--
 	{
 		"nvim-tree/nvim-tree.lua",
 		lazy = false,
@@ -269,7 +245,7 @@ return {
 						if bufname:match("NvimTree_") ~= nil then
 							table.insert(tree_wins, w)
 						end
-						if vim.api.nvim_win_get_config(w).relative ~= '' then
+						if vim.api.nvim_win_get_config(w).relative ~= "" then
 							table.insert(floating_wins, w)
 						end
 					end
@@ -279,101 +255,72 @@ return {
 							vim.api.nvim_win_close(w, true)
 						end
 					end
-				end
-			})
-		end
-	},
-
-	--[[ Comment ]] --
-	{
-		'numToStr/Comment.nvim',
-		config = function()
-			require('Comment').setup({
-				padding = true,
-				sticky = true,
-				ignore = nil,
-				toggler = {
-					line = 'gcc',
-					block = 'gbc',
-				},
-				opleader = {
-					line = 'gc',
-					block = 'gb',
-				},
-				extra = {
-					above = 'gcO',
-					below = 'gco',
-					eol = 'gcA',
-				},
-				mappings = {
-					basic = true,
-					extra = true,
-				},
-				pre_hook = nil,
-				post_hook = nil,
+				end,
 			})
 		end,
 	},
 
-	--[[ Nvim Surround ]]
+	--[[ Gitsigns ]]
+	--
 	{
-		"kylechui/nvim-surround",
-		version = "*", -- Use for stability; omit to use `main` branch for the latest features
-		event = "VeryLazy",
-		config = function()
-			require("nvim-surround").setup({
-				-- Configuration here, or leave empty to use defaults
-			})
-		end
-	},
-
-	--[[ Gitsigns ]] --
-	{
-		'lewis6991/gitsigns.nvim',
+		"lewis6991/gitsigns.nvim",
 		config = function()
 			local gs = require("gitsigns")
 
 			gs.setup({
 				signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-				numhl      = true, -- Toggle with `:Gitsigns toggle_numhl`
-				linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
-				word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
+				numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
+				linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
+				word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
 			})
 
-			vim.keymap.set('n', ']c',
-				function()
-					if vim.wo.diff then return ']c' end
-					vim.schedule(function() gs.next_hunk() end)
-					return '<Ignore>'
-				end, { expr = true, desc = "Next Hunk" })
-			vim.keymap.set('n', '[c',
-				function()
-					if vim.wo.diff then return '[c' end
-					vim.schedule(function() gs.prev_hunk() end)
-					return '<Ignore>'
-				end, { expr = true, desc = "Previos Hunk" })
-			vim.keymap.set('n', '<leader>ghs', gs.stage_hunk, { desc = "Stage Hunk" })
-			vim.keymap.set('n', '<leader>ghr', gs.reset_hunk, { desc = "Reset Hunk" })
-			vim.keymap.set('v', '<leader>ghs', function() gs.stage_hunk { vim.fn.line('.'), vim.fn.line('v') } end,
-				{ desc = "Stage Hunk" })
-			vim.keymap.set('v', '<leader>ghr', function() gs.reset_hunk { vim.fn.line('.'), vim.fn.line('v') } end,
-				{ desc = "Reset Hunk" })
-			vim.keymap.set('n', '<leader>ghS', gs.stage_buffer, { desc = "Stage Buffer" })
-			vim.keymap.set('n', '<leader>ghu', gs.undo_stage_hunk, { desc = "Undo Stage Hunk" })
-			vim.keymap.set('n', '<leader>ghR', gs.reset_buffer, { desc = "Reset Buffer" })
-			vim.keymap.set('n', '<leader>ghp', gs.preview_hunk, { desc = "Preview Hunk" })
-			vim.keymap.set('n', '<leader>ghb', function() gs.blame_line { full = true } end, { desc = "Blame Line" })
-			vim.keymap.set('n', '<leader>gtb', gs.toggle_current_line_blame, { desc = "Current Blame Line" })
-			vim.keymap.set('n', '<leader>ghd', gs.diffthis, { desc = "Diffthis" })
-			vim.keymap.set('n', '<leader>ghD', function() gs.diffthis('~') end, { desc = "Diffthis (~)" })
-			vim.keymap.set('n', '<leader>gtd', gs.toggle_deleted, { desc = "Deleted" })
-			vim.keymap.set({ 'o', 'x' }, 'ih', '<cmd><C-U>Gitsigns select_hunk<CR>')
+			vim.keymap.set("n", "]c", function()
+				if vim.wo.diff then
+					return "]c"
+				end
+				vim.schedule(function()
+					gs.next_hunk()
+				end)
+				return "<Ignore>"
+			end, { expr = true, desc = "Next Hunk" })
+			vim.keymap.set("n", "[c", function()
+				if vim.wo.diff then
+					return "[c"
+				end
+				vim.schedule(function()
+					gs.prev_hunk()
+				end)
+				return "<Ignore>"
+			end, { expr = true, desc = "Previos Hunk" })
+			vim.keymap.set("n", "<leader>ghs", gs.stage_hunk, { desc = "Stage Hunk" })
+			vim.keymap.set("n", "<leader>ghr", gs.reset_hunk, { desc = "Reset Hunk" })
+			vim.keymap.set("v", "<leader>ghs", function()
+				gs.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
+			end, { desc = "Stage Hunk" })
+			vim.keymap.set("v", "<leader>ghr", function()
+				gs.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
+			end, { desc = "Reset Hunk" })
+			vim.keymap.set("n", "<leader>ghS", gs.stage_buffer, { desc = "Stage Buffer" })
+			vim.keymap.set("n", "<leader>ghu", gs.undo_stage_hunk, { desc = "Undo Stage Hunk" })
+			vim.keymap.set("n", "<leader>ghR", gs.reset_buffer, { desc = "Reset Buffer" })
+			vim.keymap.set("n", "<leader>ghp", gs.preview_hunk, { desc = "Preview Hunk" })
+			vim.keymap.set("n", "<leader>ghb", function()
+				gs.blame_line({ full = true })
+			end, { desc = "Blame Line" })
+			vim.keymap.set("n", "<leader>gtb", gs.toggle_current_line_blame, { desc = "Current Blame Line" })
+			vim.keymap.set("n", "<leader>ghd", gs.diffthis, { desc = "Diffthis" })
+			vim.keymap.set("n", "<leader>ghD", function()
+				gs.diffthis("~")
+			end, { desc = "Diffthis (~)" })
+			vim.keymap.set("n", "<leader>gtd", gs.toggle_deleted, { desc = "Deleted" })
+			vim.keymap.set({ "o", "x" }, "ih", "<cmd><C-U>Gitsigns select_hunk<CR>")
 		end,
 	},
 
-	--[[ Toggleterm ]] --
+	--[[ Toggleterm ]]
+	--
 	{
-		'akinsho/toggleterm.nvim',
+		"akinsho/toggleterm.nvim",
 		config = function()
 			require("toggleterm").setup({
 				size = function(term)
@@ -387,53 +334,87 @@ return {
 				shade_terminals = false,
 			})
 
-			local Terminal = require('toggleterm.terminal').Terminal
+			local Terminal = require("toggleterm.terminal").Terminal
 
 			local horizontal = Terminal:new({ direction = "horizontal" })
-			function _Horizontal_toggle() horizontal:toggle() end
+			function _Horizontal_toggle()
+				horizontal:toggle()
+			end
 
-			vim.api.nvim_set_keymap("n", "<leader>th", "<cmd>lua _Horizontal_toggle()<CR>",
-				{ desc = 'Horizontal Terminal', noremap = true, silent = true })
+			vim.api.nvim_set_keymap(
+				"n",
+				"<leader>th",
+				"<cmd>lua _Horizontal_toggle()<CR>",
+				{ desc = "Horizontal Terminal", noremap = true, silent = true }
+			)
 
 			local vertical = Terminal:new({ direction = "vertical" })
-			function _Vertical_toggle() vertical:toggle() end
+			function _Vertical_toggle()
+				vertical:toggle()
+			end
 
-			vim.api.nvim_set_keymap("n", "<leader>tv", "<cmd>lua _Vertical_toggle()<CR>",
-				{ desc = 'Verical Terminal', noremap = true, silent = true })
+			vim.api.nvim_set_keymap(
+				"n",
+				"<leader>tv",
+				"<cmd>lua _Vertical_toggle()<CR>",
+				{ desc = "Verical Terminal", noremap = true, silent = true }
+			)
 
 			local float = Terminal:new({ direction = "float" })
-			function _Float_toggle() float:toggle() end
+			function _Float_toggle()
+				float:toggle()
+			end
 
-			vim.api.nvim_set_keymap("n", "<leader>tf", "<cmd>lua _Float_toggle()<CR>",
-				{ desc = 'Floating Terminal', noremap = true, silent = true })
+			vim.api.nvim_set_keymap(
+				"n",
+				"<leader>tf",
+				"<cmd>lua _Float_toggle()<CR>",
+				{ desc = "Floating Terminal", noremap = true, silent = true }
+			)
 
 			local htop = Terminal:new({ cmd = "htop", hidden = true, direction = "float" })
-			function _Htop_toggle() htop:toggle() end
+			function _Htop_toggle()
+				htop:toggle()
+			end
 
-			vim.api.nvim_set_keymap("n", "<leader>ts", "<cmd>lua _Htop_toggle()<CR>",
-				{ desc = 'HTop', noremap = true, silent = true })
+			vim.api.nvim_set_keymap(
+				"n",
+				"<leader>ts",
+				"<cmd>lua _Htop_toggle()<CR>",
+				{ desc = "HTop", noremap = true, silent = true }
+			)
 
 			local ncspot = Terminal:new({ cmd = "ncspot", hidden = true, direction = "float" })
-			function _Ncspot_toggle() ncspot:toggle() end
+			function _Ncspot_toggle()
+				ncspot:toggle()
+			end
 
-			vim.api.nvim_set_keymap("n", "<leader>tm", "<cmd>lua _Ncspot_toggle()<CR>",
-				{ desc = 'NcSpot', noremap = true, silent = true })
+			vim.api.nvim_set_keymap(
+				"n",
+				"<leader>tm",
+				"<cmd>lua _Ncspot_toggle()<CR>",
+				{ desc = "NcSpot", noremap = true, silent = true }
+			)
 
 			local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
-			function _Lazygit_toggle() lazygit:toggle() end
+			function _Lazygit_toggle()
+				lazygit:toggle()
+			end
 
-			vim.api.nvim_set_keymap("n", "<leader>gl", "<cmd>lua _Lazygit_toggle()<CR>",
-				{ desc = 'LazyGit', noremap = true, silent = true })
+			vim.api.nvim_set_keymap(
+				"n",
+				"<leader>gl",
+				"<cmd>lua _Lazygit_toggle()<CR>",
+				{ desc = "LazyGit", noremap = true, silent = true }
+			)
 		end,
 	},
 
-	--[[ Trouble ]] --
+	--[[ Trouble ]]
+	--
 	{
-		'folke/trouble.nvim',
+		"folke/trouble.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {
-		},
+		opts = {},
 	},
-
-
 }
