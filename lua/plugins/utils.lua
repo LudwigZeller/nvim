@@ -1,7 +1,15 @@
 return {
-	{ "folke/neodev.nvim", opts = {},         priority = 100 },
+	{ "folke/neodev.nvim",    priority = 100 },
+
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		opts = {}, -- this is equalent to setup({}) function
+	},
+	--[[ Window Layout after Bufferclose ]]
+	{ "famiu/bufdelete.nvim", cmd = { "Bdelete", "Bwipeout" } },
+
 	--[[ Flash ]]
-	--
 	{
 		"folke/flash.nvim",
 		event = "VeryLazy",
@@ -102,54 +110,34 @@ return {
 
 	--[[ Session Management ]]
 	{
-		"folke/persistence.nvim",
-		event = "BufReadPre",                                        -- this will only start session saving when an actual file was opened
-		opts = {
-			dir = vim.fn.expand(vim.fn.stdpath("state") .. "/sessions/"), -- directory where session files are saved
-			options = {
-				"blank",
-				"buffers",
-				"curdir",
-				"folds",
-				"help",
-				"tabpages",
-				"winsize",
-				"winpos",
-				"terminal",
-				"localoptions",
-			},
-			pre_save = nil, -- a function to call before saving the session
-		},
-	},
-	{
-		enabled = false,
-		"rmagatti/auto-session",
-		lazy = false,
+		"Shatur/neovim-session-manager",
+		cmd = "SessionManager",
 		keys = {
-			{ "<leader>qs", "<cmd>SessionSave<cr>",        desc = "Save current Session" },
-			{ "<leader>qd", "<cmd>SessionSave<cr>",        desc = "Delete current Session" },
-			{ "<leader>qr", "<cmd>SessionRestore<cr>",     desc = "Restore Session based on CWD" },
-			{ "<leader>ql", "<cmd>Autosession search<cr>", desc = "List Sessions" },
-			{ "<leader>qx", "<cmd>Autosession delete<cr>", desc = "Delete Sessions" },
+			{ "<leader>qs", "<cmd>SessionManager save_current_session<cr>", desc = "Save current Session" },
+			{
+				"<leader>qr",
+				"<cmd>SessionManager load_current_dir_session<cr>",
+				desc = "Restore Session based on CWD",
+			},
+			{ "<leader>ql", "<cmd>SessionManager load_session<cr>",         desc = "List Sessions" },
+			{ "<leader>qo", "<cmd>SessionManager load_last_session<cr>",    desc = "Load last Sessions" },
+			{ "<leader>qx", "<cmd>SessionManager delete_session<cr>",       desc = "Delete Sessions" },
 		},
 		config = function()
-			require("auto-session").setup({
-				log_level = "info",
-				auto_session_suppress_dirs = { "~/", "~/Downloads", "/" },
-				auto_session_enable_last_session = false,
-				auto_session_root_dir = vim.fn.stdpath("data") .. "/sessions/",
-				auto_session_enabled = true,
-				auto_save_enabled = true,
-				auto_session_create_enabled = false,
-				auto_restore_enabled = false,
-				auto_session_use_git_branch = false,
-				cwd_change_handling = {
-					restore_upcoming_session = true, -- already the default, no need to specify like this, only here as an example
-					pre_cwd_changed_hook = nil,   -- already the default, no need to specify like this, only here as an example
-					post_cwd_changed_hook = function() -- example refreshing the lualine status line _after_ the cwd changes
-						require("lualine").refresh() -- refresh lualine so the new session name is displayed in the status bar
-					end,
+			local config = require("session_manager.config")
+			require("session_manager").setup({
+				sessions_dir = vim.fn.expand(vim.fn.stdpath("state") .. "/sessions/"),
+				autoload_mode = config.AutoloadMode.Disabled, -- Define what to do when Neovim is started without arguments. Possible values: Disabled, CurrentDir, LastSession
+				autosave_last_session = true,             -- Automatically save last session on exit and on session switch.
+				autosave_ignore_not_normal = true,        -- Plugin will not save a session when no buffers are opened, or all of them aren't writable or listed.
+				autosave_ignore_dirs = {},                -- A list of directories where the session will not be autosaved.
+				autosave_ignore_filetypes = {             -- All buffers of these file types will be closed before the session is saved.
+					"gitcommit",
+					"gitrebase",
 				},
+				autosave_ignore_buftypes = {}, -- All buffers of these bufer types will be closed before the session is saved.
+				autosave_only_in_session = true, -- Always autosaves session. If true, only autosaves after a session is active.
+				max_path_length = 80,        -- Shorten the display path if length exceeds this threshold. Use 0 if don't want to shorten the path at all.
 			})
 		end,
 	},
@@ -165,45 +153,35 @@ return {
 	},
 
 	--[[ Improved Macros ]]
-	--
 	{
-		"chrisgrieser/nvim-recorder",
-		dependencies = "rcarriga/nvim-notify", -- optional
-		opts = {
-			slots = { "a", "b", "c", "d", "e" },
-			mapping = {
-				startStopRecording = "q",
-				playMacro = "Q",
-				switchSlot = "<C-q>",
-				editMacro = "cq",
-				yankMacro = "yq",
-				addBreakPoint = "##", -- ⚠️ this should be a string you don't use in insert mode during a macro
-			},
-			clear = true,
-			logLevel = vim.log.levels.INFO,
-			lessNotifications = false,
-			useNerdfontIcons = true,
-			performanceOpts = {
-				countThreshold = 100,
-				lazyredraw = true,    -- enable lazyredraw (see `:h lazyredraw`)
-				noSystemClipboard = true, -- remove `+`/`*` from clipboard option
-				autocmdEventsIgnore = { -- temporarily ignore these autocmd events
-					"TextChangedI",
-					"TextChanged",
-					"InsertLeave",
-					"InsertEnter",
-					"InsertCharPre",
+		"ecthelionvi/NeoComposer.nvim",
+		dependencies = { "kkharji/sqlite.lua" },
+		config = function()
+			require("NeoComposer").setup({
+				notify = false,
+				delay_timer = 150,
+				colors = {
+					bg = "bg",
+					fg = "fg",
+					red = "#ec5f67",
+					blue = "#5fb3b3",
+					green = "#99c794",
 				},
-			},
-			dapSharedKeymaps = false,
-		},
+				keymaps = {
+					play_macro = "Q",
+					yank_macro = "yq",
+					stop_macro = "cq",
+					toggle_record = "q",
+					cycle_next = "<c-n>",
+					cycle_prev = "<c-p>",
+					toggle_macro_menu = "<m-q>",
+				},
+			})
+
+			require("telescope").load_extension("macros")
+		end,
 	},
 
 	--[[ makes plugins dot-repeatable ]]
-	--
-	{ "tpope/vim-repeat",  event = "VeryLazy" },
-
-	--[[ Lua + Nvim ]]
-	--
-	{ "folke/neodev.nvim" },
+	{ "tpope/vim-repeat", event = "VeryLazy" },
 }

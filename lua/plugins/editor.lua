@@ -192,25 +192,26 @@ return {
 	},
 
 	--[[ Treesitter ]]
-	--
 	{
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
 		build = ":TSUpdate",
-		opts = {
-			ensure_installed = { "lua" },
-			auto_install = true,
-			highlight = {
-				enable = true,
-				additional_vim_regex_highlighting = false,
-			},
-			ident = { enable = true },
-			rainbow = {
-				enable = true,
-				extended_mode = true,
-				max_file_lines = nil,
-			},
-		},
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = { "lua" },
+				auto_install = true,
+				highlight = {
+					enable = true,
+					additional_vim_regex_highlighting = false,
+				},
+				ident = { enable = true },
+				rainbow = {
+					enable = true,
+					extended_mode = true,
+					max_file_lines = nil,
+				},
+			})
+		end,
 	},
 
 	--[[ Nvim-Tree ]]
@@ -269,7 +270,7 @@ return {
 
 			gs.setup({
 				signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-				numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
+				numhl = true,  -- Toggle with `:Gitsigns toggle_numhl`
 				linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
 				word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
 			})

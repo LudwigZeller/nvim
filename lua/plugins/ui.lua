@@ -5,11 +5,11 @@ return {
 		"folke/which-key.nvim",
 		opts = {
 			window = {
-				border = "shadow",     -- none, single, double, shadow
-				position = "bottom",   -- bottom, top
+				border = "shadow", -- none, single, double, shadow
+				position = "bottom", -- bottom, top
 				margin = { 2, 10, 2, 10 }, -- extra window margin [top, right, bottom, left].
 				padding = { 1, 2, 1, 2 }, -- extra window padding [top, right, bottom, left]
-				zindex = 1000,         -- positive value to position WhichKey above other floating windows.
+				zindex = 1000, -- positive value to position WhichKey above other floating windows.
 			},
 			plugins = { spelling = true },
 			defaults = {
@@ -88,11 +88,11 @@ return {
 			},
 			-- you can enable a preset for easier configuration
 			presets = {
-				bottom_search = true,     -- use a classic bottom cmdline for search
-				command_palette = true,   -- position the cmdline and popupmenu together
+				bottom_search = true, -- use a classic bottom cmdline for search
+				command_palette = true, -- position the cmdline and popupmenu together
 				long_message_to_split = true, -- long messages will be sent to a split
-				inc_rename = false,       -- enables an input dialog for inc-rename.nvim
-				lsp_doc_border = true,    -- add a border to hover docs and signature help
+				inc_rename = false, -- enables an input dialog for inc-rename.nvim
+				lsp_doc_border = true, -- add a border to hover docs and signature help
 			},
 		},
 		dependencies = {
@@ -170,7 +170,7 @@ return {
 				term_bg = "#000000", -- if guibg=NONE, this will be used to calculate text color
 				inactive = false, -- when true, other windows will be fully dimmed (unless they contain the same buffer)
 			},
-			context = 10,      -- amount of lines we will try to show around the current line
+			context = 10, -- amount of lines we will try to show around the current line
 			treesitter = true, -- use treesitter when available for the filetype
 			-- treesitter is used to automatically expand the visible text,
 			-- but you can further control the types of nodes that should always be fully expanded
@@ -227,10 +227,7 @@ return {
 				lualine_c = { "filename" },
 				lualine_x = {
 					function()
-						return require("recorder").displaySlots()
-					end,
-					function()
-						return require("recorder").recordingStatus()
+						return require("NeoComposer.ui").status_recording()
 					end,
 				},
 				lualine_y = { "encoding", "fileformat", "filetype" },
@@ -312,6 +309,18 @@ return {
 				filetypes_denylist = {
 					"dirvish",
 					"fugitive",
+					"startify",
+					"dashboard",
+					"packer",
+					"neogitstatus",
+					"NvimTree",
+					"Trouble",
+					"alpha",
+					"lir",
+					"Outline",
+					"spectre_panel",
+					"toggleterm",
+					"qf",
 				},
 				under_cursor = true,
 				large_file_cutoff = 10000,
@@ -321,14 +330,22 @@ return {
 		end,
 	},
 
+	--[[ Very Important ]]
+	{
+		"eandrju/cellular-automaton.nvim",
+		config = function()
+			vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>", { desc = "which_key_ignore" })
+		end,
+	},
+
 	--[[ Dashboard ]]
 	{
 		"glepnir/dashboard-nvim",
 		event = "VimEnter",
 		config = function()
 			require("dashboard").setup({
-				theme = "doom",        --  theme is doom and hyper default is hyper
-				disable_move = false,  --  default is false disable move keymap for hyper
+				theme = "doom", --  theme is doom and hyper default is hyper
+				disable_move = false, --  default is false disable move keymap for hyper
 				shortcut_type = "letter", --  shorcut type 'letter' or 'number'
 				change_to_vcs_root = true, -- default is false,for open file in hyper mru. it will change to the root of vcs
 				config = {
@@ -381,7 +398,16 @@ return {
 							desc_hl = "String",
 							key = "d",
 							key_hl = "Number",
-							action = "Autosession search",
+							action = "SessionManager load_session",
+						},
+						{
+							icon = " ",
+							icon_hl = "Title",
+							desc = "Last Sessions",
+							desc_hl = "String",
+							key = "r",
+							key_hl = "Number",
+							action = "SessionManager load_last_session",
 						},
 						{
 							icon = " ",
@@ -392,7 +418,15 @@ return {
 							action = "cd ~/.config/nvim | edit .",
 						},
 					},
-					footer = {}, --your footer
+					footer = {
+						"",
+						"",
+						"",
+						"",
+						"",
+						"",
+						"K.I.S.S ~ Keep it simple stupid 💕",
+					}, --your footer
 				},
 				hide = {
 					statusline = true, -- hide statusline default is true
@@ -410,12 +444,12 @@ return {
 		"folke/drop.nvim",
 		event = "VimEnter",
 		opts = {
-			theme = "snow",           -- can be one of rhe default themes, or a custom theme
-			max = 40,                 -- maximum number of drops on the screen
-			interval = 150,           -- every 150ms we update the drops
-			screensaver = 2 * 60 * 1000, -- show after 5 minutes. Set to false, to disable
-			filetypes = {},           -- will enable/disable automatically for the following filetypes
-			winblend = 100,           -- winblend for the drop window
+			theme = "snow", -- can be one of rhe default themes, or a custom theme
+			max = 40, -- maximum number of drops on the screen
+			interval = 150, -- every 150ms we update the drops
+			screensaver = 3 * 60 * 1000,
+			filetypes = {}, -- will enable/disable automatically for the following filetypes
+			winblend = 100, -- winblend for the drop window
 		},
 	},
 }
