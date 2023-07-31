@@ -9,6 +9,16 @@ return {
 	--[[ Window Layout after Bufferclose ]]
 	{ "famiu/bufdelete.nvim", cmd = { "Bdelete", "Bwipeout" } },
 
+	--[[ Learn Neovim ]]
+	{
+		"m4xshen/hardtime.nvim",
+		event = "UIEnter",
+		keys = {
+			{ "<leader>uh", "<cmd>Hardtime toggle<cr>", desc = "Toggle Hardtime" },
+		},
+		opts = {},
+	},
+
 	--[[ Flash ]]
 	{
 		"folke/flash.nvim",
@@ -156,6 +166,14 @@ return {
 	{
 		"ecthelionvi/NeoComposer.nvim",
 		dependencies = { "kkharji/sqlite.lua" },
+		event = "BufEnter",
+		keys = {
+			{
+				"<leader>sr",
+				"<cmd>Telescope macros<cr>",
+				desc = "Symbols",
+			},
+		},
 		config = function()
 			require("NeoComposer").setup({
 				notify = false,

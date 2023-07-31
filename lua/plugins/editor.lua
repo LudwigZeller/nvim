@@ -51,6 +51,12 @@ return {
 				desc = "Auto Commands",
 			},
 			{
+				"<leader>se",
+				"<cmd>Telescope symbols<cr>",
+				desc = "Symbols",
+			},
+
+			{
 				"<leader>sb",
 				"<cmd>Telescope current_buffer_fuzzy_find<cr>",
 				desc = "Buffer",
@@ -214,6 +220,51 @@ return {
 		end,
 	},
 
+	--[[ Code Runner ]]
+	{
+		keys = {
+			{ "<leader>rt", "<cmd>OverseerToggle<cr>", desc = "Toggle Task List" },
+			{ "<leader>rr", "<cmd>OverseerRun<cr>", desc = "Run Task" },
+			{ "<leader>rn", "<cmd>OverseerBuild<cr>", desc = "Create Task" },
+		},
+		"stevearc/overseer.nvim",
+		opts = {
+			strategy = {
+				"toggleterm",
+				use_shell = false,
+				direction = "float",
+				highlights = nil,
+				auto_scroll = nil,
+				close_on_exit = false,
+				-- can be "never, "success", or "always". "success" will close the window
+				quit_on_exit = "never",
+				open_on_start = true,
+				hidden = false,
+				on_create = nil,
+			},
+			task_list = {
+				bindings = {
+					["?"] = "ShowHelp",
+					["g?"] = "ShowHelp",
+					["<CR>"] = "RunAction",
+					["<C-e>"] = "Edit",
+					["o"] = "Open",
+					["<C-v>"] = "OpenVsplit",
+					["<C-s>"] = "OpenSplit",
+					["<C-f>"] = "OpenFloat",
+					["<C-q>"] = "OpenQuickFix",
+					["p"] = "TogglePreview",
+					["<S-l>"] = "IncreaseDetail",
+					["<S-h>"] = "DecreaseDetail",
+					["{"] = "PrevTask",
+					["}"] = "NextTask",
+					["<C-k>"] = "ScrollOutputUp",
+					["<C-j>"] = "ScrollOutputDown",
+				},
+			},
+		},
+	},
+
 	--[[ Nvim-Tree ]]
 	--
 	{
@@ -236,28 +287,6 @@ return {
 					dotfiles = true,
 				},
 			})
-			vim.api.nvim_create_autocmd("QuitPre", {
-				callback = function()
-					local tree_wins = {}
-					local floating_wins = {}
-					local wins = vim.api.nvim_list_wins()
-					for _, w in ipairs(wins) do
-						local bufname = vim.api.nvim_buf_get_name(vim.api.nvim_win_get_buf(w))
-						if bufname:match("NvimTree_") ~= nil then
-							table.insert(tree_wins, w)
-						end
-						if vim.api.nvim_win_get_config(w).relative ~= "" then
-							table.insert(floating_wins, w)
-						end
-					end
-					if 1 == #wins - #floating_wins - #tree_wins then
-						-- Should quit, so we close all invalid windows.
-						for _, w in ipairs(tree_wins) do
-							vim.api.nvim_win_close(w, true)
-						end
-					end
-				end,
-			})
 		end,
 	},
 
@@ -270,7 +299,7 @@ return {
 
 			gs.setup({
 				signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-				numhl = true,  -- Toggle with `:Gitsigns toggle_numhl`
+				numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
 				linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
 				word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
 			})
