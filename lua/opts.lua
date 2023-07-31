@@ -29,6 +29,7 @@ vim.opt.mousemodel = "extend"
 -- { "blank", "buffers", "curdir", "folds", "help", "tabpages", "winsize", "winpos", "terminal", "localoptions" }
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
+vim.opt.winminwidth = 10
 vim.opt.winblend = 30
 
 vim.opt.completeopt = { "menuone", "noselect", "noinsert" }

@@ -4,11 +4,11 @@ return {
 		"folke/which-key.nvim",
 		opts = {
 			window = {
-				border = "shadow",     -- none, single, double, shadow
-				position = "bottom",   -- bottom, top
+				border = "shadow", -- none, single, double, shadow
+				position = "bottom", -- bottom, top
 				margin = { 2, 10, 2, 10 }, -- extra window margin [top, right, bottom, left].
 				padding = { 1, 2, 1, 2 }, -- extra window padding [top, right, bottom, left]
-				zindex = 1000,         -- positive value to position WhichKey above other floating windows.
+				zindex = 1000, -- positive value to position WhichKey above other floating windows.
 			},
 			plugins = { spelling = true },
 			defaults = {
@@ -99,11 +99,11 @@ return {
 			},
 			-- you can enable a preset for easier configuration
 			presets = {
-				bottom_search = true,     -- use a classic bottom cmdline for search
-				command_palette = true,   -- position the cmdline and popupmenu together
+				bottom_search = true, -- use a classic bottom cmdline for search
+				command_palette = true, -- position the cmdline and popupmenu together
 				long_message_to_split = true, -- long messages will be sent to a split
-				inc_rename = false,       -- enables an input dialog for inc-rename.nvim
-				lsp_doc_border = true,    -- add a border to hover docs and signature help
+				inc_rename = false, -- enables an input dialog for inc-rename.nvim
+				lsp_doc_border = true, -- add a border to hover docs and signature help
 			},
 		},
 		dependencies = {
@@ -139,18 +139,15 @@ return {
 		end,
 	},
 
-	--[[ Dressing ]]
-	--
+	--[[ Dressing	 ]]
 	{
 		"stevearc/dressing.nvim",
 		lazy = true,
 		init = function()
-			---@diagnostic disable-next-line: duplicate-set-field
 			vim.ui.select = function(...)
 				require("lazy").load({ plugins = { "dressing.nvim" } })
 				return vim.ui.select(...)
 			end
-			---@diagnostic disable-next-line: duplicate-set-field
 			vim.ui.input = function(...)
 				require("lazy").load({ plugins = { "dressing.nvim" } })
 				return vim.ui.input(...)
@@ -159,7 +156,6 @@ return {
 	},
 
 	--[[ Todo Comments ]]
-	--
 	{
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
@@ -167,7 +163,6 @@ return {
 	},
 
 	--[[ Twilight ]]
-	--
 	{
 		"folke/twilight.nvim",
 		keys = {
@@ -181,7 +176,7 @@ return {
 				term_bg = "#000000", -- if guibg=NONE, this will be used to calculate text color
 				inactive = false, -- when true, other windows will be fully dimmed (unless they contain the same buffer)
 			},
-			context = 10,      -- amount of lines we will try to show around the current line
+			context = 10, -- amount of lines we will try to show around the current line
 			treesitter = true, -- use treesitter when available for the filetype
 			-- treesitter is used to automatically expand the visible text,
 			-- but you can further control the types of nodes that should always be fully expanded
@@ -262,7 +257,7 @@ return {
 					},
 					"diagnostics",
 				},
-				lualine_c = { "filename", "overseer" },
+				lualine_c = { "overseer" },
 				lualine_x = {
 					function()
 						return require("NeoComposer.ui").status_recording()
@@ -293,11 +288,58 @@ return {
 	},
 
 	--[[ Bufferline ]]
-	--
 	{
 		"akinsho/bufferline.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {},
+		event = "UIEnter",
+		config = function()
+			local bufferline = require("bufferline")
+			bufferline.setup({
+				options = {
+					style_preset = bufferline.style_preset.default, -- or bufferline.style_preset.minimal,
+					themable = true,
+					indicator = { style = "icon", icon = " ▷" },
+					diagnostics = "nvim_lsp",
+					always_show_bufferline = false,
+					offsets = {
+						{
+							filetype = "NvimTree",
+							text = "File Explorer",
+							highlight = "Directory",
+							separator = true, -- use a "true" to enable the default, or set your own character
+						},
+						{
+							filetype = "OverseerList",
+							text = "Task List",
+							highlight = "Directory",
+							separator = true, -- use a "true" to enable the default, or set your own character
+						},
+					},
+				},
+			})
+		end,
+		-- opts = {
+		-- 	options = {
+		-- 		indicator = { style = "underline" },
+		-- 		diagnostics = "nvim_lsp",
+		-- 		seperator_style = "slant",
+		-- 		always_show_bufferline = false,
+		-- 		offsets = {
+		-- 			{
+		-- 				filetype = "NvimTree",
+		-- 				text = "File Explorer",
+		-- 				highlight = "Directory",
+		-- 				separator = true, -- use a "true" to enable the default, or set your own character
+		-- 			},
+		-- 			{
+		-- 				filetype = "OverseerList",
+		-- 				text = "Task List",
+		-- 				highlight = "Directory",
+		-- 				separator = true, -- use a "true" to enable the default, or set your own character
+		-- 			},
+		-- 		},
+		-- 	},
+		-- },
 	},
 
 	--[[ Winbar ]]
@@ -391,7 +433,9 @@ return {
 		event = "VimEnter",
 		opts = function()
 			local dashboard = require("alpha.themes.dashboard")
-			local logo = [[                     `. ___
+			local config = vim.fn.stdpath("config")
+			local logo = [[
+                     `. ___
                     __,' __`.                _..----....____
         __...--.'``;.   ,.   ;``--..__     .'    ,-._    _.-'
   _..-''-------'   `'   `'   `'     O ``-''._   (,;') _,'
@@ -404,8 +448,8 @@ return {
                    `-:._____/______/___/____`.     \  `
                                |       `._    `.    \
                                `._________`-.   `.   `.___
-                                             SSt  `------'`]]
-			local config = vim.fn.stdpath("config")
+                                             SSt  `------'`
+]]
 
 			dashboard.section.header.val = vim.split(logo, "\n")
 			dashboard.section.buttons.val = {
@@ -465,7 +509,7 @@ return {
 		event = "VimEnter",
 		opts = {
 			theme = "snow", -- can be one of rhe default themes, or a custom theme
-			max = 40,    -- maximum number of drops on the screen
+			max = 40, -- maximum number of drops on the screen
 			interval = 150, -- every 150ms we update the drops
 			screensaver = 3 * 60 * 1000,
 			filetypes = {}, -- will enable/disable automatically for the following filetypes

@@ -232,7 +232,7 @@ return {
 			strategy = {
 				"toggleterm",
 				use_shell = false,
-				direction = "float",
+				direction = "horizontal",
 				highlights = nil,
 				auto_scroll = nil,
 				close_on_exit = false,
@@ -243,6 +243,7 @@ return {
 				on_create = nil,
 			},
 			task_list = {
+				direction = "right",
 				bindings = {
 					["?"] = "ShowHelp",
 					["g?"] = "ShowHelp",
@@ -266,7 +267,6 @@ return {
 	},
 
 	--[[ Nvim-Tree ]]
-	--
 	{
 		"nvim-tree/nvim-tree.lua",
 		lazy = false,
