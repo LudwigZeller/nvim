@@ -7,15 +7,35 @@ return {
 		opts = {}, -- this is equalent to setup({}) function
 	},
 
-	--[[ AutoTags ]]
+	--[[ UFO Folds ]]
 	{
-		"windwp/nvim-ts-autotag",
-		config = true, --[[ event = "InsertEnter" ]]
+		"kevinhwang91/nvim-ufo",
+		keys = {
+			{
+				"zR",
+				function()
+					require("ufo").openAllFolds()
+				end,
+			},
+			{
+				"zM",
+				function()
+					require("ufo").closeAllFolds()
+				end,
+			},
+		},
+		event = "VimEnter",
+		config = function()
+			require("ufo").setup({
+				provider_selector = function(_bufnr, _filetype, _buftype)
+					return { "treesitter", "indent" }
+				end,
+			})
+		end,
 	},
-
 	--[[ Window Layout after Bufferclose ]]
-	{ "famiu/bufdelete.nvim", cmd = { "Bdelete", "Bwipeout" } },
 
+	{ "famiu/bufdelete.nvim", cmd = { "Bdelete", "Bwipeout" } },
 	--[[ Learn Neovim ]]
 	{
 		"m4xshen/hardtime.nvim",

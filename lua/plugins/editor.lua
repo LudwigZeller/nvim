@@ -199,7 +199,7 @@ return {
 	--[[ Treesitter ]]
 	{
 		"nvim-treesitter/nvim-treesitter",
-		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
+		dependencies = { "windwp/nvim-ts-autotag" },
 		build = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter.configs").setup({
@@ -210,11 +210,7 @@ return {
 					additional_vim_regex_highlighting = false,
 				},
 				ident = { enable = true },
-				rainbow = {
-					enable = true,
-					extended_mode = true,
-					max_file_lines = nil,
-				},
+				autotag = { enable = true },
 			})
 		end,
 	},
@@ -223,8 +219,8 @@ return {
 	{
 		keys = {
 			{ "<leader>rt", "<cmd>OverseerToggle<cr>", desc = "Toggle Task List" },
-			{ "<leader>rr", "<cmd>OverseerRun<cr>", desc = "Run Task" },
-			{ "<leader>rn", "<cmd>OverseerBuild<cr>", desc = "Create Task" },
+			{ "<leader>rr", "<cmd>OverseerRun<cr>",    desc = "Run Task" },
+			{ "<leader>rn", "<cmd>OverseerBuild<cr>",  desc = "Create Task" },
 		},
 		"stevearc/overseer.nvim",
 		opts = {
@@ -244,7 +240,7 @@ return {
 			component_aliases = {
 				-- Most tasks are initialized with the default components
 				default = {
-					{ "display_duration", detail_level = 2 },
+					{ "display_duration",    detail_level = 2 },
 					{ "on_output_summarize", max_lines = 8 },
 					"on_exit_set_status",
 					{ "on_complete_notify", statuses = { "FAILURE" } },
@@ -314,7 +310,7 @@ return {
 
 			gs.setup({
 				signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-				numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
+				numhl = true,  -- Toggle with `:Gitsigns toggle_numhl`
 				linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
 				word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
 			})
@@ -452,6 +448,12 @@ return {
 				end,
 				shade_terminals = false,
 				autochdir = true,
+				winbar = {
+					enabled = false,
+					name_formatter = function(term) --  term: Terminal
+						return term.name
+					end,
+				},
 			})
 		end,
 	},

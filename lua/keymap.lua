@@ -93,7 +93,7 @@ vim.keymap.set("n", "<leader>bt", "<cmd>BufferLineTogglePin<cr>", { desc = "Pin 
 
 --[[ Tabs ]]
 vim.keymap.set("n", "<leader><tab>h", "<cmd>tabprevious<cr>", { desc = "Previos tab" })
-vim.keymap.set("n", "<leader><tab>t", "<cmd>tabnext<cr>", { desc = "Next tab" })
+vim.keymap.set("n", "<leader><tab>l", "<cmd>tabnext<cr>", { desc = "Next tab" })
 vim.keymap.set("n", "<leader><tab>n", "<cmd>tabnew<cr>", { desc = "New tab" })
 vim.keymap.set("n", "<leader><tab>c", "<cmd>tabclose<cr>", { desc = "Close tab" })
 
