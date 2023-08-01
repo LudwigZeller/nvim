@@ -26,9 +26,8 @@ vim.opt.timeoutlen = 1000
 vim.opt.shell = "fish"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.mousemodel = "extend"
+
 -- Scope save to Session
--- vim.opt.sessionoptions =
--- { "blank", "buffers", "curdir", "folds", "help", "tabpages", "winsize", "winpos", "terminal", "localoptions" }
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 vim.opt.winminwidth = 10
