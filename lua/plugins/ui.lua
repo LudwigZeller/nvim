@@ -263,17 +263,8 @@ return {
 						return require("NeoComposer.ui").status_recording()
 					end,
 				},
-				lualine_y = { "encoding", "fileformat", "filetype" },
+				lualine_y = { "encoding", "filetype", "fileformat", "hostname" },
 				lualine_z = { "progress", "location" },
-			},
-			winbar = {
-				lualine_c = {
-					{
-						"navic",
-						color_correction = "dynamic",
-						navic_opts = nil,
-					},
-				},
 			},
 			inactive_sections = {
 				lualine_a = {},
@@ -282,6 +273,30 @@ return {
 				lualine_x = { "location" },
 				lualine_y = {},
 				lualine_z = {},
+			},
+			winbar = {
+				lualine_c = {
+					{
+						"navic",
+						draw_empty = true,
+						color_correction = "dynamic",
+						navic_opts = {
+							highlight = true,
+						},
+					},
+				},
+			},
+			inactive_winbar = {
+				lualine_c = {
+					{
+						"navic",
+						draw_empty = true,
+						color_correction = "dynamic",
+						navic_opts = {
+							highlight = false,
+						},
+					},
+				},
 			},
 			extensions = {},
 		},
