@@ -21,6 +21,8 @@ vim.opt.shiftwidth = 2
 
 vim.opt.relativenumber = true
 
+vim.opt.timeoutlen = 1000
+
 vim.opt.shell = "fish"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.mousemodel = "extend"
