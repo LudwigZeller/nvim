@@ -2,7 +2,6 @@ return {
 	--[[ Tokyonight ]]
 	{
 		"folke/tokyonight.nvim",
-		name = "tokyonight",
 		priority = 1000,
 		config = function()
 			require("tokyonight").setup({
@@ -16,7 +15,7 @@ return {
 					functions = {},
 					variables = {},
 					sidebars = "transparent", -- style for sidebars, see below
-					floats = "dark",     -- style for floating windows
+					floats = "dark", -- style for floating windows
 				},
 				sidebars = { "qf", "help", "OverseerList", "NvimTree" },
 				day_brightness = 0.3,
@@ -33,8 +32,7 @@ return {
 	{
 		"catppuccin/nvim",
 		lazy = true,
-		event = "UIEnter",
-		name = "catppuccin",
+		event = "VimEnter",
 		opts = {
 			integrations = {
 				alpha = true,
@@ -70,9 +68,7 @@ return {
 	--[[ Gruvbox ]]
 	{
 		"ellisonleao/gruvbox.nvim",
-		lazy = true,
-		event = "UIEnter",
-		name = "gruvbox",
+		event = "VimEnter",
 		opts = {},
 	},
 }
