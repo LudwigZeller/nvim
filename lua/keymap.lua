@@ -1,5 +1,6 @@
 vim.keymap.set("i", "jk", "<ESC>", { nowait = true, desc = "Normal Mode" })
 vim.keymap.set({ "n", "i" }, "<C-s>", "<cmd>write<cr>", { nowait = true, desc = "Safe Buffer" })
+vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { nowait = true, desc = "Quit Neovim" })
 
 -- better up/down
 vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })

@@ -15,7 +15,7 @@ return {
 					functions = {},
 					variables = {},
 					sidebars = "transparent", -- style for sidebars, see below
-					floats = "dark", -- style for floating windows
+					floats = "dark",     -- style for floating windows
 				},
 				sidebars = { "qf", "help", "OverseerList", "NvimTree" },
 				day_brightness = 0.3,
@@ -31,7 +31,7 @@ return {
 	--[[ catppuccin ]]
 	{
 		"catppuccin/nvim",
-		lazy = true,
+		name = "catppuccin",
 		event = "VimEnter",
 		opts = {
 			integrations = {

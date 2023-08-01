@@ -6,6 +6,13 @@ return {
 		event = "InsertEnter",
 		opts = {}, -- this is equalent to setup({}) function
 	},
+
+	--[[ AutoTags ]]
+	{
+		"windwp/nvim-ts-autotag",
+		config = true, --[[ event = "InsertEnter" ]]
+	},
+
 	--[[ Window Layout after Bufferclose ]]
 	{ "famiu/bufdelete.nvim", cmd = { "Bdelete", "Bwipeout" } },
 
