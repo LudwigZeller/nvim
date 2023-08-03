@@ -1,41 +1,16 @@
 return {
 	{ "folke/neodev.nvim",    priority = 100 },
 
+	--[[ Autopair ]]
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		opts = {}, -- this is equalent to setup({}) function
 	},
 
-	--[[ UFO Folds ]]
-	{
-		"kevinhwang91/nvim-ufo",
-		keys = {
-			{
-				"zR",
-				function()
-					require("ufo").openAllFolds()
-				end,
-			},
-			{
-				"zM",
-				function()
-					require("ufo").closeAllFolds()
-				end,
-			},
-		},
-		event = "VimEnter",
-		config = function()
-			require("ufo").setup({
-				provider_selector = function(_bufnr, _filetype, _buftype)
-					return { "treesitter", "indent" }
-				end,
-			})
-		end,
-	},
 	--[[ Window Layout after Bufferclose ]]
-
 	{ "famiu/bufdelete.nvim", cmd = { "Bdelete", "Bwipeout" } },
+
 	--[[ Learn Neovim ]]
 	{
 		"m4xshen/hardtime.nvim",
@@ -193,95 +168,6 @@ return {
 			clear = true,
 			lessNotifications = true,
 		}, -- required even with default settings, since it calls `setup()`
-	},
-	{
-		enabled = false,
-		"ecthelionvi/NeoComposer.nvim",
-		dependencies = { "kkharji/sqlite.lua" },
-		keys = {
-			{
-				"<leader>sr",
-				"<cmd>Telescope macros<cr>",
-				desc = "Symbols",
-			},
-			{
-				"<c-n>",
-				function()
-					require("NeoComposer.ui").cycle_next()
-				end,
-				desc = "Next Macro",
-			},
-			{
-				"<c-n>",
-				function()
-					require("NeoComposer.ui").cycle_prev()
-				end,
-				desc = "Previous Macro",
-			},
-			{
-				"yq",
-				function()
-					require("NeoComposer.macro").yank_macro()
-				end,
-				desc = "Yank Macro",
-			},
-
-			{
-				"cq",
-				function()
-					require("NeoComposer.macro").halt_macro()
-				end,
-				desc = "Halt Macro",
-			},
-			{
-				"q",
-				function()
-					require("NeoComposer.macro").toggle_record()
-				end,
-				desc = "Toggle Record",
-			},
-			{
-				"<m-q>",
-				function()
-					require("NeoComposer.ui").toggle_macro_menu()
-				end,
-				desc = "Macro Menu",
-			},
-			{
-				modes = { "n", "x" },
-				"Q",
-				function()
-					require("NeoComposer.macro").toggle_play_macro()
-				end,
-				desc = "Play Macro",
-			},
-		},
-		-- opts = { notify = false },
-		config = true,
-		-- config = function()
-		-- 	require("NeoComposer").setup({
-		-- 		notify = false,
-		-- 		delay_timer = 150,
-		-- 		colors = {
-		-- 			bg = "bg",
-		-- 			fg = "fg",
-		-- 			red = "#ec5f67",
-		-- 			blue = "#5fb3b3",
-		-- 			green = "#99c794",
-		-- 		},
-		-- 		keymaps = {
-		-- 			play_macro = vim.NIL,
-		-- 			yank_macro = vim.NIL,
-		-- 			stop_macro = vim.NIL,
-		-- 			toggle_record = vim.NIL,
-		-- 			cycle_next = vim.NIL,
-		-- 			cycle_prev = vim.NIL,
-		-- 			toggle_macro_menu = vim.NIL,
-		-- 		},
-		-- 	})
-		--
-		-- 	require("telescope").load_extension("macros")
-		-- end,
 	},
 
 	--[[ makes plugins dot-repeatable ]]

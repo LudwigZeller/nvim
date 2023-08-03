@@ -72,8 +72,35 @@ return {
 		end,
 	},
 
+	--[[ UFO Folds ]]
+	{
+		"kevinhwang91/nvim-ufo",
+		keys = {
+			{
+				"zR",
+				function(...)
+					require("ufo").openAllFolds(...)
+				end,
+			},
+			{
+				"zM",
+				function(...)
+					require("ufo").closeAllFolds(...)
+				end,
+			},
+		},
+		event = "VimEnter",
+		dependencies = "kevinhwang91/promise-async",
+		config = function()
+			require("ufo").setup({
+				provider_selector = function(_bufnr, _filetype, _buftype)
+					return { "treesitter", "indent" }
+				end,
+			})
+		end,
+	},
+
 	--[[ Noice ]]
-	--
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
@@ -113,7 +140,6 @@ return {
 	},
 
 	--[[ Notify ]]
-	--
 	{
 		"rcarriga/nvim-notify",
 		keys = {
@@ -157,6 +183,7 @@ return {
 
 	--[[ Todo Comments ]]
 	{
+		-- TODO: Configure
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {},
@@ -191,7 +218,6 @@ return {
 	},
 
 	--[[ Statusline ]]
-	--
 	{
 		"nvim-lualine/lualine.nvim",
 		event = "VimEnter",

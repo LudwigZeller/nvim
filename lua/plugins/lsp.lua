@@ -18,14 +18,20 @@ return {
 			})
 
 			require("mason-lspconfig").setup_handlers({
-				-- The first entry (without a key) will be the default handler
-				-- and will be called for each installed server that doesn't have
-				-- a dedicated handler.
-				function(server_name) -- default handler (optional)
+				function(server_name)
 					require("lspconfig")[server_name].setup({})
 				end,
-				-- Next, you can provide a dedicated handler for specific servers.
-				-- For example, a handler override for the `rust_analyzer`:
+				["lua_ls"] = function()
+					-- TODO: Enforce Range Formatting
+					require("lspconfig").lua_ls.setup({
+						settings = {
+							runtime = { version = "LuaJIT" },
+							diagnostics = { globals = { "vim" } },
+							workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+							format = { enable = false },
+						},
+					})
+				end,
 				["rust_analyzer"] = function()
 					require("rust-tools").setup({
 						server = {
@@ -47,6 +53,17 @@ return {
 	},
 
 	{
+		enabled = false,
+		"mfussenegger/nvim-lint",
+		config = function()
+			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+				callback = function()
+					require("lint").try_lint()
+				end,
+			})
+		end,
+	},
+	{
 		"jose-elias-alvarez/null-ls.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {},
@@ -59,9 +76,13 @@ return {
 			null_ls.setup({
 				-- add your sources / config options here
 				sources = {
+					-- formatting,
+					-- diagnostics,
+					-- code_actions,
 					code_actions.refactoring,
 
 					formatting.eslint,
+					formatting.prettier,
 					formatting.autopep8,
 					formatting.stylua,
 
