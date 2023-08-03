@@ -94,14 +94,16 @@ vim.keymap.set("n", "<leader>bx", "<cmd>BufferLineCloseOther<cr>", { desc = "Clo
 vim.keymap.set("n", "<leader>bt", "<cmd>BufferLineTogglePin<cr>", { desc = "Pin current buffer" })
 
 --[[ Tabs ]]
-vim.keymap.set("n", "<leader><tab>h", "<cmd>tabprevious<cr>", { desc = "Previos tab" })
-vim.keymap.set("n", "<leader><tab>l", "<cmd>tabnext<cr>", { desc = "Next tab" })
-vim.keymap.set("n", "<leader><tab>n", "<cmd>tabnew<cr>", { desc = "New tab" })
-vim.keymap.set("n", "<leader><tab>c", "<cmd>tabclose<cr>", { desc = "Close tab" })
+vim.keymap.set("n", "<leader>ph", "<cmd>tabprevious<cr>", { desc = "Previos tab" })
+vim.keymap.set("n", "<leader>pl", "<cmd>tabnext<cr>", { desc = "Next tab" })
+vim.keymap.set("n", "<leader>pn", "<cmd>tabnew<cr>", { desc = "New tab" })
+vim.keymap.set("n", "<leader>pc", "<cmd>tabclose<cr>", { desc = "Close tab" })
 
 --[[ LSP ]]
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
+		vim.keymap.set("n", "<leader>xa", vim.lsp.buf.code_action, { desc = "Code Action" })
+		vim.keymap.set("n", "<leader>xc", vim.lsp.buf.rename, { desc = "Rename Sign" })
 		require("which-key").register({})
 	end,
 })

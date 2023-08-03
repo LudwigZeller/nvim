@@ -17,7 +17,7 @@ return {
 				--["gz"] = { name = "+surround" },
 				["]"] = { name = "+next" },
 				["["] = { name = "+prev" },
-				["<leader><tab>"] = { name = "+tabs" },
+				["<leader>p"] = { name = "+tabs" },
 				["<leader>b"] = { name = "+buffer" },
 				["<leader>t"] = { name = "+terminal" },
 				["<leader>c"] = { name = "+code" },
