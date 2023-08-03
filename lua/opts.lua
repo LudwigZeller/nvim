@@ -18,14 +18,14 @@ vim.opt.smartcase = true
 vim.opt.wrap = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
-
 vim.opt.relativenumber = true
-
 vim.opt.timeoutlen = 1000
 
 vim.opt.shell = "fish"
 vim.opt.clipboard = "unnamedplus"
 vim.opt.mousemodel = "extend"
+
+vim.wo.fillchars = "eob: "
 
 -- Scope save to Session
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
@@ -67,7 +67,7 @@ sign({ name = "DiagnosticSignInfo", text = "" })
 
 --[[ Folds ]]
 vim.o.foldcolumn = "0" -- '0' is not bad
-vim.o.foldlevel = 99 -- Using ufo provider need a large value, feel free to decrease the value
+vim.o.foldlevel = 99   -- Using ufo provider need a large value, feel free to decrease the value
 vim.o.foldlevelstart = 99
 vim.o.foldenable = true
 

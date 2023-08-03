@@ -4,11 +4,11 @@ return {
 		"folke/which-key.nvim",
 		opts = {
 			window = {
-				border = "shadow",     -- none, single, double, shadow
-				position = "bottom",   -- bottom, top
+				border = "shadow", -- none, single, double, shadow
+				position = "bottom", -- bottom, top
 				margin = { 2, 10, 2, 10 }, -- extra window margin [top, right, bottom, left].
 				padding = { 1, 2, 1, 2 }, -- extra window padding [top, right, bottom, left]
-				zindex = 1000,         -- positive value to position WhichKey above other floating windows.
+				zindex = 1000, -- positive value to position WhichKey above other floating windows.
 			},
 			plugins = { spelling = true },
 			defaults = {
@@ -126,11 +126,11 @@ return {
 			},
 			-- you can enable a preset for easier configuration
 			presets = {
-				bottom_search = true,     -- use a classic bottom cmdline for search
-				command_palette = true,   -- position the cmdline and popupmenu together
+				bottom_search = true, -- use a classic bottom cmdline for search
+				command_palette = true, -- position the cmdline and popupmenu together
 				long_message_to_split = true, -- long messages will be sent to a split
-				inc_rename = false,       -- enables an input dialog for inc-rename.nvim
-				lsp_doc_border = true,    -- add a border to hover docs and signature help
+				inc_rename = false, -- enables an input dialog for inc-rename.nvim
+				lsp_doc_border = true, -- add a border to hover docs and signature help
 			},
 		},
 		dependencies = {
@@ -203,7 +203,7 @@ return {
 				term_bg = "#000000", -- if guibg=NONE, this will be used to calculate text color
 				inactive = false, -- when true, other windows will be fully dimmed (unless they contain the same buffer)
 			},
-			context = 10,      -- amount of lines we will try to show around the current line
+			context = 10, -- amount of lines we will try to show around the current line
 			treesitter = true, -- use treesitter when available for the filetype
 			-- treesitter is used to automatically expand the visible text,
 			-- but you can further control the types of nodes that should always be fully expanded
@@ -255,6 +255,34 @@ return {
 						"toggleterm",
 						"qf",
 						"OverseerList",
+						"dapui_watches",
+						"dapui_stacks",
+						"dapui_breakpoints",
+						"dapui_scopes",
+						"dapui_console",
+						"dap-repl",
+					},
+					winbar = {
+						"help",
+						"startify",
+						"dashboard",
+						"packer",
+						"neogitstatus",
+						"NvimTree",
+						"Trouble",
+						"alpha",
+						"lir",
+						"Outline",
+						"spectre_panel",
+						"toggleterm",
+						"qf",
+						"OverseerList",
+						"dapui_watches",
+						"dapui_stacks",
+						"dapui_breakpoints",
+						"dapui_scopes",
+						"dapui_console",
+						"dap-repl",
 					},
 				},
 				ignore_focus = {},
@@ -391,44 +419,6 @@ return {
 		-- },
 	},
 
-	--[[ Winbar ]]
-	{
-		enabled = false,
-		"fgheng/winbar.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons", "SmiteshP/nvim-navic" },
-		opts = {
-			enabled = true,
-			show_file_path = true,
-			show_symbols = true,
-			colors = {
-				path = "", -- You can customize colors like #c946fd
-				file_name = "",
-				symbols = "",
-			},
-			icons = {
-				file_icon_default = "",
-				seperator = ">",
-				editor_state = "●",
-				lock_icon = "",
-			},
-			exclude_filetype = {
-				"help",
-				"startify",
-				"dashboard",
-				"packer",
-				"neogitstatus",
-				"NvimTree",
-				"Trouble",
-				"alpha",
-				"lir",
-				"Outline",
-				"spectre_panel",
-				"toggleterm",
-				"qf",
-			},
-		},
-	},
-
 	--[[ Highlight Words ]]
 	{
 		"RRethy/vim-illuminate",
@@ -558,7 +548,7 @@ return {
 		event = "VimEnter",
 		opts = {
 			theme = "snow", -- can be one of rhe default themes, or a custom theme
-			max = 40,    -- maximum number of drops on the screen
+			max = 40, -- maximum number of drops on the screen
 			interval = 150, -- every 150ms we update the drops
 			screensaver = 3 * 60 * 1000,
 			filetypes = {}, -- will enable/disable automatically for the following filetypes
