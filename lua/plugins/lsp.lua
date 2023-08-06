@@ -62,13 +62,28 @@ return {
 	--[[ Dap Config ]]
 	{
 		"jay-babu/mason-nvim-dap.nvim",
-		dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap", "rcarriga/nvim-dap-ui" },
+		dependencies = {
+			"williamboman/mason.nvim",
+			"mfussenegger/nvim-dap",
+			"rcarriga/nvim-dap-ui",
+			"simrat39/rust-tools.nvim",
+		},
 		config = function()
 			require("mason-nvim-dap").setup({
 				handlers = {
 					function(config) -- Default
 						require("mason-nvim-dap").default_setup(config)
 					end,
+					-- ["codelldb"] = function(config)
+					-- vim.print(config)
+					-- require("rust-tools").setup({
+					-- 	dap = {
+					-- 		type = "executable",
+					-- 		command = config.adapters.command,
+					-- 		name = config.name,
+					-- 	}
+					-- })
+					-- end,
 				},
 			})
 			require("dapui").setup()
@@ -88,6 +103,7 @@ return {
 
 	--[[ Null Ls ]]
 	{
+		enabled = false,
 		"jose-elias-alvarez/null-ls.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {},

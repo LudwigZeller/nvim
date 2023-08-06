@@ -255,12 +255,6 @@ return {
 						"toggleterm",
 						"qf",
 						"OverseerList",
-						"dapui_watches",
-						"dapui_stacks",
-						"dapui_breakpoints",
-						"dapui_scopes",
-						"dapui_console",
-						"dap-repl",
 					},
 					winbar = {
 						"help",
@@ -285,7 +279,14 @@ return {
 						"dap-repl",
 					},
 				},
-				ignore_focus = {},
+				ignore_focus = {
+					"dapui_watches",
+					"dapui_stacks",
+					"dapui_breakpoints",
+					"dapui_scopes",
+					"dapui_console",
+					"dap-repl",
+				},
 				always_divide_middle = true,
 				globalstatus = false,
 				refresh = {
@@ -388,6 +389,12 @@ return {
 						{
 							filetype = "OverseerList",
 							text = "Task List",
+							highlight = "Directory",
+							separator = true, -- use a "true" to enable the default, or set your own character
+						},
+						{
+							filetype = "dapui_watches",
+							text = "Debug",
 							highlight = "Directory",
 							separator = true, -- use a "true" to enable the default, or set your own character
 						},

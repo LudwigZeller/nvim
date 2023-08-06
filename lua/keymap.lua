@@ -102,6 +102,7 @@ vim.keymap.set("n", "<leader>pc", "<cmd>tabclose<cr>", { desc = "Close tab" })
 --[[ LSP ]]
 vim.api.nvim_create_autocmd("LspAttach", {
 	callback = function(args)
+		vim.keymap.set("n", "<S-k>", vim.lsp.buf.hover, { desc = "Code Action" })
 		vim.keymap.set("n", "<leader>xa", vim.lsp.buf.code_action, { desc = "Code Action" })
 		vim.keymap.set("n", "<leader>xc", vim.lsp.buf.rename, { desc = "Rename Sign" })
 		require("which-key").register({})
