@@ -219,8 +219,8 @@ return {
 	{
 		keys = {
 			{ "<leader>rt", "<cmd>OverseerToggle<cr>", desc = "Toggle Task List" },
-			{ "<leader>rr", "<cmd>OverseerRun<cr>", desc = "Run Task" },
-			{ "<leader>rn", "<cmd>OverseerBuild<cr>", desc = "Create Task" },
+			{ "<leader>rr", "<cmd>OverseerRun<cr>",    desc = "Run Task" },
+			{ "<leader>rn", "<cmd>OverseerBuild<cr>",  desc = "Create Task" },
 		},
 		"stevearc/overseer.nvim",
 		opts = {
@@ -240,7 +240,7 @@ return {
 			component_aliases = {
 				-- Most tasks are initialized with the default components
 				default = {
-					{ "display_duration", detail_level = 2 },
+					{ "display_duration",    detail_level = 2 },
 					{ "on_output_summarize", max_lines = 8 },
 					"on_exit_set_status",
 					{ "on_complete_notify", statuses = { "FAILURE" } },
@@ -284,7 +284,10 @@ return {
 		keys = {
 			{ "<leader>ft", "<cmd>NvimTreeToggle<cr>", desc = "Toggle Filetree" },
 		},
-		dependencies = { "nvim-tree/nvim-web-devicons" },
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			{ "antosha417/nvim-lsp-file-operations", config = true }
+		},
 		config = function()
 			require("nvim-tree").setup({
 				sort_by = "case_sensitive",
@@ -310,7 +313,7 @@ return {
 
 			gs.setup({
 				signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-				numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
+				numhl = true,  -- Toggle with `:Gitsigns toggle_numhl`
 				linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
 				word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
 			})
@@ -463,12 +466,12 @@ return {
 		-- TODO: Configure
 		"folke/trouble.nvim",
 		keys = {
-			{ "<leader>xx", "<cmd>TroubleToggle<cr>", desc = "Toggle Trouble" },
+			{ "<leader>xx", "<cmd>TroubleToggle<cr>",                       desc = "Toggle Trouble" },
 			{ "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "WorkspaceDignostics" },
-			{ "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>", desc = "Document Diagnostic" },
-			{ "<leader>xq", "<cmd>TroubleToggle quickfix<cr>", desc = "Quickfix" },
-			{ "<leader>xl", "<cmd>TroubleToggle loclist<cr>", desc = "Location List" },
-			{ "<leader>xr", "<cmd>TroubleToggle lsp_references<cr>", desc = "References" },
+			{ "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document Diagnostic" },
+			{ "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",              desc = "Quickfix" },
+			{ "<leader>xl", "<cmd>TroubleToggle loclist<cr>",               desc = "Location List" },
+			{ "<leader>xr", "<cmd>TroubleToggle lsp_references<cr>",        desc = "References" },
 		},
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {

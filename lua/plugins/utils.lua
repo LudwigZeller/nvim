@@ -13,6 +13,7 @@ return {
 
 	--[[ Learn Neovim ]]
 	{
+		enabled = false,
 		"m4xshen/hardtime.nvim",
 		event = "VimEnter",
 		keys = {

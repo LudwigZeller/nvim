@@ -1,5 +1,5 @@
 vim.keymap.set("i", "jk", "<ESC>", { nowait = true, desc = "Normal Mode" })
-vim.keymap.set({ "n", "i" }, "<C-s>", "<cmd>write<cr>", { nowait = true, desc = "Safe Buffer" })
+vim.keymap.set({ "n", "i" }, "<C-s>", "<cmd>silent write<cr>", { nowait = true, desc = "Safe Buffer" })
 vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { nowait = true, desc = "Quit Neovim" })
 
 -- better up/down
@@ -100,11 +100,19 @@ vim.keymap.set("n", "<leader>pn", "<cmd>tabnew<cr>", { desc = "New tab" })
 vim.keymap.set("n", "<leader>pc", "<cmd>tabclose<cr>", { desc = "Close tab" })
 
 --[[ LSP ]]
-vim.api.nvim_create_autocmd("LspAttach", {
+vim.keymap.set("n", "<S-k>", vim.lsp.buf.hover, { desc = "Code Action" })
+vim.keymap.set("n", "<leader>xa", vim.lsp.buf.code_action, { desc = "Code Action" })
+vim.keymap.set("n", "<leader>xc", vim.lsp.buf.rename, { desc = "Rename Sign" })
+
+--[[ Rust Keybinds ]]
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+	group = vim.api.nvim_create_augroup("FileTypeKeybinds", { clear = false }),
+	pattern = "*.rs",
 	callback = function(args)
-		vim.keymap.set("n", "<S-k>", vim.lsp.buf.hover, { desc = "Code Action" })
-		vim.keymap.set("n", "<leader>xa", vim.lsp.buf.code_action, { desc = "Code Action" })
-		vim.keymap.set("n", "<leader>xc", vim.lsp.buf.rename, { desc = "Rename Sign" })
-		require("which-key").register({})
-	end,
+		vim.keymap.set("n", "<S-k>", "<cmd>RustHoverActions<cr>", { buffer = args.buf, remap = true, desc = "Rust Hover" })
+		vim.keymap.set("n", "<leader>dd", "<cmd>RustDebuggables<cr>",
+			{ buffer = args.buf, remap = true, desc = "Rust Debug" })
+
+		require("which-key").register()
+	end
 })
