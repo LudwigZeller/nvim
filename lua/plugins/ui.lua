@@ -237,6 +237,9 @@ return {
 	{
 		"NvChad/nvim-colorizer.lua",
 		event = "BufEnter",
+		keys = {
+			{ "<leader>ui", "<cmd>ColorizerToggle<cr>", desc = "Toggle color preview" },
+		},
 		config = function()
 			require("colorizer").setup({
 				filetypes = { "*" },
