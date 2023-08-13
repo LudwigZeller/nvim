@@ -2,7 +2,6 @@ return {
 	--[[ Tokyonight ]]
 	{
 		"folke/tokyonight.nvim",
-		name = "tokyonight",
 		priority = 1000,
 		config = function()
 			require("tokyonight").setup({
@@ -32,9 +31,8 @@ return {
 	--[[ catppuccin ]]
 	{
 		"catppuccin/nvim",
-		lazy = true,
-		event = "UIEnter",
 		name = "catppuccin",
+		event = "VimEnter",
 		opts = {
 			integrations = {
 				alpha = true,
@@ -70,9 +68,7 @@ return {
 	--[[ Gruvbox ]]
 	{
 		"ellisonleao/gruvbox.nvim",
-		lazy = true,
-		event = "UIEnter",
-		name = "gruvbox",
+		event = "VimEnter",
 		opts = {},
 	},
 }

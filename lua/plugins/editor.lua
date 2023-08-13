@@ -199,7 +199,7 @@ return {
 	--[[ Treesitter ]]
 	{
 		"nvim-treesitter/nvim-treesitter",
-		dependencies = { "nvim-treesitter/nvim-treesitter-textobjects" },
+		dependencies = { "windwp/nvim-ts-autotag" },
 		build = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter.configs").setup({
@@ -210,11 +210,7 @@ return {
 					additional_vim_regex_highlighting = false,
 				},
 				ident = { enable = true },
-				rainbow = {
-					enable = true,
-					extended_mode = true,
-					max_file_lines = nil,
-				},
+				autotag = { enable = true },
 			})
 		end,
 	},
@@ -223,8 +219,8 @@ return {
 	{
 		keys = {
 			{ "<leader>rt", "<cmd>OverseerToggle<cr>", desc = "Toggle Task List" },
-			{ "<leader>rr", "<cmd>OverseerRun<cr>", desc = "Run Task" },
-			{ "<leader>rn", "<cmd>OverseerBuild<cr>", desc = "Create Task" },
+			{ "<leader>rr", "<cmd>OverseerRun<cr>",    desc = "Run Task" },
+			{ "<leader>rn", "<cmd>OverseerBuild<cr>",  desc = "Create Task" },
 		},
 		"stevearc/overseer.nvim",
 		opts = {
@@ -237,9 +233,25 @@ return {
 				close_on_exit = false,
 				-- can be "never, "success", or "always". "success" will close the window
 				quit_on_exit = "never",
-				open_on_start = true,
+				open_on_start = false,
 				hidden = false,
 				on_create = nil,
+			},
+			component_aliases = {
+				-- Most tasks are initialized with the default components
+				default = {
+					{ "display_duration",    detail_level = 2 },
+					{ "on_output_summarize", max_lines = 8 },
+					"on_exit_set_status",
+					{ "on_complete_notify", statuses = { "FAILURE" } },
+					-- "on_complete_dispose",
+				},
+				-- Tasks from tasks.json use these components
+				default_vscode = {
+					"default",
+					"on_result_diagnostics",
+					"on_result_diagnostics_quickfix",
+				},
 			},
 			task_list = {
 				direction = "right",
@@ -272,10 +284,14 @@ return {
 		keys = {
 			{ "<leader>ft", "<cmd>NvimTreeToggle<cr>", desc = "Toggle Filetree" },
 		},
-		dependencies = { "nvim-tree/nvim-web-devicons" },
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			{ "antosha417/nvim-lsp-file-operations", config = true }
+		},
 		config = function()
 			require("nvim-tree").setup({
 				sort_by = "case_sensitive",
+				sync_root_with_cwd = true,
 				view = {
 					width = 30,
 				},
@@ -290,7 +306,6 @@ return {
 	},
 
 	--[[ Gitsigns ]]
-	--
 	{
 		"lewis6991/gitsigns.nvim",
 		config = function()
@@ -298,7 +313,7 @@ return {
 
 			gs.setup({
 				signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-				numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
+				numhl = true,  -- Toggle with `:Gitsigns toggle_numhl`
 				linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
 				word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
 			})
@@ -350,6 +365,80 @@ return {
 	--
 	{
 		"akinsho/toggleterm.nvim",
+		keys = {
+			{
+				"<leader>th",
+				function()
+					if _Toggleterm == nil then
+						_Toggleterm = require("toggleterm.terminal").Terminal:new()
+					end
+					_Toggleterm:toggle(0, "horizontal")
+				end,
+				desc = "Horizontal Terminal",
+			},
+			{
+				"<leader>tv",
+				function()
+					if _Toggleterm == nil then
+						_Toggleterm = require("toggleterm.terminal").Terminal:new()
+					end
+					_Toggleterm:toggle(0, "vertical")
+				end,
+				desc = "Vertical Terminal",
+			},
+			{
+				"<leader>tf",
+				function()
+					if _Toggleterm == nil then
+						_Toggleterm = require("toggleterm.terminal").Terminal:new({ direction = "float" })
+					end
+					_Toggleterm:toggle(0, "float")
+				end,
+				desc = "Float Terminal",
+			},
+			{
+				"<leader>ts",
+				function()
+					if _Htop == nil then
+						_Htop = require("toggleterm.terminal").Terminal:new({
+							cmd = "htop",
+							hidden = true,
+							direction = "float",
+						})
+					end
+					_Htop:toggle()
+				end,
+				desc = "HTop",
+			},
+			{
+				"<leader>tm",
+				function()
+					if _Ncspot == nil then
+						_Ncspot = require("toggleterm.terminal").Terminal:new({
+							cmd = "ncspot",
+							hidden = true,
+							direction = "float",
+						})
+					end
+					_Ncspot:toggle()
+				end,
+				desc = "NcSpot",
+			},
+			{
+				"<leader>gl",
+				function()
+					if _Lazygit == nil then
+						_Lazygit = require("toggleterm.terminal").Terminal:new({
+							cmd = "lazygit",
+							hidden = true,
+							direction = "float",
+						})
+					end
+					_Lazygit:toggle()
+				end,
+				desc = "LazyGit",
+			},
+		},
 		config = function()
 			require("toggleterm").setup({
 				size = function(term)
@@ -361,89 +450,32 @@ return {
 					return 20
 				end,
 				shade_terminals = false,
+				autochdir = true,
+				winbar = {
+					enabled = false,
+					name_formatter = function(term) --  term: Terminal
+						return term.name
+					end,
+				},
 			})
-
-			local Terminal = require("toggleterm.terminal").Terminal
-
-			local horizontal = Terminal:new({ direction = "horizontal" })
-			function _Horizontal_toggle()
-				horizontal:toggle()
-			end
-
-			vim.api.nvim_set_keymap(
-				"n",
-				"<leader>th",
-				"<cmd>lua _Horizontal_toggle()<CR>",
-				{ desc = "Horizontal Terminal", noremap = true, silent = true }
-			)
-
-			local vertical = Terminal:new({ direction = "vertical" })
-			function _Vertical_toggle()
-				vertical:toggle()
-			end
-
-			vim.api.nvim_set_keymap(
-				"n",
-				"<leader>tv",
-				"<cmd>lua _Vertical_toggle()<CR>",
-				{ desc = "Verical Terminal", noremap = true, silent = true }
-			)
-
-			local float = Terminal:new({ direction = "float" })
-			function _Float_toggle()
-				float:toggle()
-			end
-
-			vim.api.nvim_set_keymap(
-				"n",
-				"<leader>tf",
-				"<cmd>lua _Float_toggle()<CR>",
-				{ desc = "Floating Terminal", noremap = true, silent = true }
-			)
-
-			local htop = Terminal:new({ cmd = "htop", hidden = true, direction = "float" })
-			function _Htop_toggle()
-				htop:toggle()
-			end
-
-			vim.api.nvim_set_keymap(
-				"n",
-				"<leader>ts",
-				"<cmd>lua _Htop_toggle()<CR>",
-				{ desc = "HTop", noremap = true, silent = true }
-			)
-
-			local ncspot = Terminal:new({ cmd = "ncspot", hidden = true, direction = "float" })
-			function _Ncspot_toggle()
-				ncspot:toggle()
-			end
-
-			vim.api.nvim_set_keymap(
-				"n",
-				"<leader>tm",
-				"<cmd>lua _Ncspot_toggle()<CR>",
-				{ desc = "NcSpot", noremap = true, silent = true }
-			)
-
-			local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
-			function _Lazygit_toggle()
-				lazygit:toggle()
-			end
-
-			vim.api.nvim_set_keymap(
-				"n",
-				"<leader>gl",
-				"<cmd>lua _Lazygit_toggle()<CR>",
-				{ desc = "LazyGit", noremap = true, silent = true }
-			)
 		end,
 	},
 
 	--[[ Trouble ]]
-	--
 	{
+		-- TODO: Configure
 		"folke/trouble.nvim",
+		keys = {
+			{ "<leader>xx", "<cmd>TroubleToggle<cr>",                       desc = "Toggle Trouble" },
+			{ "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "WorkspaceDignostics" },
+			{ "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document Diagnostic" },
+			{ "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",              desc = "Quickfix" },
+			{ "<leader>xl", "<cmd>TroubleToggle loclist<cr>",               desc = "Location List" },
+			{ "<leader>xr", "<cmd>TroubleToggle lsp_references<cr>",        desc = "References" },
+		},
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {},
+		opts = {
+			use_diagnostic_signs = true,
+		},
 	},
 }

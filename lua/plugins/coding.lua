@@ -1,6 +1,5 @@
 return {
 	--[[ CMP Support ]]
-	--
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
@@ -16,8 +15,6 @@ return {
 		config = function()
 			local cmp = require("cmp")
 			cmp.setup({
-
-				-- Enable LSP snippets
 				snippet = {
 					expand = function(args)
 						vim.fn["vsnip#anonymous"](args.body)
@@ -38,15 +35,14 @@ return {
 						select = true,
 					}),
 				}),
-				-- Installed sources:
 				sources = cmp.config.sources({
-					{ name = "path" },                    -- file paths
-					{ name = "nvim_lsp",               keyword_length = 3 }, -- from language server
+					{ name = "path", priority = 2, keyword_length = 2 }, -- file paths
+					{ name = "nvim_lsp", priority = 3, keyword_length = 2 }, -- from language server
 					{ name = "nvim_lsp_signature_help" }, -- display function signatures with current parameter emphasized
-					{ name = "nvim_lua",               keyword_length = 2 }, -- complete neovim's Lua runtime API such vim.lsp.*
-					{ name = "buffer",                 keyword_length = 2 }, -- source current buffer
-					{ name = "vsnip",                  keyword_length = 2 }, -- nvim-cmp source for vim-vsnip
-					{ name = "calc" },                    -- source for math calculation
+					{ name = "nvim_lua", keyword_length = 2 }, -- complete neovim's Lua runtime API such vim.lsp.*
+					{ name = "buffer", priority = 1, keyword_length = 2 }, -- source current buffer
+					{ name = "vsnip", priority = 3, keyword_length = 2 }, -- nvim-cmp source for vim-vsnip
+					{ name = "calc" }, -- source for math calculation
 				}),
 				window = {
 					completion = cmp.config.window.bordered(),
@@ -66,6 +62,20 @@ return {
 					end,
 				},
 			})
+			-- cmp.setup.cmdline("/", {
+			-- 	mapping = cmp.mapping.preset.cmdline(),
+			-- 	sources = {
+			-- 		{ name = "buffer" },
+			-- 	},
+			-- })
+			-- cmp.setup.cmdline(":", {
+			-- 	mapping = cmp.mapping.preset.cmdline(),
+			-- 	sources = cmp.config.sources({
+			-- 		{ name = "path" },
+			-- 	}, {
+			-- 		{ name = "cmdline" },
+			-- 	}),
+			-- })
 		end,
 	},
 }

@@ -11,7 +11,9 @@ local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 vim.api.nvim_create_autocmd("BufWritePre", {
 	group = augroup,
 	callback = function()
-		vim.lsp.buf.format({ async = false })
+		if format_on_save then
+			vim.lsp.buf.format({ async = false })
+		end
 	end,
 })
 
@@ -40,6 +42,7 @@ vim.api.nvim_create_autocmd("User", {
 		end
 	end,
 })
+
 vim.api.nvim_create_autocmd("User", {
 	pattern = "SessionLoadPost",
 	group = vim.api.nvim_create_augroup("OverseerSession", { clear = false }),
@@ -71,3 +74,10 @@ vim.api.nvim_create_autocmd("QuitPre", {
 		end
 	end,
 })
+
+-- vim.api.nvim_create_autocmd("CursorHold", {
+-- 	group = vim.api.nvim_create_augroup("Ufo-Folds", { clear = false }),
+-- 	callback = function()
+-- 		require("ufo").peekFoldedLinesUnderCursor()
+-- 	end,
+-- })

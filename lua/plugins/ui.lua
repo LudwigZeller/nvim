@@ -4,11 +4,11 @@ return {
 		"folke/which-key.nvim",
 		opts = {
 			window = {
-				border = "shadow", -- none, single, double, shadow
-				position = "bottom", -- bottom, top
+				border = "shadow",     -- none, single, double, shadow
+				position = "bottom",   -- bottom, top
 				margin = { 2, 10, 2, 10 }, -- extra window margin [top, right, bottom, left].
 				padding = { 1, 2, 1, 2 }, -- extra window padding [top, right, bottom, left]
-				zindex = 1000, -- positive value to position WhichKey above other floating windows.
+				zindex = 1000,         -- positive value to position WhichKey above other floating windows.
 			},
 			plugins = { spelling = true },
 			defaults = {
@@ -17,7 +17,7 @@ return {
 				--["gz"] = { name = "+surround" },
 				["]"] = { name = "+next" },
 				["["] = { name = "+prev" },
-				["<leader><tab>"] = { name = "+tabs" },
+				["<leader>p"] = { name = "+tabs" },
 				["<leader>b"] = { name = "+buffer" },
 				["<leader>t"] = { name = "+terminal" },
 				["<leader>c"] = { name = "+code" },
@@ -27,6 +27,7 @@ return {
 				["<leader>gt"] = { name = "+toggle" },
 				["<leader>q"] = { name = "+session" },
 				["<leader>r"] = { name = "+runner" },
+				["<leader>d"] = { name = "+debug" },
 				["<leader>s"] = { name = "+search" },
 				["<leader>u"] = { name = "+ui" },
 				["<leader>w"] = { name = "+windows" },
@@ -72,8 +73,35 @@ return {
 		end,
 	},
 
+	--[[ UFO Folds ]]
+	{
+		"kevinhwang91/nvim-ufo",
+		keys = {
+			{
+				"zR",
+				function(...)
+					require("ufo").openAllFolds(...)
+				end,
+			},
+			{
+				"zM",
+				function(...)
+					require("ufo").closeAllFolds(...)
+				end,
+			},
+		},
+		event = "VimEnter",
+		dependencies = "kevinhwang91/promise-async",
+		config = function()
+			require("ufo").setup({
+				provider_selector = function(_bufnr, _filetype, _buftype)
+					return { "treesitter", "indent" }
+				end,
+			})
+		end,
+	},
+
 	--[[ Noice ]]
-	--
 	{
 		"folke/noice.nvim",
 		event = "VeryLazy",
@@ -99,11 +127,11 @@ return {
 			},
 			-- you can enable a preset for easier configuration
 			presets = {
-				bottom_search = true, -- use a classic bottom cmdline for search
-				command_palette = true, -- position the cmdline and popupmenu together
+				bottom_search = true,     -- use a classic bottom cmdline for search
+				command_palette = true,   -- position the cmdline and popupmenu together
 				long_message_to_split = true, -- long messages will be sent to a split
-				inc_rename = false, -- enables an input dialog for inc-rename.nvim
-				lsp_doc_border = true, -- add a border to hover docs and signature help
+				inc_rename = false,       -- enables an input dialog for inc-rename.nvim
+				lsp_doc_border = true,    -- add a border to hover docs and signature help
 			},
 		},
 		dependencies = {
@@ -113,9 +141,9 @@ return {
 	},
 
 	--[[ Notify ]]
-	--
 	{
 		"rcarriga/nvim-notify",
+		lazy = false,
 		keys = {
 			{
 				"<leader>un",
@@ -133,6 +161,20 @@ return {
 			max_width = function()
 				return math.floor(vim.o.columns * 0.75)
 			end,
+			background_colour = "NotifyBackground",
+			fps = 30,
+			icons = {
+				DEBUG = "",
+				ERROR = "",
+				INFO = "",
+				TRACE = "✎",
+				WARN = ""
+			},
+			level = 2,
+			minimum_width = 50,
+			render = "default",
+			stages = "fade_in_slide_out",
+			top_down = true
 		},
 		init = function()
 			vim.notify = require("notify")
@@ -157,6 +199,7 @@ return {
 
 	--[[ Todo Comments ]]
 	{
+		-- TODO: Configure
 		"folke/todo-comments.nvim",
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {},
@@ -176,7 +219,7 @@ return {
 				term_bg = "#000000", -- if guibg=NONE, this will be used to calculate text color
 				inactive = false, -- when true, other windows will be fully dimmed (unless they contain the same buffer)
 			},
-			context = 10, -- amount of lines we will try to show around the current line
+			context = 10,      -- amount of lines we will try to show around the current line
 			treesitter = true, -- use treesitter when available for the filetype
 			-- treesitter is used to automatically expand the visible text,
 			-- but you can further control the types of nodes that should always be fully expanded
@@ -190,16 +233,55 @@ return {
 		},
 	},
 
+	--[[ Color Highlighting ]]
+	{
+		"NvChad/nvim-colorizer.lua",
+		event = "BufEnter",
+		keys = {
+			{ "<leader>ui", "<cmd>ColorizerToggle<cr>", desc = "Toggle color preview" },
+		},
+		config = function()
+			require("colorizer").setup({
+				filetypes = { "*" },
+				user_default_options = {
+					RGB = true,      -- #RGB hex codes
+					RRGGBB = true,   -- #RRGGBB hex codes
+					names = true,    -- "Name" codes like Blue or blue
+					RRGGBBAA = true, -- #RRGGBBAA hex codes
+					AARRGGBB = true, -- 0xAARRGGBB hex codes
+					rgb_fn = true,   -- CSS rgb() and rgba() functions
+					hsl_fn = true,   -- CSS hsl() and hsla() functions
+					css = true,      -- Enable all CSS features: rgb_fn, hsl_fn, names, RGB, RRGGBB
+					css_fn = true,   -- Enable all CSS *functions*: rgb_fn, hsl_fn
+					-- Available modes for `mode`: foreground, background,  virtualtext
+					mode = "virtualtext", -- Set the display mode.
+					-- Available methods are false / true / "normal" / "lsp" / "both"
+					-- True is same as normal
+					tailwind = false,                           -- Enable tailwind colors
+					-- parsers can contain values used in |user_default_options|
+					sass = { enable = false, parsers = { "css" }, }, -- Enable sass colors
+					virtualtext = "■",
+					-- update color values even if buffer is not focused
+					-- example use: cmp_menu, cmp_docs
+					always_update = false
+				},
+				-- all the sub-options of filetypes apply to buftypes
+				buftypes = {},
+			})
+		end,
+	},
+
 	--[[ Statusline ]]
-	--
 	{
 		"nvim-lualine/lualine.nvim",
+		event = "VimEnter",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 			"chrisgrieser/nvim-recorder",
 			{
 				"SmiteshP/nvim-navic",
 				dependencies = "neovim/nvim-lspconfig",
+				lazy = true,
 				config = function()
 					require("nvim-navic").setup({ lsp = { auto_attach = true } })
 				end,
@@ -228,8 +310,37 @@ return {
 						"qf",
 						"OverseerList",
 					},
+					winbar = {
+						"help",
+						"startify",
+						"dashboard",
+						"packer",
+						"neogitstatus",
+						"NvimTree",
+						"Trouble",
+						"alpha",
+						"lir",
+						"Outline",
+						"spectre_panel",
+						"toggleterm",
+						"qf",
+						"OverseerList",
+						"dapui_watches",
+						"dapui_stacks",
+						"dapui_breakpoints",
+						"dapui_scopes",
+						"dapui_console",
+						"dap-repl",
+					},
 				},
-				ignore_focus = {},
+				ignore_focus = {
+					"dapui_watches",
+					"dapui_stacks",
+					"dapui_breakpoints",
+					"dapui_scopes",
+					"dapui_console",
+					"dap-repl",
+				},
 				always_divide_middle = true,
 				globalstatus = false,
 				refresh = {
@@ -261,6 +372,12 @@ return {
 				lualine_x = {
 					function()
 						return require("NeoComposer.ui").status_recording()
+					end,
+					function()
+						return require("recorder").recordingStatus()
+					end,
+					function()
+						return require("recorder").displaySlots()
 					end,
 				},
 				lualine_y = { "encoding", "filetype", "fileformat", "hostname" },
@@ -306,14 +423,14 @@ return {
 	{
 		"akinsho/bufferline.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
-		event = "UIEnter",
+		event = "VimEnter",
 		config = function()
 			local bufferline = require("bufferline")
 			bufferline.setup({
 				options = {
 					style_preset = bufferline.style_preset.default, -- or bufferline.style_preset.minimal,
 					themable = true,
-					indicator = { style = "icon", icon = " ▷" },
+					indicator = { --[[ style = "icon", icon = " ▷" ]] style = "underline" },
 					diagnostics = "nvim_lsp",
 					always_show_bufferline = false,
 					offsets = {
@@ -326,6 +443,12 @@ return {
 						{
 							filetype = "OverseerList",
 							text = "Task List",
+							highlight = "Directory",
+							separator = true, -- use a "true" to enable the default, or set your own character
+						},
+						{
+							filetype = "dapui_watches",
+							text = "Debug",
 							highlight = "Directory",
 							separator = true, -- use a "true" to enable the default, or set your own character
 						},
@@ -355,44 +478,6 @@ return {
 		-- 		},
 		-- 	},
 		-- },
-	},
-
-	--[[ Winbar ]]
-	{
-		enabled = false,
-		"fgheng/winbar.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons", "SmiteshP/nvim-navic" },
-		opts = {
-			enabled = true,
-			show_file_path = true,
-			show_symbols = true,
-			colors = {
-				path = "", -- You can customize colors like #c946fd
-				file_name = "",
-				symbols = "",
-			},
-			icons = {
-				file_icon_default = "",
-				seperator = ">",
-				editor_state = "●",
-				lock_icon = "",
-			},
-			exclude_filetype = {
-				"help",
-				"startify",
-				"dashboard",
-				"packer",
-				"neogitstatus",
-				"NvimTree",
-				"Trouble",
-				"alpha",
-				"lir",
-				"Outline",
-				"spectre_panel",
-				"toggleterm",
-				"qf",
-			},
-		},
 	},
 
 	--[[ Highlight Words ]]
@@ -524,7 +609,7 @@ return {
 		event = "VimEnter",
 		opts = {
 			theme = "snow", -- can be one of rhe default themes, or a custom theme
-			max = 40, -- maximum number of drops on the screen
+			max = 40,    -- maximum number of drops on the screen
 			interval = 150, -- every 150ms we update the drops
 			screensaver = 3 * 60 * 1000,
 			filetypes = {}, -- will enable/disable automatically for the following filetypes

@@ -1,5 +1,6 @@
 vim.keymap.set("i", "jk", "<ESC>", { nowait = true, desc = "Normal Mode" })
-vim.keymap.set({ "n", "i" }, "<C-s>", "<cmd>write<cr>", { nowait = true, desc = "Safe Buffer" })
+vim.keymap.set({ "n", "i" }, "<C-s>", "<cmd>silent write<cr>", { nowait = true, desc = "Safe Buffer" })
+vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { nowait = true, desc = "Quit Neovim" })
 
 -- better up/down
 vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -78,6 +79,8 @@ vim.keymap.set("n", "<leader>wo", "<C-W>o", { desc = "Close all other windows", 
 --[[ Buffers ]]
 vim.keymap.set("n", "<S-h>", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
 vim.keymap.set("n", "<S-l>", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
+vim.keymap.set("n", "<C-S-h>", "<cmd>BufferLineMovePrev<cr>", { desc = "Prev buffer" })
+vim.keymap.set("n", "<C-S-l>", "<cmd>BufferLineMoveNext<cr>", { desc = "Prev buffer" })
 vim.keymap.set("n", "[b", "<cmd>BufferLineCyclePrev<cr>", { desc = "Prev buffer" })
 vim.keymap.set("n", "]b", "<cmd>BufferLineCycleNext<cr>", { desc = "Next buffer" })
 vim.keymap.set("n", "<leader>fn", "<cmd>enew<cr>", { desc = "New buffer" })
@@ -91,33 +94,12 @@ vim.keymap.set("n", "<leader>bx", "<cmd>BufferLineCloseOther<cr>", { desc = "Clo
 vim.keymap.set("n", "<leader>bt", "<cmd>BufferLineTogglePin<cr>", { desc = "Pin current buffer" })
 
 --[[ Tabs ]]
-vim.keymap.set("n", "<leader><tab>h", "<cmd>tabprevious<cr>", { desc = "Previos tab" })
-vim.keymap.set("n", "<leader><tab>t", "<cmd>tabnext<cr>", { desc = "Next tab" })
-vim.keymap.set("n", "<leader><tab>n", "<cmd>tabnew<cr>", { desc = "New tab" })
-vim.keymap.set("n", "<leader><tab>c", "<cmd>tabclose<cr>", { desc = "Close tab" })
+vim.keymap.set("n", "<leader>ph", "<cmd>tabprevious<cr>", { desc = "Previos tab" })
+vim.keymap.set("n", "<leader>pl", "<cmd>tabnext<cr>", { desc = "Next tab" })
+vim.keymap.set("n", "<leader>pn", "<cmd>tabnew<cr>", { desc = "New tab" })
+vim.keymap.set("n", "<leader>pc", "<cmd>tabclose<cr>", { desc = "Close tab" })
 
 --[[ LSP ]]
-vim.api.nvim_create_autocmd("LspAttach", {
-	callback = function(args)
-		vim.keymap.set("n", "<C-Space>", vim.lsp.buf.hover, { desc = "Hover" })
-		vim.keymap.set("n", "<leader>x<C-Space>", vim.lsp.buf.hover, { desc = "Hover" })
-		vim.keymap.set("n", "<S-Space>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
-		vim.keymap.set("n", "<leader>x<S-Space>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
-		vim.keymap.set("n", "<A-Space>", vim.lsp.buf.code_action, { desc = "Code Action" })
-		vim.keymap.set("n", "<leader>x<A-Space>", vim.lsp.buf.code_action, { desc = "Code Action" })
-		vim.keymap.set("n", "gd", vim.lsp.buf.implementation, { desc = "Goto implementation" })
-		vim.keymap.set("n", "<leader>xd", vim.lsp.buf.implementation, { desc = "Goto implementation" })
-		vim.keymap.set("n", "gD", vim.lsp.buf.definition, { desc = "Goto definition" })
-		vim.keymap.set("n", "<leader>xD", vim.lsp.buf.definition, { desc = "Goto definition" })
-		vim.keymap.set("n", "g<C-D>", vim.lsp.buf.type_definition, { desc = "Goto type definition" })
-		vim.keymap.set("n", "<leader>x<C-D>", vim.lsp.buf.type_definition, { desc = "Goto type definition" })
-		vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Goto references" })
-		vim.keymap.set("n", "<leader>xr", vim.lsp.buf.references, { desc = "Goto references" })
-		vim.keymap.set("n", "g0", vim.lsp.buf.document_symbol, { desc = "Goto document symbol" })
-		vim.keymap.set("n", "<leader>x0", vim.lsp.buf.document_symbol, { desc = "Goto document symbol" })
-		vim.keymap.set("n", "gW", vim.lsp.buf.workspace_symbol, { desc = "Goto workspace symbol" })
-		vim.keymap.set("n", "<leader>xW", vim.lsp.buf.workspace_symbol, { desc = "Goto workspace symbol" })
-
-		require("which-key").register({})
-	end,
-})
+vim.keymap.set("n", "<S-k>", vim.lsp.buf.hover, { desc = "Code Action" })
+vim.keymap.set("n", "<leader>xa", vim.lsp.buf.code_action, { desc = "Code Action" })
+vim.keymap.set("n", "<leader>xc", vim.lsp.buf.rename, { desc = "Rename Sign" })

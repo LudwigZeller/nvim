@@ -1,18 +1,21 @@
 return {
-	{ "folke/neodev.nvim", priority = 100 },
+	{ "folke/neodev.nvim",    priority = 100 },
 
+	--[[ Autopair ]]
 	{
 		"windwp/nvim-autopairs",
 		event = "InsertEnter",
 		opts = {}, -- this is equalent to setup({}) function
 	},
+
 	--[[ Window Layout after Bufferclose ]]
 	{ "famiu/bufdelete.nvim", cmd = { "Bdelete", "Bwipeout" } },
 
 	--[[ Learn Neovim ]]
 	{
+		enabled = false,
 		"m4xshen/hardtime.nvim",
-		event = "UIEnter",
+		event = "VimEnter",
 		keys = {
 			{ "<leader>uh", "<cmd>Hardtime toggle<cr>", desc = "Toggle Hardtime" },
 		},
@@ -128,25 +131,25 @@ return {
 				"<cmd>SessionManager load_current_dir_session<cr>",
 				desc = "Restore Session based on CWD",
 			},
-			{ "<leader>ql", "<cmd>SessionManager load_session<cr>", desc = "List Sessions" },
-			{ "<leader>qo", "<cmd>SessionManager load_last_session<cr>", desc = "Load last Sessions" },
-			{ "<leader>qx", "<cmd>SessionManager delete_session<cr>", desc = "Delete Sessions" },
+			{ "<leader>ql", "<cmd>SessionManager load_session<cr>",         desc = "List Sessions" },
+			{ "<leader>qo", "<cmd>SessionManager load_last_session<cr>",    desc = "Load last Sessions" },
+			{ "<leader>qx", "<cmd>SessionManager delete_session<cr>",       desc = "Delete Sessions" },
 		},
 		config = function()
 			local config = require("session_manager.config")
 			require("session_manager").setup({
 				sessions_dir = vim.fn.expand(vim.fn.stdpath("state") .. "/sessions/"),
 				autoload_mode = config.AutoloadMode.Disabled, -- Define what to do when Neovim is started without arguments. Possible values: Disabled, CurrentDir, LastSession
-				autosave_last_session = true, -- Automatically save last session on exit and on session switch.
-				autosave_ignore_not_normal = true, -- Plugin will not save a session when no buffers are opened, or all of them aren't writable or listed.
-				autosave_ignore_dirs = {}, -- A list of directories where the session will not be autosaved.
-				autosave_ignore_filetypes = { -- All buffers of these file types will be closed before the session is saved.
+				autosave_last_session = true,             -- Automatically save last session on exit and on session switch.
+				autosave_ignore_not_normal = true,        -- Plugin will not save a session when no buffers are opened, or all of them aren't writable or listed.
+				autosave_ignore_dirs = {},                -- A list of directories where the session will not be autosaved.
+				autosave_ignore_filetypes = {             -- All buffers of these file types will be closed before the session is saved.
 					"gitcommit",
 					"gitrebase",
 				},
 				autosave_ignore_buftypes = {}, -- All buffers of these bufer types will be closed before the session is saved.
 				autosave_only_in_session = true, -- Always autosaves session. If true, only autosaves after a session is active.
-				max_path_length = 80, -- Shorten the display path if length exceeds this threshold. Use 0 if don't want to shorten the path at all.
+				max_path_length = 80,        -- Shorten the display path if length exceeds this threshold. Use 0 if don't want to shorten the path at all.
 			})
 		end,
 	},
@@ -159,40 +162,13 @@ return {
 
 	--[[ Improved Macros ]]
 	{
-		"ecthelionvi/NeoComposer.nvim",
-		dependencies = { "kkharji/sqlite.lua" },
-		event = "BufEnter",
-		keys = {
-			{
-				"<leader>sr",
-				"<cmd>Telescope macros<cr>",
-				desc = "Symbols",
-			},
-		},
-		config = function()
-			require("NeoComposer").setup({
-				notify = false,
-				delay_timer = 150,
-				colors = {
-					bg = "bg",
-					fg = "fg",
-					red = "#ec5f67",
-					blue = "#5fb3b3",
-					green = "#99c794",
-				},
-				keymaps = {
-					play_macro = "Q",
-					yank_macro = "yq",
-					stop_macro = "cq",
-					toggle_record = "q",
-					cycle_next = "<c-n>",
-					cycle_prev = "<c-p>",
-					toggle_macro_menu = "<m-q>",
-				},
-			})
-
-			require("telescope").load_extension("macros")
-		end,
+		"chrisgrieser/nvim-recorder",
+		dependencies = "rcarriga/nvim-notify", -- optional
+		opts = {                             -- startup.
+			slots = { "a", "b", "c" },
+			clear = true,
+			lessNotifications = true,
+		}, -- required even with default settings, since it calls `setup()`
 	},
 
 	--[[ makes plugins dot-repeatable ]]
