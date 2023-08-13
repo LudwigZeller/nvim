@@ -112,37 +112,6 @@ return {
 		end,
 	},
 
-	--[[ Rust Tools ]]
-	{
-		"simrat39/rust-tools.nvim",
-		config = function()
-			local codelldb_path = vim.fn.expand(vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/")
-			require("rust-tools").setup {
-			}
-			require("rust-tools").setup({
-				server = {
-					settings = {
-						["rust-analyzer"] = {
-							checkOnSave = {
-								command = "clippy",
-							},
-						},
-					},
-				},
-				dap = {
-					adapter = require("rust-tools.dap").get_codelldb_adapter(
-						vim.fn.expand(codelldb_path .. "adapter/codelldb"),
-						vim.fn.expand(codelldb_path .. "lldb/lib/liblldb.so")
-					)
-				},
-				tools = {
-					executor = require("rust-tools.executors").toggleterm,
-				},
-			})
-		end
-
-	},
-
 	--[[ Null Ls ]]
 	{
 		enabled = false,
