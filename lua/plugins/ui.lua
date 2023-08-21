@@ -10,8 +10,11 @@ return {
 				padding = { 1, 2, 1, 2 }, -- extra window padding [top, right, bottom, left]
 				zindex = 1000,         -- positive value to position WhichKey above other floating windows.
 			},
-			plugins = { spelling = true },
-			defaults = {
+		},
+		config = function(_, opts)
+			local wk = require("which-key")
+			wk.setup(opts)
+			wk.register({
 				mode = { "n", "v" },
 				["g"] = { name = "+goto" },
 				--["gz"] = { name = "+surround" },
@@ -32,13 +35,10 @@ return {
 				["<leader>u"] = { name = "+ui" },
 				["<leader>w"] = { name = "+windows" },
 				["<leader>x"] = { name = "+diagnostics/quickfix" },
-				["<leader>m"] = { name = "which_key_ignore" },
-			},
-		},
-		config = function(_, opts)
-			local wk = require("which-key")
-			wk.setup(opts)
-			wk.register(opts.defaults)
+			})
+			if vim.g.neovide then
+				wk.register({ mode = { "n", "v" }, ["<leader>v"] = { name = "+neovide" } })
+			end
 		end,
 	},
 
@@ -519,18 +519,9 @@ return {
 		end,
 	},
 
-	--[[ Very Important ]]
-	{
-		"eandrju/cellular-automaton.nvim",
-		config = function()
-			vim.keymap.set("n", "<leader>fml", "<cmd>CellularAutomaton make_it_rain<CR>", { desc = "which_key_ignore" })
-		end,
-	},
-
 	--[[ Dashboard ]]
 	{
 		"goolord/alpha-nvim",
-		event = "VimEnter",
 		opts = function()
 			local dashboard = require("alpha.themes.dashboard")
 			local config = vim.fn.stdpath("config")

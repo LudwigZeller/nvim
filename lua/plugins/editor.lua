@@ -465,17 +465,19 @@ return {
 	{
 		-- TODO: Configure
 		"folke/trouble.nvim",
+		cmd = { "Trouble", "TroubleToggle" },
 		keys = {
 			{ "<leader>xx", "<cmd>TroubleToggle<cr>",                       desc = "Toggle Trouble" },
-			{ "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "WorkspaceDignostics" },
+			{ "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Dignostics" },
 			{ "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document Diagnostic" },
 			{ "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",              desc = "Quickfix" },
 			{ "<leader>xl", "<cmd>TroubleToggle loclist<cr>",               desc = "Location List" },
-			{ "<leader>xr", "<cmd>TroubleToggle lsp_references<cr>",        desc = "References" },
+
 		},
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
 			use_diagnostic_signs = true,
 		},
+
 	},
 }

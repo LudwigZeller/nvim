@@ -18,7 +18,23 @@ vim.g.neovide_padding_top = 0
 vim.g.neovide_profiler = false
 vim.g.neovide_refresh_rate = 60
 vim.g.neovide_refresh_rate_idle = 5
-vim.g.neovide_transparency = 0.95
+vim.g.neovide_transparency = 0.9
 vim.g.neovide_remember_window_size = true
 vim.g.neovide_theme = "auto"
 -- vim.g.neovide_underline_automatic_scaling = true
+
+vim.keymap.set("n", "<leader>v+", function()
+	if vim.g.neovide_transparency <= 1 then
+		vim.g.neovide_transparency = vim.g.neovide_transparency + 0.1
+	end
+end, { desc = "Increase Transparency" })
+
+vim.keymap.set("n", "<leader>v-", function()
+	if vim.g.neovide_transparency >= 0 then
+		vim.g.neovide_transparency = vim.g.neovide_transparency - 0.1
+	end
+end, { desc = "Decrease Transparency" })
+
+vim.keymap.set("n", "<leader>vf", function()
+	vim.g.neovide_fullscreen = not vim.g.neovide_fullscreen
+end, { desc = "Fullscreen" })
