@@ -100,11 +100,6 @@ vim.keymap.set("n", "<leader>pn", "<cmd>tabnew<cr>", { desc = "New tab" })
 vim.keymap.set("n", "<leader>pc", "<cmd>tabclose<cr>", { desc = "Close tab" })
 
 --[[ LSP ]]
-<<<<<<< Updated upstream
-vim.keymap.set("n", "<S-k>", vim.lsp.buf.hover, { desc = "Code Action" })
-vim.keymap.set("n", "<leader>xa", vim.lsp.buf.code_action, { desc = "Code Action" })
-vim.keymap.set("n", "<leader>xc", vim.lsp.buf.rename, { desc = "Rename Sign" })
-=======
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(args)
 		vim.keymap.set("n", "<S-k>", vim.lsp.buf.hover, { desc = "Symbol Information", buffer = args.buf })
@@ -142,4 +137,3 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
 		require("which-key").register()
 	end
 })
->>>>>>> Stashed changes
