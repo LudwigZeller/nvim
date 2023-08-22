@@ -1,5 +1,6 @@
 return {
 	{
+		event = "VeryLazy",
 		"williamboman/mason.nvim",
 		dependencies = {},
 		config = function()
@@ -17,6 +18,7 @@ return {
 
 	--[[ Lsp Config ]]
 	{
+		event = "VeryLazy",
 		"williamboman/mason-lspconfig.nvim",
 		dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig", "simrat39/rust-tools.nvim" },
 		config = function()
@@ -48,8 +50,8 @@ return {
 
 	--[[ Dap Config ]]
 	{
+		event = "VeryLazy",
 		"jay-babu/mason-nvim-dap.nvim",
-		lazy = false,
 		dependencies = {
 			"williamboman/mason.nvim",
 			"mfussenegger/nvim-dap",
@@ -89,10 +91,10 @@ return {
 				})
 			end
 
-			sign({ name = "DapBreakpoint", text = "🔴" })
-			sign({ name = "DapLogPoint", text = "" })
-			sign({ name = "DapBreakpointCondition", text = "🟡" })
-			sign({ name = "DapBreakpointRejected", text = "❌" })
+			sign({ name = "DapBreakpoint", text = "●" })
+			sign({ name = "DapLogPoint", text = "◆" })
+			sign({ name = "DapBreakpointCondition", text = "●" })
+			sign({ name = "DapBreakpointRejected", text = "󰚽" })
 
 			vim.keymap.set("n", "<leader>dd", dap.continue, { desc = "Debug" }) -- Used for overriding
 			vim.keymap.set("n", "<leader>do", dap.run_last, { desc = "Rerun last debug" })

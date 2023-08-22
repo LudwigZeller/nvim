@@ -1,6 +1,7 @@
 return {
 	--[[ WhichKey ]]
 	{
+		event = "VeryLazy",
 		"folke/which-key.nvim",
 		opts = {
 			window = {
@@ -184,17 +185,18 @@ return {
 	--[[ Dressing	 ]]
 	{
 		"stevearc/dressing.nvim",
-		lazy = true,
-		init = function()
-			vim.ui.select = function(...)
-				require("lazy").load({ plugins = { "dressing.nvim" } })
-				return vim.ui.select(...)
-			end
-			vim.ui.input = function(...)
-				require("lazy").load({ plugins = { "dressing.nvim" } })
-				return vim.ui.input(...)
-			end
-		end,
+		event = "VeryLazy",
+		opts = {},
+		-- init = function()
+		-- 	vim.ui.select = function(...)
+		-- 		require("lazy").load({ plugins = { "dressing.nvim" } })
+		-- 		return vim.ui.select(...)
+		-- 	end
+		-- 	vim.ui.input = function(...)
+		-- 		require("lazy").load({ plugins = { "dressing.nvim" } })
+		-- 		return vim.ui.input(...)
+		-- 	end
+		-- end,
 	},
 
 	--[[ Todo Comments ]]
@@ -236,9 +238,8 @@ return {
 	--[[ Color Highlighting ]]
 	{
 		"NvChad/nvim-colorizer.lua",
-		event = "BufEnter",
 		keys = {
-			{ "<leader>ui", "<cmd>ColorizerToggle<cr>", desc = "Toggle color preview" },
+			{ "<leader>uc", "<cmd>ColorizerToggle<cr>", desc = "Toggle color preview" },
 		},
 		config = function()
 			require("colorizer").setup({
@@ -274,7 +275,7 @@ return {
 	--[[ Statusline ]]
 	{
 		"nvim-lualine/lualine.nvim",
-		event = "VimEnter",
+		event = "VeryLazy",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 			"chrisgrieser/nvim-recorder",
@@ -483,7 +484,7 @@ return {
 	--[[ Highlight Words ]]
 	{
 		"RRethy/vim-illuminate",
-		lazy = false,
+		event = "BufEnter",
 		keys = {
 			{ "<leader>ui", "<cmd>IlluminateToggle<cr>", desc = "Toggle Illuminate" },
 		},

@@ -2,6 +2,7 @@ return {
 	--[[ CMP Support ]]
 	{
 		"hrsh7th/nvim-cmp",
+		event = "InsertEnter",
 		dependencies = {
 			"hrsh7th/cmp-nvim-lsp",
 			"hrsh7th/cmp-nvim-lsp-signature-help",
@@ -24,7 +25,6 @@ return {
 			local feedkey = function(key, mode)
 				vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 			end
-
 			cmp.setup({
 				snippet = {
 					expand = function(args)
@@ -40,8 +40,8 @@ return {
 							cmp.select_next_item()
 						elseif vim.fn["vsnip#available"](1) == 1 then
 							feedkey("<Plug>(vsnip-expand-or-jump)", "")
-						elseif has_words_before() then
-							cmp.complete()
+							-- elseif has_words_before() then
+							-- 	cmp.complete()
 						else
 							fallback() -- The fallback function sends a already mapped key. In this case, it's probably `<Tab>`.
 						end
@@ -92,20 +92,36 @@ return {
 					end,
 				},
 			})
-			-- cmp.setup.cmdline("/", {
-			-- 	mapping = cmp.mapping.preset.cmdline(),
-			-- 	sources = {
-			-- 		{ name = "buffer" },
-			-- 	},
-			-- })
-			-- cmp.setup.cmdline(":", {
-			-- 	mapping = cmp.mapping.preset.cmdline(),
-			-- 	sources = cmp.config.sources({
-			-- 		{ name = "path" },
-			-- 	}, {
-			-- 		{ name = "cmdline" },
-			-- 	}),
-			-- })
 		end,
 	},
+	{
+		'abecodes/tabout.nvim',
+		event = "VeryLazy",
+		dependencies = {
+			'nvim-treesitter', -- or require if not used so far
+			'nvim-cmp'      -- if a completion plugin is using tabs load it before
+		},
+		opts = {
+			tabkey = '<Tab>',          -- key to trigger tabout, set to an empty string to disable
+			backwards_tabkey = '<S-Tab>', -- key to trigger backwards tabout, set to an empty string to disable
+			act_as_tab = true,         -- shift content if tab out is not possible
+			act_as_shift_tab = false,  -- reverse shift content if tab out is not possible (if your keyboard/terminal supports <S-Tab>)
+			default_tab = '<C-t>',     -- shift default action (only at the beginning of a line, otherwise <TAB> is used)
+			default_shift_tab = '<C-d>', -- reverse shift default action,
+			enable_backwards = true,   -- well ...
+			completion = true,         -- if the tabkey is used in a completion pum
+			tabouts = {
+				{ open = "'", close = "'" },
+				{ open = '"', close = '"' },
+				{ open = '`', close = '`' },
+				{ open = '(', close = ')' },
+				{ open = '[', close = ']' },
+				{ open = '{', close = '}' }
+			},
+			ignore_beginning = true, --[[ if the cursor is at the beginning of a filled element it will rather tab out than shift the content ]]
+			exclude = {} -- tabout will ignore these filetypes
+
+		},
+		config = true,
+	}
 }

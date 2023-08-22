@@ -275,7 +275,7 @@ return {
 	--[[ Nvim-Tree ]]
 	{
 		"nvim-tree/nvim-tree.lua",
-		lazy = false,
+		event = "VeryLazy",
 		keys = {
 			{ "<leader>ft", "<cmd>NvimTreeToggle<cr>", desc = "Toggle Filetree" },
 		},

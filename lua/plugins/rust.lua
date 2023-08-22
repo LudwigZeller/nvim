@@ -2,6 +2,7 @@ return {
 	--[[ Rust Tools ]]
 	{
 		"simrat39/rust-tools.nvim",
+		event = "VeryLazy",
 		config = function()
 			local codelldb_path = vim.fn.expand(vim.fn.stdpath("data") .. "/mason/packages/codelldb/extension/")
 			require("rust-tools").setup({
