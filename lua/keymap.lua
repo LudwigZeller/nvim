@@ -1,6 +1,14 @@
+-- remap qwertz to saner locations
+vim.keymap.set({ "n", "i", "x", "v", "o", "t" }, "æ", "{", { remap = true, nowait = true })
+vim.keymap.set({ "n", "i", "x", "v", "o", "t" }, "ſ", "[", { remap = true })
+vim.keymap.set({ "n", "i", "x", "v", "o", "t" }, "ð", "]", { remap = true })
+vim.keymap.set({ "n", "i", "x", "v", "o", "t" }, "đ", "}", { remap = true, nowait = true })
+
+
 vim.keymap.set("i", "jk", "<ESC>", { nowait = true, desc = "Normal Mode" })
 vim.keymap.set({ "n", "i" }, "<C-s>", "<cmd>silent write<cr>", { nowait = true, desc = "Safe Buffer" })
 vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { nowait = true, desc = "Quit Neovim" })
+
 
 -- better up/down
 vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -112,7 +120,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		-- vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Reference", buffer = args.buf })
 		vim.keymap.set("n", "gd", "<cmd>Trouble lsp_definitions<cr>", { desc = "Type Definition", buffer = args.buf })
 		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Declaration", buffer = args.buf })
-		vim.keymap.set("n", "gi", "<cmd>Trouble lsp_implementations<cr>", { desc = "Implementation", buffer = args.buf })
+		vim.keymap.set("n", "gI", "<cmd>Trouble lsp_implementations<cr>", { desc = "Implementation", buffer = args.buf })
 		vim.keymap.set("n", "go", "<cmd>Trouble lsp_type_definitions<cr>", { desc = "Type Definition", buffer = args.buf })
 		vim.keymap.set("n", "gl", vim.lsp.buf.signature_help, { desc = "Signatur", buffer = args.buf })
 		vim.keymap.set("n", "gr", "<cmd>Trouble lsp_references<cr>", { desc = "Reference", buffer = args.buf })

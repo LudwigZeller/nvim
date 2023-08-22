@@ -136,11 +136,6 @@ return {
 				desc = "Word (cwd)",
 			},
 			{
-				"<leader>uC",
-				"<cmd>Telescope colorscheme enable_preview=true<cr>",
-				desc = "Colorscheme with preview",
-			},
-			{
 				"<leader>ss",
 				'<cmd>lua require(\'telescope.builtin\').lsp_document_symbols({ symbols = { "Class", "Function", "Method", "Constructor", "Interface", "Module", "Struct", "Trait", "Field", "Property", }, })<cr>',
 				desc = "Goto Symbol",
