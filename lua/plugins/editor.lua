@@ -229,7 +229,7 @@ return {
 				-- can be "never, "success", or "always". "success" will close the window
 				quit_on_exit = "never",
 				open_on_start = false,
-				hidden = false,
+				hidden = true,
 				on_create = nil,
 			},
 			component_aliases = {

@@ -70,12 +70,6 @@ return {
 				}
 			end,
 			integrations = {
-				alpha = true,
-				cmp = true,
-				gitsigns = true,
-				illuminate = true,
-				indent_blankline = { enabled = true },
-				mason = true,
 				native_lsp = {
 					enabled = true,
 					virtual_text = {
@@ -94,11 +88,17 @@ return {
 						background = true,
 					},
 				},
-				navic = { enabled = true, custom_bg = "lualine" },
 				dap = {
 					enabled = true,
 					enable_ui = true, -- enable nvim-dap-ui
 				},
+				alpha = true,
+				cmp = true,
+				gitsigns = true,
+				illuminate = true,
+				indent_blankline = { enabled = true },
+				mason = true,
+				navic = { enabled = true, custom_bg = "lualine" },
 				lsp_trouble = true,
 				noice = true,
 				notify = true,
@@ -106,6 +106,8 @@ return {
 				telescope = true,
 				treesitter = true,
 				which_key = true,
+				overseer = true,
+				aerial = true,
 			},
 		},
 	},

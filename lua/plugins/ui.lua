@@ -91,7 +91,7 @@ return {
 				end,
 			},
 		},
-		event = "VimEnter",
+		event = "VeryLazy",
 		dependencies = "kevinhwang91/promise-async",
 		config = function()
 			require("ufo").setup({
@@ -100,6 +100,18 @@ return {
 				end,
 			})
 		end,
+	},
+
+	--[[ Aerial ]]
+	{
+		'stevearc/aerial.nvim',
+		event = "VeryLazy",
+		opts = {},
+		-- Optional dependencies
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"nvim-tree/nvim-web-devicons"
+		},
 	},
 
 	--[[ Noice ]]
@@ -341,6 +353,7 @@ return {
 					"dapui_scopes",
 					"dapui_console",
 					"dap-repl",
+					"aerial",
 				},
 				always_divide_middle = true,
 				globalstatus = false,
