@@ -5,24 +5,36 @@ return {
 		"folke/neodev.nvim",
 	},
 
-	--[[ Autopair ]]
+	--[[ DevDocs ]]
 	{
-		"windwp/nvim-autopairs",
-		event = "InsertEnter",
-		dependencies = { "hrsh7th/nvim-cmp" },
-		config = function()
-			-- If you want insert `(` after select function or method item
-			local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-			local cmp = require('cmp')
-			cmp.event:on(
-				'confirm_done',
-				cmp_autopairs.on_confirm_done()
-			)
-		end,
+		"luckasRanarison/nvim-devdocs",
+		event = "VeryLazy",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		opts = {
+			dir_path = vim.fn.stdpath("data") .. "/devdocs", -- installation directory
+			telescope = {},                               -- passed to the telescope picker
+			float_win = {                                 -- passed to nvim_open_win(), see :h api-floatwin
+				relative = "editor",
+				height = 30,
+				width = 140,
+				border = "rounded",
+			},
+			wrap = false,                                -- text wrap, only applies to floating window
+			previewer_cmd = "glow",                      -- for example: "glow"
+			cmd_args = { "-s", "dark", "-w", "80", "-l", }, -- example using glow: { "-s", "dark", "-w", "80" }
+			cmd_ignore = {},                             -- ignore cmd rendering for the listed docs
+			picker_cmd = false,                          -- use cmd previewer in picker preview
+			picker_cmd_args = { "-p", "-l", },           -- example using glow: { "-p" }
+			ensure_installed = {},                       -- get automatically installed
+		}
 	},
 
 	--[[ Window Layout after Bufferclose ]]
-	{ "famiu/bufdelete.nvim", cmd = { "Bdelete", "Bwipeout" } },
+	{ "famiu/bufdelete.nvim",     cmd = { "Bdelete", "Bwipeout" } },
 
 	--[[ Learn Neovim ]]
 	{
@@ -153,5 +165,5 @@ return {
 	},
 
 	--[[ makes plugins dot-repeatable ]]
-	{ "tpope/vim-repeat",     event = "VeryLazy" },
+	{ "tpope/vim-repeat", event = "VeryLazy" },
 }

@@ -60,6 +60,13 @@ return {
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<C-e>"] = cmp.mapping.close(),
+					-- ["<CR>"] =  function(fallback)
+					-- 	if cmp.visible() then
+					-- 		cmp.confirm()
+					-- 	else
+					-- 		fallback() -- If you use vim-endwise, this fallback will behave the same as vim-endwise.
+					-- 	end
+					-- end,
 					["<CR>"] = cmp.mapping.confirm({
 						behavior = cmp.ConfirmBehavior.Insert,
 						select = true,
@@ -69,7 +76,7 @@ return {
 					{ name = "path",                   priority = 2,      keyword_length = 3 }, -- file paths
 					{ name = "nvim_lsp",               priority = 3,      keyword_length = 1 }, -- from language server
 					{ name = "nvim_lsp_signature_help" },                                  -- display function signatures with current parameter emphasized
-					{ name = "nvim_lua",               keyword_length = 2 },               -- complete neovim's Lua runtime API such vim.lsp.*
+					{ name = "nvim_lua",               keyword_length = 1 },               -- complete neovim's Lua runtime API such vim.lsp.*
 					{ name = "buffer",                 priority = 1,      keyword_length = 3 }, -- source current buffer
 					{ name = "vsnip",                  priority = 3,      keyword_length = 1 }, -- nvim-cmp source for vim-vsnip
 					{ name = "calc" },                                                     -- source for math calculation
@@ -123,5 +130,20 @@ return {
 
 		},
 		config = true,
-	}
+	},
+	--[[ Autopair ]]
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		dependencies = { "hrsh7th/nvim-cmp" },
+		config = function()
+			-- If you want insert `(` after select function or method item
+			local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+			local cmp = require('cmp')
+			cmp.event:on(
+				'confirm_done',
+				cmp_autopairs.on_confirm_done()
+			)
+		end,
+	},
 }
