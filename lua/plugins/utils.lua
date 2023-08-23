@@ -1,9 +1,10 @@
 return {
-	{ 'ThePrimeagen/vim-be-good', },
 	{
 		ft = "lua",
 		"folke/neodev.nvim",
 	},
+
+	{ 'ThePrimeagen/vim-be-good', },
 
 	--[[ DevDocs ]]
 	{

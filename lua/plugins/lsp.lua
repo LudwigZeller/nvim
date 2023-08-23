@@ -97,6 +97,7 @@ return {
 			sign({ name = "DapBreakpointRejected", text = "󰚽" })
 
 			vim.keymap.set("n", "<leader>dd", dap.continue, { desc = "Debug" }) -- Used for overriding
+			vim.keymap.set("n", "<leader>dd", dap.terminate, { desc = "Quit" })
 			vim.keymap.set("n", "<leader>do", dap.run_last, { desc = "Rerun last debug" })
 			vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "Continue" })
 			vim.keymap.set("n", "<leader>ds", dap.step_over, { desc = "Step Over" })
