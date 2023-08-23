@@ -1,3 +1,4 @@
+vim.o.guifont = "FiraCode_Nerd_Font_Mono,Noto_Color_Emoji:h12:#e-subpixelantialias"
 vim.g.neovide_animation_lenght = 0.3
 vim.g.neovide_confirm_quit = true
 vim.g.neovide_cursor_animate_command_line = true

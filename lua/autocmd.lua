@@ -26,6 +26,7 @@ vim.api.nvim_create_autocmd("User", {
 	pattern = "SessionSavePre",
 	group = vim.api.nvim_create_augroup("OverseerSession", { clear = false }),
 	callback = function()
+		require("overseer").delete_task_bundle(get_cwd_as_name())
 		require("overseer").save_task_bundle(
 			get_cwd_as_name(),
 			nil,

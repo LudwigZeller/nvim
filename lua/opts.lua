@@ -4,7 +4,6 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.mapleader = " "
 vim.g.mapleaderlocal = " "
 
-vim.o.guifont = "FiraCode Nerd Font Mono:h12:#e-subpixelantialias"
 vim.opt.linespace = 2
 
 vim.opt.termguicolors = true
