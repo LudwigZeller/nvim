@@ -455,6 +455,12 @@ return {
 							separator = true, -- use a "true" to enable the default, or set your own character
 						},
 						{
+							filetype = "neo-tree",
+							text = "File Explorer",
+							highlight = "Directory",
+							separator = true, -- use a "true" to enable the default, or set your own character
+						},
+						{
 							filetype = "OverseerList",
 							text = "Task List",
 							highlight = "Directory",

@@ -272,8 +272,113 @@ return {
 		},
 	},
 
-	--[[ Nvim-Tree ]]
+	--[[ Filetree ]]
 	{
+		"nvim-neo-tree/neo-tree.nvim",
+		keys = {
+			{ "<leader>ft", "<cmd>Neotree toggle<cr>" },
+		},
+		branch = "v3.x",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+			"MunifTanjim/nui.nvim",
+			{
+				-- only needed if you want to use the commands with "_with_window_picker" suffix
+				's1n7ax/nvim-window-picker',
+				config = function()
+					require 'window-picker'.setup({
+						autoselect_one = true,
+						include_current = false,
+						filter_rules = {
+							bo = {
+								filetype = { 'neo-tree', "neo-tree-popup", "notify" },
+								buftype = { 'terminal', "quickfix" },
+							},
+						},
+						other_win_hl_color = '#e35e4f',
+					})
+				end,
+			},
+		},
+		config = function()
+			require("neo-tree").setup({
+				close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
+				popup_border_style = "rounded",
+				enable_git_status = true,
+				enable_diagnostics = true,
+				default_component_configs = {
+					container = {
+						enable_character_fade = true
+					},
+					icon = {
+						folder_closed = "",
+						folder_open = "",
+						folder_empty = "󰜌",
+						-- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
+						-- then these will never be used.
+						default = "*",
+						highlight = "NeoTreeFileIcon"
+					},
+					modified = {
+						symbol = "󱇧",
+						highlight = "NeoTreeModified",
+					},
+					name = {
+						trailing_slash = false,
+						use_git_status_colors = false,
+						highlight = "NeoTreeFileName",
+					},
+					git_status = {
+						symbols = {
+							-- Change type
+							added     = "✚", -- or "✚", but this is redundant info if you use git_status_colors on the name
+							modified  = "", -- or "", but this is redundant info if you use git_status_colors on the name
+							deleted   = "󰆴", -- this can only be used in the git_status source
+							renamed   = "󰁕", -- this can only be used in the git_status source
+							-- Status type
+							untracked = "",
+							ignored   = "",
+							unstaged  = "󰄱",
+							staged    = "",
+							conflict  = "",
+						}
+					},
+					file_size = {
+						enabled = true,
+						required_width = 64, -- min width of window required to show this column
+					},
+					type = {
+						enabled = true,
+						required_width = 122, -- min width of window required to show this column
+					},
+					last_modified = {
+						enabled = true,
+						required_width = 88, -- min width of window required to show this column
+					},
+					created = {
+						enabled = true,
+						required_width = 110, -- min width of window required to show this column
+					},
+					filesystem = {
+						hijack_netrw_behavior = "open_current",
+					},
+				},
+			})
+		end,
+	},
+	{
+		'antosha417/nvim-lsp-file-operations',
+		requires = {
+			"nvim-lua/plenary.nvim",
+			"nvim-neo-tree/neo-tree.nvim",
+		},
+		config = true,
+	},
+
+
+	{
+		enabled = false,
 		"nvim-tree/nvim-tree.lua",
 		-- event = "VeryLazy",
 		keys = {
