@@ -1,14 +1,13 @@
--- remap qwertz to saner locations
-vim.keymap.set({ "n", "i", "x", "v", "o", "t" }, "æ", "{", { remap = true, nowait = true })
-vim.keymap.set({ "n", "i", "x", "v", "o", "t" }, "ſ", "[", { remap = true })
-vim.keymap.set({ "n", "i", "x", "v", "o", "t" }, "ð", "]", { remap = true })
-vim.keymap.set({ "n", "i", "x", "v", "o", "t" }, "đ", "}", { remap = true, nowait = true })
-
-
 vim.keymap.set("i", "jk", "<ESC>", { nowait = true, desc = "Normal Mode" })
 vim.keymap.set({ "n", "i" }, "<C-s>", "<cmd>silent write<cr>", { nowait = true, desc = "Safe Buffer" })
 vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { nowait = true, desc = "Quit Neovim" })
 
+-- remap qwertz to saner locations
+vim.keymap.set({ "", "n", "i", "x", "v", "o", "t", "c", "l" }, "æ", "{", { remap = true })
+vim.keymap.set({ "", "n", "i", "x", "v", "o", "t", "c", "l" }, "ſ", "[", { remap = true })
+vim.keymap.set({ "", "n", "i", "x", "v", "o", "t", "c", "l" }, "ð", "]", { remap = true })
+vim.keymap.set({ "", "n", "i", "x", "v", "o", "t", "c", "l" }, "đ", "}", { remap = true })
+vim.cmd([[ set langmap=æ{,ſ[,ð],đ} ]])
 
 -- better up/down
 vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -111,7 +110,7 @@ vim.keymap.set("n", "<leader>pc", "<cmd>tabclose<cr>", { desc = "Close tab" })
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(args)
 		vim.keymap.set("n", "<S-k>", vim.lsp.buf.hover, { desc = "Symbol Information", buffer = args.buf })
-		vim.keymap.set("n", "<A-S-k>", vim.lsp.buf.code_action, { desc = "Code Action", buffer = args.buf })
+		vim.keymap.set({ "n", "v" }, "<A-S-k>", vim.lsp.buf.code_action, { desc = "Code Action", buffer = args.buf })
 		vim.keymap.set("n", "cn", vim.lsp.buf.rename, { desc = "Rename Sign", buffer = args.buf })
 
 		-- vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Type Definition", buffer = args.buf })

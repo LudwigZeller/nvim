@@ -23,27 +23,29 @@ return {
 		dependencies = { "williamboman/mason.nvim", "neovim/nvim-lspconfig", "simrat39/rust-tools.nvim" },
 		config = function()
 			require("mason-lspconfig").setup({
+				ensure_installed = { "lua_ls" },
 				automatic_installation = true,
-			})
+				handlers = {
 
-			require("mason-lspconfig").setup_handlers({
-				function(server_name)
-					require("lspconfig")[server_name].setup({})
-				end,
-				["lua_ls"] = function()
-					-- TODO: Enforce Range Formatting
-					require("lspconfig").lua_ls.setup({
-						settings = {
-							runtime = { version = "LuaJIT" },
-							diagnostics = { globals = { "vim" } },
-							workspace = { library = vim.api.nvim_get_runtime_file("", true) },
-							format = { enable = false },
-						},
-					})
-				end,
-				["rust_analyzer"] = function()
+					function(server_name)
+						require("lspconfig")[server_name].setup({})
+					end,
+					["lua_ls"] = function()
+						-- TODO: Enforce Range Formatting
+						require("lspconfig").lua_ls.setup({
+							settings = {
+								runtime = { version = "LuaJIT" },
+								diagnostics = { globals = { "vim" } },
+								workspace = { library = vim.api.nvim_get_runtime_file("", true) },
+								format = { enable = false },
+							},
+						})
+					end,
+					["rust_analyzer"] = function()
 
-				end,
+					end,
+
+				}
 			})
 		end,
 	},

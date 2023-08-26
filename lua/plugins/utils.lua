@@ -51,7 +51,7 @@ return {
 	--[[ Flash ]]
 	{
 		"folke/flash.nvim",
-		opts = {},
+		opts = { modes = { char = { enabled = false } } },
 		keys = {
 			{ "f", mode = { "n", "x", "o" }, function() require("flash").jump() end,       desc = "Flash", },
 			{ "F", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter", },
@@ -78,7 +78,22 @@ return {
 		event = "VeryLazy",
 		config = function()
 			require("nvim-surround").setup({
-				-- Configuration here, or leave empty to use defaults
+				-- Configuration h
+				aliases = {
+					["a"] = ">",
+					["b"] = ")",
+					["B"] = "}",
+					["r"] = "]",
+					["q"] = { '"', "'", "`" },
+					["s"] = { "}", "]", ")", ">", '"', "'", "`" },
+
+					["æ"] = "}"
+
+				},
+				highlight = {
+					duration = 100,
+				},
+				move_cursor = "begin",
 			})
 		end,
 	},

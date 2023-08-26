@@ -30,5 +30,5 @@ require("autocmd")
 
 -- Themery block
 -- This block will be replaced by Themery.
-vim.cmd("colorscheme catppuccin-frappe")
+vim.cmd("colorscheme tokyonight-moon")
 -- end themery block
