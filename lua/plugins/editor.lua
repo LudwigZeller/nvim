@@ -52,7 +52,7 @@ return {
 			{
 				"<leader>se",
 				"<cmd>Telescope symbols<cr>",
-				desc = "Symbols",
+				desc = "Emoji",
 			},
 
 			{
@@ -275,6 +275,7 @@ return {
 	--[[ Filetree ]]
 	{
 		"nvim-neo-tree/neo-tree.nvim",
+		lazy = false,
 		keys = {
 			{ "<leader>ft", "<cmd>Neotree toggle<cr>" },
 		},
@@ -290,6 +291,9 @@ return {
 					require 'window-picker'.setup({
 						autoselect_one = true,
 						include_current = false,
+						show_prompt = false,
+						hint = "floating-big-letter",
+						selection_chars = 'hjkladsf',
 						filter_rules = {
 							bo = {
 								filetype = { 'neo-tree', "neo-tree-popup", "notify" },
@@ -303,7 +307,7 @@ return {
 		},
 		config = function()
 			require("neo-tree").setup({
-				close_if_last_window = false, -- Close Neo-tree if it is the last window left in the tab
+				close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
 				popup_border_style = "rounded",
 				enable_git_status = true,
 				enable_diagnostics = true,
@@ -360,15 +364,19 @@ return {
 						enabled = true,
 						required_width = 110, -- min width of window required to show this column
 					},
-					filesystem = {
-						hijack_netrw_behavior = "open_current",
-					},
+				},
+				filesystem = {
+					hide_by_name = { "node_modules" },
+					always_show = { ".gitignore" },
+					use_libuv_file_watcher = true,
+					hijack_netrw_behavior = "open_current",
 				},
 			})
 		end,
 	},
 	{
 		'antosha417/nvim-lsp-file-operations',
+		event = "VeryLazy",
 		requires = {
 			"nvim-lua/plenary.nvim",
 			"nvim-neo-tree/neo-tree.nvim",
@@ -376,34 +384,6 @@ return {
 		config = true,
 	},
 
-
-	{
-		enabled = false,
-		"nvim-tree/nvim-tree.lua",
-		-- event = "VeryLazy",
-		keys = {
-			{ "<leader>ft", "<cmd>NvimTreeToggle<cr>", desc = "Toggle Filetree" },
-		},
-		dependencies = {
-			"nvim-tree/nvim-web-devicons",
-			{ "antosha417/nvim-lsp-file-operations", config = true }
-		},
-		config = function()
-			require("nvim-tree").setup({
-				sort_by = "case_sensitive",
-				sync_root_with_cwd = true,
-				view = {
-					width = 30,
-				},
-				renderer = {
-					group_empty = true,
-				},
-				filters = {
-					dotfiles = true,
-				},
-			})
-		end,
-	},
 
 	--[[ Gitsigns ]]
 	{

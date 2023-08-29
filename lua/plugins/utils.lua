@@ -37,17 +37,6 @@ return {
 	--[[ Window Layout after Bufferclose ]]
 	{ "famiu/bufdelete.nvim",     cmd = { "Bdelete", "Bwipeout" } },
 
-	--[[ Learn Neovim ]]
-	{
-		enabled = false,
-		"m4xshen/hardtime.nvim",
-		event = "VimEnter",
-		keys = {
-			{ "<leader>uh", "<cmd>Hardtime toggle<cr>", desc = "Toggle Hardtime" },
-		},
-		opts = {},
-	},
-
 	--[[ Flash ]]
 	{
 		"folke/flash.nvim",
