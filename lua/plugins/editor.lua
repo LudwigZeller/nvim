@@ -513,16 +513,20 @@ return {
 			{
 				"<leader>tm",
 				function()
-					if _Ncspot == nil then
-						_Ncspot = require("toggleterm.terminal").Terminal:new({
-							cmd = "ncspot",
+					if _Music == nil then
+						local cmd = "ncspot";
+						if vim.fn.executable("spt") == 1 then
+							cmd = "spt"
+						end
+						_Music = require("toggleterm.terminal").Terminal:new({
+							cmd = cmd,
 							hidden = true,
 							direction = "float",
 						})
 					end
-					_Ncspot:toggle()
+					_Music:toggle()
 				end,
-				desc = "NcSpot",
+				desc = "Music",
 			},
 			{
 				"<leader>gl",
