@@ -1,4 +1,4 @@
-vim.keymap.set("i", "jk", "<ESC>", { nowait = true, desc = "Normal Mode" })
+vim.keymap.set({ "i", "v" }, "jk", "<ESC>", { nowait = true, desc = "Normal Mode" })
 vim.keymap.set({ "n", "i" }, "<C-s>", "<cmd>silent write<cr>", { nowait = true, desc = "Safe Buffer" })
 vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { nowait = true, desc = "Quit Neovim" })
 
@@ -63,9 +63,6 @@ vim.keymap.set("i", ";", ";<c-g>u")
 vim.keymap.set("v", "<", "<gv")
 vim.keymap.set("v", ">", ">gv")
 
---[[ Diagnostics/Quickfix ]]
-vim.keymap.set("n", "<leader>xl", "<cmd>lopen<cr>", { desc = "Location List" })
-vim.keymap.set("n", "<leader>xq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 
 --[[ Terminal Mappings ]]
 vim.keymap.set("t", "<M-esc>", "<c-\\><c-n>", { desc = "Enter Normal Mode" })
@@ -105,6 +102,10 @@ vim.keymap.set("n", "<leader>ph", "<cmd>tabprevious<cr>", { desc = "Previos tab"
 vim.keymap.set("n", "<leader>pl", "<cmd>tabnext<cr>", { desc = "Next tab" })
 vim.keymap.set("n", "<leader>pn", "<cmd>tabnew<cr>", { desc = "New tab" })
 vim.keymap.set("n", "<leader>pc", "<cmd>tabclose<cr>", { desc = "Close tab" })
+
+--[[ Diagnostics/Quickfix ]]
+vim.keymap.set("n", "<leader>ll", "<cmd>lopen<cr>", { desc = "Location List" })
+vim.keymap.set("n", "<leader>lq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 
 --[[ LSP ]]
 vim.api.nvim_create_autocmd('LspAttach', {
