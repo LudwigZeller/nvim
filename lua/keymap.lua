@@ -124,8 +124,8 @@ vim.api.nvim_create_autocmd('LspAttach', {
 		vim.keymap.set("n", "gl", vim.lsp.buf.signature_help, { desc = "Signatur", buffer = args.buf })
 		vim.keymap.set("n", "gr", "<cmd>Trouble lsp_references<cr>", { desc = "Reference", buffer = args.buf })
 
-		vim.keymap.set("n", "<leader>xa", vim.lsp.buf.code_action, { desc = "Code Action", buffer = args.buf })
-		vim.keymap.set("n", "<leader>xc", vim.lsp.buf.rename, { desc = "Rename Sign", buffer = args.buf })
+		vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code Action", buffer = args.buf })
+		vim.keymap.set("n", "<leader>lc", vim.lsp.buf.rename, { desc = "Rename Sign", buffer = args.buf })
 
 		require("which-key").register()
 	end,

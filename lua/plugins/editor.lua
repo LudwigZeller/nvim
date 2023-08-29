@@ -70,16 +70,16 @@ return {
 				"<cmd>Telescope commands<cr>",
 				desc = "Commands",
 			},
-			{
-				"<leader>sd",
-				"<cmd>Telescope diagnostics bufnr=0<cr>",
-				desc = "Document diagnostics",
-			},
-			{
-				"<leader>sD",
-				"<cmd>Telescope diagnostics<cr>",
-				desc = "Workspace diagnostics",
-			},
+			-- {
+			-- 	"<leader>sd",
+			-- 	"<cmd>Telescope diagnostics bufnr=0<cr>",
+			-- 	desc = "Document diagnostics",
+			-- },
+			-- {
+			-- 	"<leader>sD",
+			-- 	"<cmd>Telescope diagnostics<cr>",
+			-- 	desc = "Workspace diagnostics",
+			-- },
 			{
 				"<leader>sg",
 				"<cmd>lua require('telescope.builtin').live_grep({ cwd=vim.lsp.buf.list_workspace_folders()[1] })<cr>",
@@ -287,7 +287,7 @@ return {
 			{
 				-- only needed if you want to use the commands with "_with_window_picker" suffix
 				's1n7ax/nvim-window-picker',
-				version = '2.0.1',
+				version = '2.0.1', --TODO:Reset to HEAD when issue is fixed
 				config = function()
 					require 'window-picker'.setup({
 						show_prompt = false,
@@ -612,11 +612,11 @@ return {
 		"folke/trouble.nvim",
 		cmd = { "Trouble", "TroubleToggle" },
 		keys = {
-			{ "<leader>xx", "<cmd>TroubleToggle<cr>",                       desc = "Toggle Trouble" },
-			{ "<leader>xw", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Dignostics" },
-			{ "<leader>xd", "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document Diagnostic" },
-			{ "<leader>xq", "<cmd>TroubleToggle quickfix<cr>",              desc = "Quickfix" },
-			{ "<leader>xl", "<cmd>TroubleToggle loclist<cr>",               desc = "Location List" },
+			{ "<leader>lx",     "<cmd>TroubleToggle<cr>",                       desc = "Toggle Trouble" },
+			{ "<leader>l<s-d>", "<cmd>TroubleToggle workspace_diagnostics<cr>", desc = "Workspace Dignostics" },
+			{ "<leader>ld",     "<cmd>TroubleToggle document_diagnostics<cr>",  desc = "Document Diagnostic" },
+			{ "<leader>lq",     "<cmd>TroubleToggle quickfix<cr>",              desc = "Quickfix" },
+			{ "<leader>ll",     "<cmd>TroubleToggle loclist<cr>",               desc = "Location List" },
 
 		},
 		dependencies = { "nvim-tree/nvim-web-devicons" },

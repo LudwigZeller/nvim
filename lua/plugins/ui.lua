@@ -35,7 +35,7 @@ return {
 				["<leader>s"] = { name = "+search" },
 				["<leader>u"] = { name = "+ui" },
 				["<leader>w"] = { name = "+windows" },
-				["<leader>x"] = { name = "+diagnostics/quickfix" },
+				["<leader>l"] = { name = "+lsp" },
 			})
 			if vim.g.neovide then
 				wk.register({ mode = { "n", "v" }, ["<leader>v"] = { name = "+neovide" } })
@@ -105,25 +105,32 @@ return {
 	--[[ Aerial ]]
 	{
 		'stevearc/aerial.nvim',
-		event = "VeryLazy",
-		keys = {
-			{
-				"<leader>ss",
-				'<cmd>lua require(\'telescope.builtin\').lsp_document_symbols({ symbols = { "Class", "Function", "Method", "Constructor", "Interface", "Module", "Struct", "Trait", "Field", "Property", }, })<cr>',
-				desc = "Goto Symbol",
-			},
-			{
-				"<leader>sS",
-				"lsp_dynamic_workspace_symbols",
-				desc = "Goto Symbol (Workspace)",
-			},
-		},
-		opts = {},
-		-- Optional dependencies
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 			"nvim-tree/nvim-web-devicons"
 		},
+		event = "VeryLazy",
+		keys = {
+			{
+				"<leader>ls",
+				"<cmd>AerialToggle<cr>",
+				desc = "Symbol",
+			},
+			{
+				"<leader>lS",
+				"<cmd>AerialNavToggle<cr>",
+				desc = "Quick Symbol",
+			},
+		},
+		opts = {
+			on_attach = function(bufnr)
+				-- Jump forwards/backwards with '{' and '}'
+				vim.keymap.set('n', '[a', '<cmd>AerialPrev<CR>', { buffer = bufnr, desc = "Previvous Symbol" })
+				vim.keymap.set('n', ']a', '<cmd>AerialNext<CR>', { buffer = bufnr, desc = "Next Symbol" })
+			end
+		},
+		config = true,
+		-- Optional dependencies
 	},
 
 	--[[ Noice ]]
