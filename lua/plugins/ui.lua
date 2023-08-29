@@ -106,6 +106,18 @@ return {
 	{
 		'stevearc/aerial.nvim',
 		event = "VeryLazy",
+		keys = {
+			{
+				"<leader>ss",
+				'<cmd>lua require(\'telescope.builtin\').lsp_document_symbols({ symbols = { "Class", "Function", "Method", "Constructor", "Interface", "Module", "Struct", "Trait", "Field", "Property", }, })<cr>',
+				desc = "Goto Symbol",
+			},
+			{
+				"<leader>sS",
+				"lsp_dynamic_workspace_symbols",
+				desc = "Goto Symbol (Workspace)",
+			},
+		},
 		opts = {},
 		-- Optional dependencies
 		dependencies = {
@@ -314,6 +326,7 @@ return {
 						"packer",
 						"neogitstatus",
 						"NvimTree",
+						"neo-tree",
 						"Trouble",
 						"alpha",
 						"lir",

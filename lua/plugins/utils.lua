@@ -161,6 +161,7 @@ return {
 	--[[ Improved Macros ]]
 	{
 		"chrisgrieser/nvim-recorder",
+		event = "VeryLazy",
 		dependencies = "rcarriga/nvim-notify", -- optional
 		opts = {                             -- startup.
 			slots = { "a", "b", "c" },
