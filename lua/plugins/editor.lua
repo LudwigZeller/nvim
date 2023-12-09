@@ -195,6 +195,7 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		dependencies = { "windwp/nvim-ts-autotag" },
+		event = "VeryLazy",
 		build = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter.configs").setup({
@@ -367,8 +368,8 @@ return {
 					},
 				},
 				window = {
-					position = "left",
-					width = 40,
+					position = "float",
+					width = 80,
 					mapping_options = {
 						noremap = true,
 						nowait = true,
@@ -379,7 +380,7 @@ return {
 							nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
 						},
 						["<2-LeftMouse>"] = "open",
-						["<cr>"] = "open_with_window_picker",
+						["<cr>"] = "open",
 						["<esc>"] = "cancel", -- close preview or floating neo-tree window
 						["P"] = { "toggle_preview", config = { use_float = true } },
 						["l"] = "focus_preview",
@@ -390,7 +391,7 @@ return {
 						["t"] = "open_tabnew",
 						-- ["<cr>"] = "open_drop",
 						-- ["t"] = "open_tab_drop",
-						-- ["w"] = "open_with_window_picker",
+						["w"] = "open_with_window_picker",
 						-- ["P"] = "toggle_preview", -- enter preview mode, which shows the current node without focusing
 						["C"] = "close_node",
 						-- ['C'] = 'close_all_subnodes',
