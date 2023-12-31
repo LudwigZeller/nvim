@@ -503,7 +503,6 @@ return {
 	},
 
 	--[[ Toggleterm ]]
-	--
 	{
 		"akinsho/toggleterm.nvim",
 		keys = {
@@ -601,6 +600,17 @@ return {
 					name_formatter = function(term) --  term: Terminal
 						return term.name
 					end,
+				},
+
+				float_opts = {
+					border = 'curved',
+					width = function()
+						return math.ceil(vim.o.columns * 0.75)
+					end,
+					height = function()
+						return math.ceil(vim.o.lines * 0.75)
+					end,
+					winblend = 3,
 				},
 			})
 		end,
