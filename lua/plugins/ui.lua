@@ -46,6 +46,20 @@ return {
 	--[[ Indent-Blankline ]]
 	{
 		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		opts = {
+			indent = { --[[ highlight = { "CursorColumn", "Whitespace" }, ]] char = "▎", tab_char = "" },
+			whitespace = {
+				-- highlight = {
+				-- 	"CursorColumn",
+				-- 	"Whitespace",
+				-- },
+				-- remove_blankline_trail = false,
+			},
+		}
+	},
+	--[[ {
+		"lukas-reineke/indent-blankline.nvim",
 		config = function()
 			vim.g.indent_blankline_filetype_exclude = {
 				"help",
@@ -70,9 +84,8 @@ return {
 				-- show_current_context = true,
 				-- show_current_context_start = false,
 				-- indent_blankline_use_treesitter = true,
-			})
 		end,
-	},
+	}, ]]
 
 	--[[ UFO Folds ]]
 	{
@@ -130,7 +143,6 @@ return {
 			end
 		},
 		config = true,
-		-- Optional dependencies
 	},
 
 	--[[ Noice ]]
@@ -476,6 +488,12 @@ return {
 						},
 						{
 							filetype = "neo-tree",
+							text = "File Explorer",
+							highlight = "Directory",
+							separator = true, -- use a "true" to enable the default, or set your own character
+						},
+						{
+							filetype = "aerial",
 							text = "File Explorer",
 							highlight = "Directory",
 							separator = true, -- use a "true" to enable the default, or set your own character
