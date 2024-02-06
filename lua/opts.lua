@@ -1,5 +1,12 @@
+-- disable language provider support (lua and vimscript plugins only)
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
+
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_node_provider = 0
+vim.g.loaded_python_provider = 0
+vim.g.loaded_python3_provider = 0
 
 vim.g.mapleader = " "
 vim.g.mapleaderlocal = " "
@@ -16,6 +23,7 @@ vim.opt.number = true
 vim.opt.smartcase = true
 vim.opt.wrap = true
 vim.opt.tabstop = 2
+vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.relativenumber = true
 vim.opt.timeoutlen = 1000
@@ -38,25 +46,25 @@ vim.api.nvim_set_option("updatetime", 300)
 
 -- LSP Diagnostics Options Setup
 vim.diagnostic.config({
-	virtual_text = false,
-	signs = true,
-	update_in_insert = true,
-	underline = true,
-	severity_sort = false,
-	float = {
-		border = "rounded",
-		source = "always",
-		header = "",
-		prefix = "",
-	},
+  virtual_text = false,
+  signs = true,
+  update_in_insert = true,
+  underline = true,
+  severity_sort = false,
+  float = {
+    border = "rounded",
+    source = "always",
+    header = "",
+    prefix = "",
+  },
 })
 
 local sign = function(opts)
-	vim.fn.sign_define(opts.name, {
-		texthl = opts.name,
-		text = opts.text,
-		numhl = "",
-	})
+  vim.fn.sign_define(opts.name, {
+    texthl = opts.name,
+    text = opts.text,
+    numhl = "",
+  })
 end
 
 sign({ name = "DiagnosticSignError", text = "" })
