@@ -3,11 +3,11 @@ vim.keymap.set({ "n", "i" }, "<C-s>", "<cmd>silent write<cr>", { nowait = true, 
 vim.keymap.set("n", "<leader>qq", "<cmd>qa<cr>", { nowait = true, desc = "Quit Neovim" })
 
 -- remap qwertz to saner locations
-vim.keymap.set({ "", "n", "i", "x", "v", "o", "t", "c", "l" }, "æ", "{", { remap = true })
-vim.keymap.set({ "", "n", "i", "x", "v", "o", "t", "c", "l" }, "ſ", "[", { remap = true })
-vim.keymap.set({ "", "n", "i", "x", "v", "o", "t", "c", "l" }, "ð", "]", { remap = true })
-vim.keymap.set({ "", "n", "i", "x", "v", "o", "t", "c", "l" }, "đ", "}", { remap = true })
-vim.cmd([[ set langmap=æ{,ſ[,ð],đ} ]])
+-- vim.keymap.set({ "", "n", "i", "x", "v", "o", "t", "c", "l" }, "æ", "{", { remap = true })
+-- vim.keymap.set({ "", "n", "i", "x", "v", "o", "t", "c", "l" }, "ſ", "[", { remap = true })
+-- vim.keymap.set({ "", "n", "i", "x", "v", "o", "t", "c", "l" }, "ð", "]", { remap = true })
+-- vim.keymap.set({ "", "n", "i", "x", "v", "o", "t", "c", "l" }, "đ", "}", { remap = true })
+-- vim.cmd([[ set langmap=æ{,ſ[,ð],đ} ]])
 
 -- better up/down
 vim.keymap.set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", { nowait = true, expr = true, silent = true })

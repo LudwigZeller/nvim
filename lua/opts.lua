@@ -11,10 +11,11 @@ vim.g.loaded_python3_provider = 0
 vim.g.mapleader = " "
 vim.g.mapleaderlocal = " "
 
-vim.opt.linespace = 2
 
 vim.opt.termguicolors = true
 
+
+vim.opt.linespace = 2
 vim.opt.breakindent = true
 vim.opt.hlsearch = false
 vim.opt.ignorecase = true
@@ -27,6 +28,7 @@ vim.opt.expandtab = true
 vim.opt.shiftwidth = 2
 vim.opt.relativenumber = true
 vim.opt.timeoutlen = 1000
+vim.opt.autoread = true
 
 vim.opt.shell = "fish"
 vim.opt.clipboard = "unnamedplus"

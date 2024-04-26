@@ -212,66 +212,66 @@ return {
   },
 
   --[[ Code Runner ]]
-  {
-    keys = {
-      { "<leader>rt", "<cmd>OverseerToggle<cr>", desc = "Toggle Task List" },
-      { "<leader>rr", "<cmd>OverseerRun<cr>",    desc = "Run Task" },
-      { "<leader>rn", "<cmd>OverseerBuild<cr>",  desc = "Create Task" },
-    },
-    "stevearc/overseer.nvim",
-    opts = {
-      strategy = {
-        "toggleterm",
-        use_shell = false,
-        direction = "horizontal",
-        highlights = nil,
-        auto_scroll = nil,
-        close_on_exit = false,
-        -- can be "never, "success", or "always". "success" will close the window
-        quit_on_exit = "never",
-        open_on_start = false,
-        hidden = true,
-        on_create = nil,
-      },
-      component_aliases = {
-        -- Most tasks are initialized with the default components
-        default = {
-          { "display_duration",    detail_level = 2 },
-          { "on_output_summarize", max_lines = 8 },
-          "on_exit_set_status",
-          { "on_complete_notify", statuses = { "FAILURE" } },
-          -- "on_complete_dispose",
-        },
-        -- Tasks from tasks.json use these components
-        default_vscode = {
-          "default",
-          "on_result_diagnostics",
-          "on_result_diagnostics_quickfix",
-        },
-      },
-      task_list = {
-        direction = "right",
-        bindings = {
-          ["?"] = "ShowHelp",
-          ["g?"] = "ShowHelp",
-          ["<CR>"] = "RunAction",
-          ["<C-e>"] = "Edit",
-          ["o"] = "Open",
-          ["<C-v>"] = "OpenVsplit",
-          ["<C-s>"] = "OpenSplit",
-          ["<C-f>"] = "OpenFloat",
-          ["<C-q>"] = "OpenQuickFix",
-          ["p"] = "TogglePreview",
-          ["<S-l>"] = "IncreaseDetail",
-          ["<S-h>"] = "DecreaseDetail",
-          ["{"] = "PrevTask",
-          ["}"] = "NextTask",
-          ["<C-k>"] = "ScrollOutputUp",
-          ["<C-j>"] = "ScrollOutputDown",
-        },
-      },
-    },
-  },
+  -- {
+  --   keys = {
+  --     { "<leader>rt", "<cmd>OverseerToggle<cr>", desc = "Toggle Task List" },
+  --     { "<leader>rr", "<cmd>OverseerRun<cr>",    desc = "Run Task" },
+  --     { "<leader>rn", "<cmd>OverseerBuild<cr>",  desc = "Create Task" },
+  --   },
+  --   "stevearc/overseer.nvim",
+  --   opts = {
+  --     strategy = {
+  --       "toggleterm",
+  --       use_shell = false,
+  --       direction = "horizontal",
+  --       highlights = nil,
+  --       auto_scroll = nil,
+  --       close_on_exit = false,
+  --       -- can be "never, "success", or "always". "success" will close the window
+  --       quit_on_exit = "never",
+  --       open_on_start = false,
+  --       hidden = true,
+  --       on_create = nil,
+  --     },
+  --     component_aliases = {
+  --       -- Most tasks are initialized with the default components
+  --       default = {
+  --         { "display_duration",    detail_level = 2 },
+  --         { "on_output_summarize", max_lines = 8 },
+  --         "on_exit_set_status",
+  --         { "on_complete_notify", statuses = { "FAILURE" } },
+  --         -- "on_complete_dispose",
+  --       },
+  --       -- Tasks from tasks.json use these components
+  --       default_vscode = {
+  --         "default",
+  --         "on_result_diagnostics",
+  --         "on_result_diagnostics_quickfix",
+  --       },
+  --     },
+  --     task_list = {
+  --       direction = "right",
+  --       bindings = {
+  --         ["?"] = "ShowHelp",
+  --         ["g?"] = "ShowHelp",
+  --         ["<CR>"] = "RunAction",
+  --         ["<C-e>"] = "Edit",
+  --         ["o"] = "Open",
+  --         ["<C-v>"] = "OpenVsplit",
+  --         ["<C-s>"] = "OpenSplit",
+  --         ["<C-f>"] = "OpenFloat",
+  --         ["<C-q>"] = "OpenQuickFix",
+  --         ["p"] = "TogglePreview",
+  --         ["<S-l>"] = "IncreaseDetail",
+  --         ["<S-h>"] = "DecreaseDetail",
+  --         ["{"] = "PrevTask",
+  --         ["}"] = "NextTask",
+  --         ["<C-k>"] = "ScrollOutputUp",
+  --         ["<C-j>"] = "ScrollOutputDown",
+  --       },
+  --     },
+  --   },
+  -- },
 
   --[[ Filetree ]]
   {

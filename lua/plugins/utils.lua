@@ -41,22 +41,29 @@ return {
   {
     "folke/flash.nvim",
     opts = { modes = { char = { enabled = false } } },
+    -- keys = {
+    --   { "f", mode = { "n", "x", "o" }, function() require("flash").jump() end,       desc = "Flash", },
+    --   { "F", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter", },
+    --   { "r", mode = "o",               function() require("flash").remote() end,     desc = "Remote Flash", },
+    --   {
+    --     "R",
+    --     mode = { "o", "x" },
+    --     function() require("flash").treesitter_search() end,
+    --     desc = "Treesitter Search",
+    --   },
+    --   {
+    --     "<c-s>",
+    --     mode = { "c" },
+    --     function() require("flash").toggle() end,
+    --     desc = "Toggle Flash Search",
+    --   },
+    -- },
     keys = {
-      { "f", mode = { "n", "x", "o" }, function() require("flash").jump() end,       desc = "Flash", },
-      { "F", mode = { "n", "o", "x" }, function() require("flash").treesitter() end, desc = "Flash Treesitter", },
-      { "r", mode = "o",               function() require("flash").remote() end,     desc = "Remote Flash", },
-      {
-        "R",
-        mode = { "o", "x" },
-        function() require("flash").treesitter_search() end,
-        desc = "Treesitter Search",
-      },
-      {
-        "<c-s>",
-        mode = { "c" },
-        function() require("flash").toggle() end,
-        desc = "Toggle Flash Search",
-      },
+      { "s",     mode = { "n", "x", "o" }, function() require("flash").jump() end,              desc = "Flash" },
+      { "S",     mode = { "n", "x", "o" }, function() require("flash").treesitter() end,        desc = "Flash Treesitter" },
+      { "r",     mode = "o",               function() require("flash").remote() end,            desc = "Remote Flash" },
+      { "R",     mode = { "o", "x" },      function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
+      { "<c-s>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     },
   },
 
@@ -75,9 +82,6 @@ return {
           ["r"] = "]",
           ["q"] = { '"', "'", "`" },
           ["s"] = { "}", "]", ")", ">", '"', "'", "`" },
-
-          ["æ"] = "}"
-
         },
         highlight = {
           duration = 100,
@@ -137,11 +141,11 @@ return {
       local config = require("session_manager.config")
       require("session_manager").setup({
         sessions_dir = vim.fn.expand(vim.fn.stdpath("state") .. "/sessions/"),
-        autoload_mode = config.AutoloadMode.Disabled, -- Define what to do when Neovim is started without arguments. Possible values: Disabled, CurrentDir, LastSession
-        autosave_last_session = true,                 -- Automatically save last session on exit and on session switch.
-        autosave_ignore_not_normal = true,            -- Plugin will not save a session when no buffers are opened, or all of them aren't writable or listed.
-        autosave_ignore_dirs = {},                    -- A list of directories where the session will not be autosaved.
-        autosave_ignore_filetypes = {                 -- All buffers of these file types will be closed before the session is saved.
+        autoload_mode = config.AutoloadMode.CurrentDir, -- Define what to do when Neovim is started without arguments. Possible values: Disabled, CurrentDir, LastSession
+        autosave_last_session = true,                   -- Automatically save last session on exit and on session switch.
+        autosave_ignore_not_normal = true,              -- Plugin will not save a session when no buffers are opened, or all of them aren't writable or listed.
+        autosave_ignore_dirs = {},                      -- A list of directories where the session will not be autosaved.
+        autosave_ignore_filetypes = {                   -- All buffers of these file types will be closed before the session is saved.
           "gitcommit",
           "gitrebase",
         },
