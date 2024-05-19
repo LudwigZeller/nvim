@@ -58,6 +58,7 @@ return {
       "williamboman/mason.nvim",
       "mfussenegger/nvim-dap",
       "rcarriga/nvim-dap-ui",
+      "nvim-neotest/nvim-nio",
       "simrat39/rust-tools.nvim",
     },
     config = function()
