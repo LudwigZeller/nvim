@@ -505,6 +505,7 @@ return {
   --[[ Toggleterm ]]
   {
     "akinsho/toggleterm.nvim",
+    cmd = "ToggleTerm",
     keys = {
       {
         "<leader>th",
@@ -539,9 +540,13 @@ return {
       {
         "<leader>ts",
         function()
+          local cmd = "htop";
+          if vim.fn.executable("btop") == 1 then
+            cmd = "btop"
+          end
           if _Htop == nil then
             _Htop = require("toggleterm.terminal").Terminal:new({
-              cmd = "htop",
+              cmd = cmd,
               hidden = true,
               direction = "float",
             })

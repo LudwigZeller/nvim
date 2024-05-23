@@ -603,6 +603,7 @@ return {
       dashboard.section.header.val = vim.split(logo, "\n")
       dashboard.section.buttons.val = {
         dashboard.button("f", " >" .. " Find file", "<cmd>Telescope find_files <CR>"),
+        dashboard.button("t", " >" .. " Open Terminal", "<cmd>ToggleTerm direction=float <CR>"),
         dashboard.button("n", " >" .. " New file", "<cmd>ene <BAR> startinsert <CR>"),
         dashboard.button("r", " >" .. " Recent files", "<cmd>Telescope oldfiles <CR>"),
         dashboard.button("g", " >" .. " Find text", "<cmd>Telescope live_grep <CR>"),
