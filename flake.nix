@@ -4,17 +4,15 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 
-    inputs.flake-utils.url = "github:numtide/flake-utils";
-    inputs.flake-utils.inputs.follows = "nixpkgs";
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { self, stdenv, nixpkgs, flake-utils }: flake-utils.lib.eachDefaultSystem (system: let pkgs = nixpkgs.legacyPackages.${system}; in {
+  outputs = { self, nixpkgs, flake-utils }: flake-utils.lib.eachDefaultSystem (system: let pkgs = nixpkgs.legacyPackages.${system}; in {
     formatter.${system} = pkgs.alejandra;
-    packages.${system}.default = stdenv.mkDerivation {
-      name="nvim-personal";
+    packages.default = pkgs.stdenv.mkDerivation {
+      name="nvim";
       src = ./.;
       BuildInputs = with pkgs;[
-        neovim
         neovide
         php83
         php83Packages.composer
@@ -31,13 +29,14 @@
 
       installPhase = ''
         mkdir -p $out/run
-        cp ./lazy-lock.json $out/run/lazy-lock.json
-        cp ./init.lua $out/run/init.lua
-        cp -r ./lua $out/run/lua
-        ln $XDG_CONFIG_DIR/nvim $out/run
+        cp ./lazy-lock.json $out/run
+        cp ./init.lua $out/run
+        cp -r ./lua $out/run
+        # ln $XDG_CONFIG_HOME/nvim $out/run
 
         mkdir -p $out/bin
         cp ${pkgs.neovim}/bin/nvim $out/bin
+        cp ${pkgs.neovide}/bin/neovide $out/bin
       '';
     };
   });
