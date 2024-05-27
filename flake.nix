@@ -12,6 +12,10 @@
     packages.default = pkgs.stdenv.mkDerivation {
       name="nvim";
       src = ./.;
+      nativeBuildInputs = with pkgs; [
+        wayland
+        makeWrapper
+      ];
       BuildInputs = with pkgs;[
         neovide
         php83
@@ -35,8 +39,10 @@
         # ln $XDG_CONFIG_HOME/nvim $out/run
 
         mkdir -p $out/bin
-        cp ${pkgs.neovim}/bin/nvim $out/bin
-        cp ${pkgs.neovide}/bin/neovide $out/bin
+        makeWrapper ${pkgs.neovim}/bin/nvim $out/bin/nvim --set VIMINIT "$out/run/init.lua"
+        # cp ${pkgs.neovim}/bin/nvim $out/bin
+        makeWrapper ${pkgs.neovide}/bin/neovide $out/bin/neovide --set NEOVIM_BIN "${pkgs.neovim}/bin/nvim"
+        # cp ${pkgs.neovide}/bin/neovide $out/bin
       '';
     };
   });
