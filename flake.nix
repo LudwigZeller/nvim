@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-
     flake-utils.url = "github:numtide/flake-utils";
   };
 
@@ -13,7 +12,6 @@
       name="nvim";
       src = ./.;
       nativeBuildInputs = with pkgs; [
-        wayland
         makeWrapper
       ];
       BuildInputs = with pkgs;[
@@ -39,9 +37,9 @@
         # ln $XDG_CONFIG_HOME/nvim $out/run
 
         mkdir -p $out/bin
-        makeWrapper ${pkgs.neovim}/bin/nvim $out/bin/nvim --set VIMINIT "$out/run/init.lua"
+        wrapProgram ${pkgs.neovim}/bin/nvim $out/bin/nvim --set VIMINIT "source $out/run/init.lua"
         # cp ${pkgs.neovim}/bin/nvim $out/bin
-        makeWrapper ${pkgs.neovide}/bin/neovide $out/bin/neovide --set NEOVIM_BIN "${pkgs.neovim}/bin/nvim"
+        wrapProgram ${pkgs.neovide}/bin/neovide $out/bin/neovide --set NEOVIM_BIN "${pkgs.neovim}/bin/nvim"
         # cp ${pkgs.neovide}/bin/neovide $out/bin
       '';
     };
