@@ -1,8 +1,8 @@
-local fontsize = 13
+vim.o.guifont = "FiraCode_Nerd_Font_Mono,Noto_Color_Emoji:#e-subpixelantialias"
+local fontsize = 10
 local function set_font(fontsize)
   vim.o.guifont = ("FiraCode_Nerd_Font_Mono,Noto_Color_Emoji:h%d:#e-subpixelantialias"):format(fontsize)
 end
-set_font(fontsize)
 
 vim.g.neovide_animation_lenght = 0.3
 vim.g.neovide_confirm_quit = true
@@ -30,13 +30,13 @@ vim.g.neovide_remember_window_size = true
 vim.g.neovide_theme = "auto"
 -- vim.g.neovide_underline_automatic_scaling = true
 
-vim.keymap.set("n", "<leader><M-+>", function()
+vim.keymap.set("n", "<leader>u+", function()
   if vim.g.neovide_transparency <= 1 then
     vim.g.neovide_transparency = vim.g.neovide_transparency + 0.1
   end
 end, { desc = "Increase Transparency" })
 
-vim.keymap.set("n", "<leader><M-->", function()
+vim.keymap.set("n", "<leader>->", function()
   if vim.g.neovide_transparency >= 0 then
     vim.g.neovide_transparency = vim.g.neovide_transparency - 0.1
   end
@@ -44,13 +44,13 @@ end, { desc = "Decrease Transparency" })
 
 
 vim.keymap.set("n", "<C-ScrollWheelUp>", function()
-  fontsize = fontsize + 1
+  fontsize = fontsize - 1
   set_font(fontsize)
 end, { desc = "which_key_ignore" })
 
 vim.keymap.set("n", "<C-ScrollWheelDown>", function()
   if fontsize > 1 then
-    fontsize = fontsize - 1
+    fontsize = fontsize + 1
     set_font(fontsize)
   end
 end, { desc = "which_key_ignore" })
