@@ -1,17 +1,43 @@
 {
-  description = "Neovim Flake for my personilized setup";
+  description = "Nixvim Flake for my personilized setup";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    nixvim.url = "github:nix-community/nixvim";
     flake-utils.url = "github:numtide/flake-utils";
   };
+  outputs =
+    { nixvim, flake-parts, ... }@inputs:
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+        "x86_64-darwin"
+        "aarch64-darwin"
+      ];
 
-  outputs = { self, nixpkgs, flake-utils, neovim }: flake-utils.lib.eachDefaultSystem (system: let pkgs = nixpkgs.legacyPackages.${system}; in {
-    formatter = pkgs.alejandra;
-    packages.default = neovim.packages.${system}.neovim;
-    apps.default = {
-      type="app";
-      program = "${neovim.packages.${system}.neovim}/bin/nvim}";
+      perSystem =
+        { system, ... }:
+        let
+          nixvimLib = nixvim.lib.${system};
+          nixvim' = nixvim.legacyPackages.${system};
+          nixvimModule = {
+            inherit system;
+            module = import ./config;
+            extraSpecialArgs = {
+              # inherit (inputs) foo;
+            };
+          };
+          nvim = nixvim'.makeNixvimWithModule nixvimModule;
+        in
+        {
+          checks = {
+            default = nixvimLib.check.mkTestDerivationFromNixvimModule nixvimModule;
+          };
+
+          packages = {
+            default = nvim;
+          };
+        };
     };
-  });
-}
+    }
