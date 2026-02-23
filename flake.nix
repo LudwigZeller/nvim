@@ -31,6 +31,7 @@
       {
         packages = rec {
           neovim = neovim-fhs { script = "nvim"; };
+          neovide = neovim-fhs { script = "neovide"; };
           default = neovim;
         };
         apps = rec {
