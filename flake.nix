@@ -9,8 +9,8 @@
   outputs = { self, nixpkgs, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let pkgs = nixpkgs.legacyPackages.${system};
-      neovim-fhs = { script }: (pkgs.buildFHSEnv {
-          name = "neovim-fhs";
+      neovim-fhs = { script, name }: (pkgs.buildFHSEnv {
+          inherit name;
           targetPkgs = pkgs: with pkgs; [
             neovim neovide
             go
@@ -35,9 +35,15 @@
         in
       {
         packages = rec {
-          neovim = neovim-fhs { script = "nvim"; };
-          neovide = neovim-fhs { script = "neovide"; };
-          default = neovim;
+          neovim = neovim-fhs {
+            name = "nvim";
+            script = "nvim";
+          };
+          neovide = neovim-fhs {
+            name = "neovide";
+            script = "neovide";
+          };
+          default = self.packages.${system}.neovim;
         };
         apps = rec {
           neovim = flake-utils.lib.mkApp { drv = self.packages.${system}.neovim; };
