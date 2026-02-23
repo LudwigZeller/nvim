@@ -27,7 +27,7 @@
           ];
 
           profile = ''
-            export XDG_CONFIG_HOME=${pkgs.linkFarm "nvim-config" [ { name = "nvim"; path = myConfig; } ]}
+            export XDG_CONFIG_HOME=${pkgs.linkFarm "nvim-config" [ { name = "nvim"; path = ./.; } ]}
           '';
 
           runScript = script;
@@ -43,9 +43,6 @@
           neovim = flake-utils.lib.mkApp { drv = self.packages.${system}.neovim; };
           neovide = flake-utils.lib.mkApp { drv = neovim-fhs {script = "neovide"; }; };
           default = neovim;
-        };
-        devShells = {
-          default = (neovim-fhs {script = "fish"; }).env;
         };
       }
     );
