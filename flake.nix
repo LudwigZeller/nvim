@@ -25,6 +25,11 @@
             python313 python313Packages.pip
             ruby
           ];
+
+          profile = ''
+            export XDG_CONFIG_HOME=${pkgs.linkFarm "nvim-config" [ { name = "nvim"; path = myConfig; } ]}
+          '';
+
           runScript = script;
         });
         in
