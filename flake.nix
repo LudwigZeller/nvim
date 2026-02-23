@@ -23,7 +23,7 @@
         nixvim' = nixvim.legacyPackages.${system};
         nixvimModule = {
           inherit system;
-          module = import ./config;
+          module = import ./plugins ./mappings;
           extraSpecialArgs = {
           };
         };
