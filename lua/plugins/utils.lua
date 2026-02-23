@@ -4,14 +4,6 @@ return {
     "folke/neodev.nvim",
   },
 
-  { 'ThePrimeagen/vim-be-good', },
-
-  {
-    "m4xshen/hardtime.nvim",
-    dependencies = { "MunifTanjim/nui.nvim", "nvim-lua/plenary.nvim" },
-    opts = {}
-  },
-
   --[[ DevDocs ]]
   {
     "luckasRanarison/nvim-devdocs",
@@ -41,7 +33,7 @@ return {
   },
 
   --[[ Window Layout after Bufferclose ]]
-  { "famiu/bufdelete.nvim",     cmd = { "Bdelete", "Bwipeout" } },
+  { "famiu/bufdelete.nvim", cmd = { "Bdelete", "Bwipeout" } },
 
   --[[ Flash ]]
   {
@@ -181,5 +173,5 @@ return {
   },
 
   --[[ makes plugins dot-repeatable ]]
-  { "tpope/vim-repeat", event = "VeryLazy" },
+  { "tpope/vim-repeat",     event = "VeryLazy" },
 }

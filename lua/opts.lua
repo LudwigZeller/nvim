@@ -25,7 +25,6 @@ vim.opt.linespace = 2
 vim.opt.breakindent = true
 vim.opt.hlsearch = false
 vim.opt.ignorecase = true
-vim.opt.mouse = "a"
 vim.opt.number = true
 vim.opt.smartcase = true
 vim.opt.wrap = true
@@ -38,6 +37,8 @@ vim.opt.autoread = true
 
 vim.opt.shell = "fish"
 vim.opt.clipboard = "unnamedplus"
+-- vim.g.clipboard = "unnamedplus"
+vim.opt.mouse = "a"
 vim.opt.mousemodel = "extend"
 
 vim.wo.fillchars = "eob: "

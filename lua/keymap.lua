@@ -110,40 +110,40 @@ vim.keymap.set("n", "<leader>ll", "<cmd>lopen<cr>", { desc = "Location List" })
 vim.keymap.set("n", "<leader>lq", "<cmd>copen<cr>", { desc = "Quickfix List" })
 
 --[[ LSP ]]
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(args)
-    vim.keymap.set("n", "<S-k>", vim.lsp.buf.hover, { desc = "Symbol Information", buffer = args.buf })
-    vim.keymap.set({ "n", "v" }, "<A-S-k>", vim.lsp.buf.code_action, { desc = "Code Action", buffer = args.buf })
-    vim.keymap.set("n", "cn", vim.lsp.buf.rename, { desc = "Rename Sign", buffer = args.buf })
-
-    -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Type Definition", buffer = args.buf })
-    -- vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Implementation", buffer = args.buf })
-    -- vim.keymap.set("n", "go", vim.lsp.buf.type_definition, { desc = "Type Definition", buffer = args.buf })
-    -- vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Reference", buffer = args.buf })
-    vim.keymap.set("n", "gd", "<cmd>Trouble lsp_definitions<cr>", { desc = "Type Definition", buffer = args.buf })
-    vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Declaration", buffer = args.buf })
-    vim.keymap.set("n", "gI", "<cmd>Trouble lsp_implementations<cr>", { desc = "Implementation", buffer = args.buf })
-    vim.keymap.set("n", "go", "<cmd>Trouble lsp_type_definitions<cr>", { desc = "Type Definition", buffer = args.buf })
-    vim.keymap.set("n", "gl", vim.lsp.buf.signature_help, { desc = "Signatur", buffer = args.buf })
-    vim.keymap.set("n", "gr", "<cmd>Trouble lsp_references<cr>", { desc = "Reference", buffer = args.buf })
-
-    vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code Action", buffer = args.buf })
-    vim.keymap.set("n", "<leader>lc", vim.lsp.buf.rename, { desc = "Rename Sign", buffer = args.buf })
-
-    require("which-key").register()
-  end,
-})
+-- vim.api.nvim_create_autocmd('LspAttach', {
+--   callback = function(args)
+--     vim.keymap.set("n", "<S-k>", vim.lsp.buf.hover, { desc = "Symbol Information", buffer = args.buf })
+--     vim.keymap.set({ "n", "v" }, "<A-S-k>", vim.lsp.buf.code_action, { desc = "Code Action", buffer = args.buf })
+--     vim.keymap.set("n", "cn", vim.lsp.buf.rename, { desc = "Rename Sign", buffer = args.buf })
+--
+--     -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Type Definition", buffer = args.buf })
+--     -- vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Implementation", buffer = args.buf })
+--     -- vim.keymap.set("n", "go", vim.lsp.buf.type_definition, { desc = "Type Definition", buffer = args.buf })
+--     -- vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Reference", buffer = args.buf })
+--     vim.keymap.set("n", "gd", "<cmd>Trouble lsp_definitions<cr>", { desc = "Type Definition", buffer = args.buf })
+--     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Declaration", buffer = args.buf })
+--     vim.keymap.set("n", "gI", "<cmd>Trouble lsp_implementations<cr>", { desc = "Implementation", buffer = args.buf })
+--     vim.keymap.set("n", "go", "<cmd>Trouble lsp_type_definitions<cr>", { desc = "Type Definition", buffer = args.buf })
+--     vim.keymap.set("n", "gl", vim.lsp.buf.signature_help, { desc = "Signatur", buffer = args.buf })
+--     vim.keymap.set("n", "gr", "<cmd>Trouble lsp_references<cr>", { desc = "Reference", buffer = args.buf })
+--
+--     vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "Code Action", buffer = args.buf })
+--     vim.keymap.set("n", "<leader>lc", vim.lsp.buf.rename, { desc = "Rename Sign", buffer = args.buf })
+--
+--     require("which-key").register()
+--   end,
+-- })
 
 
 --[[ Rust Keybinds ]]
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-  group = vim.api.nvim_create_augroup("FileTypeKeybinds", { clear = false }),
-  pattern = "*.rs",
-  callback = function(args)
-    vim.keymap.set("n", "<S-k>", "<cmd>RustHoverActions<cr>", { buffer = args.buf, remap = true, desc = "Rust Hover" })
-    vim.keymap.set("n", "<leader>dd", "<cmd>RustDebuggables<cr>",
-      { buffer = args.buf, remap = true, desc = "Rust Debug" })
-
-    require("which-key").register()
-  end
-})
+-- vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+--   group = vim.api.nvim_create_augroup("FileTypeKeybinds", { clear = false }),
+--   pattern = "*.rs",
+--   callback = function(args)
+--     vim.keymap.set("n", "<S-k>", "<cmd>RustHoverActions<cr>", { buffer = args.buf, remap = true, desc = "Rust Hover" })
+--     vim.keymap.set("n", "<leader>dd", "<cmd>RustDebuggables<cr>",
+--       { buffer = args.buf, remap = true, desc = "Rust Debug" })
+--
+--     require("which-key").register()
+--   end
+-- })

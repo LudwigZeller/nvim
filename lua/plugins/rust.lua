@@ -30,18 +30,18 @@ return {
           executor = require("rust-tools.executors").toggleterm,
         },
       })
-      vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-        group = vim.api.nvim_create_augroup("FileTypeKeybinds", { clear = false }),
-        pattern = "*.rs",
-        callback = function(args)
-          vim.keymap.set("n", "<S-k>", "<cmd>RustHoverActions<cr>",
-            { buffer = args.buf, remap = true, desc = "Rust Hover" })
-          vim.keymap.set("n", "<leader>dd", "<cmd>RustDebuggables<cr>",
-            { buffer = args.buf, remap = true, desc = "Rust Debug" })
-
-          require("which-key").register()
-        end
-      })
+      -- vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+      --   group = vim.api.nvim_create_augroup("FileTypeKeybinds", { clear = false }),
+      --   pattern = "*.rs",
+      --   callback = function(args)
+      --     vim.keymap.set("n", "<S-k>", "<cmd>RustHoverActions<cr>",
+      --       { buffer = args.buf, remap = true, desc = "Rust Hover" })
+      --     vim.keymap.set("n", "<leader>dd", "<cmd>RustDebuggables<cr>",
+      --       { buffer = args.buf, remap = true, desc = "Rust Debug" })
+      --
+      --     require("which-key").register()
+      --   end
+      -- })
     end
     --[[ Rust Keybinds ]]
   },
