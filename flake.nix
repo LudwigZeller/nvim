@@ -2,9 +2,13 @@
   description = "Nixvim Flake for my personilized setup";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    nixvim.url = "github:nix-community/nixvim";
+    nixpkgs.url = "nixpkgs/nixos-25.11";
+
+    nixvim.url = "github:nix-community/nixvim/nixos-25.11";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
+
     flake-parts.url = "github:hercules-ci/flake-parts";
+
   };
   outputs =
     { nixpkgs, nixvim, flake-parts, ... }@inputs: 
@@ -37,7 +41,7 @@
         packages = {
           default = nvim;
           neovide = pkgs.writeShellScriptBin "neovide" ''
-              exec &{pkgs.neovide} --neovim-bin ${nvim}/bin/nvim "$@"
+              exec ${pkgs.neovide}/bin/neovide --neovim-bin ${nvim}/bin/nvim "$@"
             '';
         };
       };

@@ -1,7 +1,8 @@
 {...}:
 {
   imports = [
+    ./options
     ./plugins
     ./mappings
-  ]
+  ];
 }
