@@ -11,8 +11,15 @@
 
   };
   outputs =
-    { nixpkgs, nixvim, flake-parts, ... }@inputs: 
-    let entry = ./init.nix; in
+    {
+      nixpkgs,
+      nixvim,
+      flake-parts,
+      ...
+    }@inputs:
+    let
+      entry = ./init.nix;
+    in
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = [
         "x86_64-linux"
@@ -21,30 +28,34 @@
         "aarch64-darwin"
       ];
 
-      perSystem = { system, pkgs, ... }:
-      let
-        nixvimLib = nixvim.lib.${system};
-        nixvim' = nixvim.legacyPackages.${system};
+      perSystem =
+        { system, pkgs, ... }:
+        let
+          nixvimLib = nixvim.lib.${system};
+          nixvim' = nixvim.legacyPackages.${system};
 
-        nixvimModule = {
-          inherit pkgs;
-          module = entry;
-          extraSpecialArgs = { };
-        };
+          nixvimModule = {
+            inherit pkgs;
+            module = entry;
+            extraSpecialArgs = { };
+          };
 
-        nvim = nixvim'.makeNixvimWithModule nixvimModule;
-      in {
-        checks = {
-          default = nixvimLib.check.mkTestDerivationFromNixvimModule nixvimModule;
-        };
+          nvim = nixvim'.makeNixvimWithModule nixvimModule;
+        in
+        {
+          formatter = pkgs.nixfmt-tree;
 
-        packages = {
-          default = nvim;
-          neovide = pkgs.writeShellScriptBin "neovide" ''
+          checks = {
+            default = nixvimLib.check.mkTestDerivationFromNixvimModule nixvimModule;
+          };
+
+          packages = {
+            default = nvim;
+            neovide = pkgs.writeShellScriptBin "neovide" ''
               exec ${pkgs.neovide}/bin/neovide --neovim-bin ${nvim}/bin/nvim "$@"
             '';
+          };
         };
-      };
 
       flake = {
         nixosModules.default = {
@@ -53,7 +64,7 @@
             {
               programs.nixvim = {
                 enable = true;
-                imports = [ entry ]; 
+                imports = [ entry ];
               };
             }
           ];

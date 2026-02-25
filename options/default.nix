@@ -1,7 +1,8 @@
-{...}:
+{ ... }:
 {
   imports = [
     # ./global.nix
-    # ./neovide.nix
+    ./options.nix
+    ./neovide.nix
   ];
 }
