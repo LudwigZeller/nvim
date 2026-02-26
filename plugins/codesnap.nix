@@ -1,4 +1,5 @@
-{ ... }: {
+{ ... }:
+{
   plugins.codesnap = {
     enable = true;
     settings = {
@@ -15,6 +16,13 @@
     };
   };
   keymaps = [
-    { action = "<cmd>CodeSnap<cr>"; key = "<leader>uc"; mode = ["v"]; options = { desc = "Take Snapshot"; }; }
+    {
+      action = "<cmd>CodeSnap<cr>";
+      key = "<leader>uc";
+      mode = [ "v" ];
+      options = {
+        desc = "Take Snapshot";
+      };
+    }
   ];
 }

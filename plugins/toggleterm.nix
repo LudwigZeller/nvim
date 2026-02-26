@@ -1,4 +1,5 @@
-{ lib, ... }: {
+{ lib, ... }:
+{
   plugins.toggleterm = {
     enable = true;
     settings = {
@@ -13,7 +14,7 @@
           return 20
         end
       '';
-      
+
       shade_terminals = false;
       autochdir = true;
       winbar.enabled = false;
@@ -29,6 +30,27 @@
   };
 
   keymaps = [
+    # General Terminals
+    {
+      mode = "n";
+      key = "<leader>th";
+      action = lib.nixvim.mkRaw "function() if _Toggleterm == nil then _Toggleterm = require('toggleterm.terminal').Terminal:new() end _Toggleterm:toggle(0, 'horizontal') end";
+      options.desc = "Horizontal Terminal";
+    }
+    {
+      mode = "n";
+      key = "<leader>tv";
+      action = lib.nixvim.mkRaw "function() if _Toggleterm == nil then _Toggleterm = require('toggleterm.terminal').Terminal:new() end _Toggleterm:toggle(0, 'vertical') end";
+      options.desc = "Vertical Terminal";
+    }
+    {
+      mode = "n";
+      key = "<leader>tf";
+      action = lib.nixvim.mkRaw "function() if _Toggleterm == nil then _Toggleterm = require('toggleterm.terminal').Terminal:new({ direction = 'float' }) end _Toggleterm:toggle(0, 'float') end";
+      options.desc = "Float Terminal";
+    }
+
+    # System Monitor (htop/btop)
     {
       mode = "n";
       key = "<leader>ts";
@@ -37,20 +59,44 @@
           local cmd = "htop"
           if vim.fn.executable("btop") == 1 then cmd = "btop" end
           if _Htop == nil then
-            _Htop = require("toggleterm.terminal").Terminal:new({ 
-              cmd = cmd, 
-              hidden = true, 
-              direction = "float" 
-            })
+            _Htop = require("toggleterm.terminal").Terminal:new({ cmd = cmd, hidden = true, direction = "float" })
           end
           _Htop:toggle()
         end
       '';
-      options = {
-        desc = "HTop";
-        silent = true;
-      };
+      options.desc = "HTop";
     }
-    # ... repeat for other keys using lib.nixvim.mkRaw for the action
+
+    # Music (ncspot/spt)
+    {
+      mode = "n";
+      key = "<leader>tm";
+      action = lib.nixvim.mkRaw ''
+        function()
+          if _Music == nil then
+            local cmd = "ncspot"
+            if vim.fn.executable("spt") == 1 then cmd = "spt" end
+            _Music = require("toggleterm.terminal").Terminal:new({ cmd = cmd, hidden = true, direction = "float" })
+          end
+          _Music:toggle()
+        end
+      '';
+      options.desc = "Music";
+    }
+
+    # LazyGit
+    # {
+    #   mode = "n";
+    #   key = "<leader>gl";
+    #   action = lib.nixvim.mkRaw ''
+    #     function()
+    #       if _Lazygit == nil then
+    #         _Lazygit = require('toggleterm.terminal').Terminal:new({ cmd = 'lazygit', hidden = true, direction = 'float' })
+    #       end
+    #       _Lazygit:toggle()
+    #     end
+    #   '';
+    #   options.desc = "LazyGit";
+    # }
   ];
 }
