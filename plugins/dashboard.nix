@@ -32,12 +32,12 @@
           {
             desc = "Find Files ";
             key = "f";
-            action = "<cmd>Telescope fd<cr>";
+            action = "Telescope fd";
           }
           {
             desc = "Search Files ";
             key = "s";
-            action = "<cmd>Telescope live_grep<cr>";
+            action = "Telescope live_grep";
           }
           # {
           #   desc = "Last Session";
