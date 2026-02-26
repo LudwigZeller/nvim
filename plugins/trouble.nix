@@ -2,7 +2,7 @@
 {
   plugins.trouble = {
     enable = true;
-    lazyLoad.setting = {
+    lazyLoad.settings = {
       cmd = ["Trouble" "TroubleToggle"];
       keys = [
         { __unkeyed-1 = "<leader>cx"; __unkeyed-3 = "<cmd>TroubleToggle<cr>"; desc = "Toggle Trouble"; }
@@ -11,6 +11,6 @@
         { __unkeyed-1 = "<leader>cq"; __unkeyed-3 = "<cmd>TroubleToggle quickfix<cr>"; desc = "Quickfix"; }
         { __unkeyed-1 = "<leader>cl"; __unkeyed-3 = "<cmd>TroubleToggle loclist<cr>"; desc = "Location List"; }
       ];
-    }
+    };
   };
 }
