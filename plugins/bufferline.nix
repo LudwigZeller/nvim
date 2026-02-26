@@ -1,8 +1,9 @@
 { ... }:
 {
   plugins = {
-    bufferline.enable = true;
+    bufdelete.enable = true;
     web-devicons.enable = true;
+    bufferline.enable = true;
   };
 
   keymaps = [
@@ -12,7 +13,7 @@
       key = "<S-h>";
       mode = [ "n" ];
       options = {
-        desc = "Prev buffer";
+        desc = "Previous buffer";
       };
     }
     {

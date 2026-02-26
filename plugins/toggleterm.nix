@@ -3,7 +3,6 @@
   plugins.toggleterm = {
     enable = true;
     settings = {
-      # Use mkRaw so NixVim treats this as a Lua function block
       size = lib.nixvim.mkRaw ''
         function(term)
           if term.direction == "horizontal" then
@@ -22,7 +21,6 @@
       float_opts = {
         border = "curved";
         winblend = 3;
-        # Inline mkRaw for shorter logic
         width = lib.nixvim.mkRaw "function() return math.ceil(vim.o.columns * 0.75) end";
         height = lib.nixvim.mkRaw "function() return math.ceil(vim.o.lines * 0.75) end";
       };
@@ -32,7 +30,7 @@
   keymaps = [
     {
       key = "<esc>";
-      action = "Toggleterm";
+      action = "<cmd>Toggleterm<cr>";
       mode = [ "t" ];
     } # Close terminal on escape
     # General Terminals
