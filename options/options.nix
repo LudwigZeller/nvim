@@ -3,6 +3,9 @@
   globals = {
     mapleader = " ";
     mapleaderlocal = " ";
+
+    loaded_netrw = 1;
+    loaded_netrwPlugin = 1;
   };
 
   clipboard = {

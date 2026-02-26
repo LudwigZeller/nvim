@@ -1,5 +1,6 @@
 { ... }:
 {
+  plugins.navic.enable = true;
   plugins.lualine = {
     enable = true;
     settings = {

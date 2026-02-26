@@ -6,7 +6,18 @@
       delay = 200;
       expand = 1;
       notify = false;
-      preset = false;
+      preset = "modern";
+      position = "bottom";
+      win = {
+        border = "rounded";
+        padding = {
+          __unkeyed-1 = 1;
+          __unkeyed-2 = 2;
+        };
+      };
+      layout = {
+        align = "center";
+      };
       replace = {
         desc = [
           [
@@ -57,15 +68,17 @@
           group = "Code";
           icon = " ";
         }
+        {
+          __unkeyed-1 = "<leader>cl";
+          group = "Lsp";
+          icon = " ";
+        }
+        {
+          __unkeyed-1 = "<leader>g";
+          group = "git";
+          icon = " ";
+        }
       ];
-      win = {
-        # border = "rounded";
-        # border = "shadow"; # none; single; double; shadow
-        # position = "bottom"; # bottom; top
-        # margin = { __unkeyed-1 = 2;__unkeyed-2 = 10;__unkeyed-3 = 2;__unkeyed-4 = 10; }; # extra window margin [top; right; bottom; left].
-        # padding = { __unkeyed-1 = 1; __unkeyed-2 =2;__unkeyed-3 = 1;__unkeyed-4 = 2; };  # extra window padding [top; right; bottom; left]
-        # zindex = 1000; # positive value to position WhichKey above other floating windows.
-      };
     };
   };
 }

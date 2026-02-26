@@ -30,6 +30,11 @@
   };
 
   keymaps = [
+    {
+      key = "<esc>";
+      action = "Toggleterm";
+      mode = [ "t" ];
+    } # Close terminal on escape
     # General Terminals
     {
       mode = "n";
@@ -85,18 +90,18 @@
     }
 
     # LazyGit
-    # {
-    #   mode = "n";
-    #   key = "<leader>gl";
-    #   action = lib.nixvim.mkRaw ''
-    #     function()
-    #       if _Lazygit == nil then
-    #         _Lazygit = require('toggleterm.terminal').Terminal:new({ cmd = 'lazygit', hidden = true, direction = 'float' })
-    #       end
-    #       _Lazygit:toggle()
-    #     end
-    #   '';
-    #   options.desc = "LazyGit";
-    # }
+    {
+      mode = "n";
+      key = "<leader>gl";
+      action = lib.nixvim.mkRaw ''
+        function()
+          if _Lazygit == nil then
+            _Lazygit = require('toggleterm.terminal').Terminal:new({ cmd = 'lazygit', hidden = true, direction = 'float' })
+          end
+          _Lazygit:toggle()
+        end
+      '';
+      options.desc = "LazyGit";
+    }
   ];
 }

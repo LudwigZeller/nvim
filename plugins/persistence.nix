@@ -1,0 +1,3 @@
+{ ... }: {
+  plugins.persistence.enable = true;
+}
