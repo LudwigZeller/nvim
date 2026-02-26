@@ -1,2 +1,2 @@
 # nvim
-My personal Neovim + Neovide configuration
+My personal NeoVim + NeoVide configuration using NixVim

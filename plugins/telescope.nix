@@ -1,0 +1,9 @@
+{ ... }:
+{
+  plugins.telescope = {
+
+  };
+  keymaps = [
+
+  ];
+}
