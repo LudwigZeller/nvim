@@ -37,6 +37,14 @@
         lspBufAction = "hover";
         mode = [ "n" ];
       }
+      # { # TODO Code Action
+      #   key = "<leader>ck";
+      #   action = lib.nixvim.mkRaw "function() vim.diagnostic.jump({ count=-1, float=true }) end";
+      #   mode = [ "n" ];
+      #   options = {
+      #     desc = "Previous diagnostic";
+      #   };
+      # }
       {
         key = "<leader>ck";
         action = lib.nixvim.mkRaw "function() vim.diagnostic.jump({ count=-1, float=true }) end";

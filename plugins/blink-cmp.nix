@@ -20,6 +20,12 @@
           "buffer"
           "emoji"
         ];
+        providers = {
+          emoji = {
+            name = "Emoji";
+            module = "blink-emoji";
+          };
+        };
       };
       keymap = {
         preset = "default";

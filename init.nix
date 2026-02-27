@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  # colorschemes.catppuccin.enable = true;
+  colorschemes.catppuccin.enable = true;
 
   plugins.lz-n.enable = true; # Enable Lazy-Loading
 
