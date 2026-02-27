@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 {
   extraPackages = with pkgs; [
     rust-analyzer

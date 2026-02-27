@@ -18,7 +18,7 @@
     settings = {
       filesystem = {
         hijackNetrwBehavior = "open_current"; # Options: "open_current", "open_default", "disabled"
-        useLibuvFileWatcher = true;           # Better performance for large projects
+        useLibuvFileWatcher = true; # Better performance for large projects
       };
       close_if_last_window = true;
       popup_border_style = "rounded";

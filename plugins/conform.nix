@@ -1,4 +1,4 @@
-{pkgs,...}:
+{ pkgs, ... }:
 {
   extraPackages = with pkgs; [
     rustfmt
@@ -22,8 +22,14 @@
       formatters_by_ft = {
         rust = [ "rustfmt" ];
         nix = [ "nixfmt" ];
-        javascript = [ "prettierd" "prettier" ];
-        python = [ "isort" "black" ];
+        javascript = [
+          "prettierd"
+          "prettier"
+        ];
+        python = [
+          "isort"
+          "black"
+        ];
         "_" = [ "trim_whitespace" ];
       };
     };
