@@ -72,9 +72,8 @@
             [
               "label"
               "label_description"
-              "gap"
             ]
-            [ "source" ]
+            [ "source_name" ]
           ];
         };
       };
