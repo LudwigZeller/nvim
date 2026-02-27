@@ -1,6 +1,16 @@
 { ... }:
 {
-  plugins.navic.enable = true;
+  plugins.navic = {
+    enable = true;
+    settings = {
+      lsp.autoAttach = true;
+      highlight = true;
+      separator = "  ";
+      depth_limit = 5;
+      lazy_update_context = true;
+    };
+  };
+
   plugins.lualine = {
     enable = true;
     settings = {

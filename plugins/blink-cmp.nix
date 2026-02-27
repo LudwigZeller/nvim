@@ -4,6 +4,10 @@
     vimPlugins.friendly-snippets
   ];
 
+  plugins = {
+    blink-emoji.enable = true;
+  }
+
   plugins.blink-cmp = {
     enable = true;
     settings = {
@@ -14,6 +18,7 @@
           "path"
           "snippets"
           "buffer"
+          "emoji"
         ];
       };
       keymap = {
