@@ -6,7 +6,7 @@
 
   plugins = {
     blink-emoji.enable = true;
-  }
+  };
 
   plugins.blink-cmp = {
     enable = true;
