@@ -12,6 +12,13 @@
         show_exact_scope = true;
         show_start = true;
       };
+      exclude.filetypes = [
+        "dashboard"
+        "help"
+        "alpha"
+        "neo-tree"
+        "Trouble"
+      ];
     };
   };
 }
