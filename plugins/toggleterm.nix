@@ -30,26 +30,26 @@
   keymaps = [
     {
       key = "<esc>";
-      action = "<cmd>Toggleterm<cr>";
+      action = "<cmd>ToggleTerm<cr>";
       mode = [ "t" ];
     } # Close terminal on escape
     # General Terminals
     {
       mode = "n";
       key = "<leader>th";
-      action = lib.nixvim.mkRaw "function() if _Toggleterm == nil then _Toggleterm = require('toggleterm.terminal').Terminal:new() end _Toggleterm:toggle(0, 'horizontal') end";
+      action = lib.nixvim.mkRaw "function() if _ToggleTerm == nil then _ToggleTerm = require('toggleterm.terminal').Terminal:new() end _ToggleTerm:toggle(0, 'horizontal') end";
       options.desc = "Horizontal Terminal";
     }
     {
       mode = "n";
       key = "<leader>tv";
-      action = lib.nixvim.mkRaw "function() if _Toggleterm == nil then _Toggleterm = require('toggleterm.terminal').Terminal:new() end _Toggleterm:toggle(0, 'vertical') end";
+      action = lib.nixvim.mkRaw "function() if _ToggleTerm == nil then _ToggleTerm = require('toggleterm.terminal').Terminal:new() end _ToggleTerm:toggle(0, 'vertical') end";
       options.desc = "Vertical Terminal";
     }
     {
       mode = "n";
       key = "<leader>tf";
-      action = lib.nixvim.mkRaw "function() if _Toggleterm == nil then _Toggleterm = require('toggleterm.terminal').Terminal:new({ direction = 'float' }) end _Toggleterm:toggle(0, 'float') end";
+      action = lib.nixvim.mkRaw "function() if _ToggleTerm == nil then _ToggleTerm = require('toggleterm.terminal').Terminal:new({ direction = 'float' }) end _ToggleTerm:toggle(0, 'float') end";
       options.desc = "Float Terminal";
     }
 
