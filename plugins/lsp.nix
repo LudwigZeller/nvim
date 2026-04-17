@@ -15,6 +15,19 @@
         };
         enable_clippy = true;
       };
+      server = {
+        default_settings = {
+          rust-analyzer = {
+            check = {
+              command = "clippy";
+              extraArgs = [
+                "--target-dir"
+                "target/nvim/"
+              ];
+            };
+          };
+        };
+      };
     };
   };
 }

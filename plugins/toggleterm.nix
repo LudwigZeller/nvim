@@ -37,19 +37,19 @@
     {
       mode = "n";
       key = "<leader>th";
-      action = lib.nixvim.mkRaw "function() if _ToggleTerm == nil then _ToggleTerm = require('toggleterm.terminal').Terminal:new() end _ToggleTerm:toggle(0, 'horizontal') end";
+      action = lib.nixvim.mkRaw "function() if _ToggleTerm == nil then _ToggleTerm = require('toggleterm.terminal').Terminal:new({direction = 'horizontal'}) end _ToggleTerm:toggle(0, 'horizontal') end";
       options.desc = "Horizontal Terminal";
     }
     {
       mode = "n";
       key = "<leader>tv";
-      action = lib.nixvim.mkRaw "function() if _ToggleTerm == nil then _ToggleTerm = require('toggleterm.terminal').Terminal:new() end _ToggleTerm:toggle(0, 'vertical') end";
+      action = lib.nixvim.mkRaw "function() if _ToggleTerm == nil then _ToggleTerm = require('toggleterm.terminal').Terminal:new({direction = 'horizontal'}) end _ToggleTerm:toggle(0, 'vertical') end";
       options.desc = "Vertical Terminal";
     }
     {
       mode = "n";
       key = "<leader>tf";
-      action = lib.nixvim.mkRaw "function() if _ToggleTerm == nil then _ToggleTerm = require('toggleterm.terminal').Terminal:new({ direction = 'float' }) end _ToggleTerm:toggle(0, 'float') end";
+      action = lib.nixvim.mkRaw "function() if _ToggleTerm == nil then _ToggleTerm = require('toggleterm.terminal').Terminal:new({direction = 'float' }) end _ToggleTerm:toggle(0, 'float') end";
       options.desc = "Float Terminal";
     }
 
