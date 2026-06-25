@@ -38,8 +38,8 @@
         mode = [ "n" ];
       }
       # { # TODO Code Action
-      #   key = "<leader>ck";
-      #   action = lib.nixvim.mkRaw "function() vim.diagnostic.jump({ count=-1, float=true }) end";
+      #   key = "<leader>ca";
+      #   action = lib.nixvim.mkRaw "Lsp";
       #   mode = [ "n" ];
       #   options = {
       #     desc = "Previous diagnostic";
