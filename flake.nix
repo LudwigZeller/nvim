@@ -51,9 +51,6 @@
 
           packages = {
             default = nvim;
-            neovide = pkgs.writeShellScriptBin "neovide" ''
-              exec ${pkgs.neovide}/bin/neovide --neovim-bin ${nvim}/bin/nvim "$@"
-            '';
           };
         };
 
