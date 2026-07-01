@@ -1,10 +1,6 @@
 { pkgs, ... }:
 {
-  extraPackages = with pkgs; [
-    rust-analyzer
-    cargo # Usually needed for RA to work correctly
-    rustc
-  ];
+  plugins.direnv.enable = true;
   plugins.rustaceanvim = {
     enable = true;
     settings = {
@@ -18,6 +14,7 @@
       server = {
         default_settings = {
           rust-analyzer = {
+            cmd = [ "rust-analyzer" ];
             check = {
               command = "clippy";
               extraArgs = [
