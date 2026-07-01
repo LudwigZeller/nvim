@@ -1,8 +1,6 @@
 { pkgs, ... }:
 {
-  plugins.image.enable = {
-    __raw = "not vim.g.neovide";
-  };
+  # plugins.image.enable = true;
   extraPlugins = with pkgs.vimPlugins; [
     nvim-lsp-file-operations
     nvim-window-picker
