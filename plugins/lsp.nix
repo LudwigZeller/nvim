@@ -1,6 +1,9 @@
 { pkgs, ... }:
 {
-  plugins.direnv.enable = true;
+  plugins.direnv = {
+    enable = true;
+    settings.silent_load = true;
+  };
   plugins.rustaceanvim = {
     enable = true;
     settings = {
