@@ -1,5 +1,23 @@
-{ ... }:
+{ pkgs, ... }:
+let
+  milli-nvim = pkgs.vimUtils.buildVimPlugin {
+    name = "milli.nvim";
+    src = pkgs.fetchFromGitHub {
+      owner = "Amansingh-afk";
+      repo = "milli.nvim";
+      rev = "main";
+      hash = "sha256-EtrBQH8vzBMUF/Wp7t46sb39RQSPyGZWT+HucPoRxVg=";
+    };
+  };
+in
 {
+  # extraPlugins = [ milli-nvim ];
+  # extraConfigLua = ''
+  #   require("milli").dashboard({ splash = "blackhole", loop = true })
+  # '';
+
+  # TODO Switch to alpha and import milli-nvim
+
   plugins.dashboard = {
     enable = true;
     settings = {
@@ -27,8 +45,12 @@
           "                                             SSt  `------'`  "
           ""
         ];
-        weekheader.enable = true;
         shortcut = [
+          {
+            desc = "Open Projects ";
+            key = "p";
+            action = "Telescope projections";
+          }
           {
             desc = "Find Files ";
             key = "f";
@@ -50,13 +72,13 @@
           #   action = "<leader>sl";
           # }
         ];
-        # project = {
-        #   enable = true;
-        #   # action = "Telescope find_files cwd=";
-        # };
+        packages.enable = false;
+        project = {
+          enable = true;
+        };
         mru = {
           enable = true;
-          cwd_only = true;
+          cwd_only = false;
         };
         footer = [
           ""

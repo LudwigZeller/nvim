@@ -15,6 +15,11 @@
           __unkeyed-3 = "<CMD>Telescope live_grep<CR>";
           desc = "Search file contents";
         }
+        {
+          __unkeyed-1 = "<leader>fp";
+          __unkeyed-3 = "<CMD>Telescope projections<CR>";
+          desc = "Find projects";
+        }
       ];
     };
   };

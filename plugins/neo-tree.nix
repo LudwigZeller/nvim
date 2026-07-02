@@ -17,6 +17,7 @@
     enable = true;
     settings = {
       filesystem = {
+        bind_to_cwd = true;
         hijackNetrwBehavior = "open_current"; # Options: "open_current", "open_default", "disabled"
         useLibuvFileWatcher = true; # Better performance for large projects
       };

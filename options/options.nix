@@ -38,6 +38,18 @@
 
     winminwidth = 10;
     winblend = 30;
+    sessionoptions = [
+      "blank" # Keep empty windows
+      "buffers" # Remember all open files/buffers
+      "curdir" # Crucial: Remember the current working directory (the project root)
+      "folds" # Remember folded code blocks
+      "help" # Remember the help window
+      "tabpages" # Keep all your open tabs
+      "winsize" # Restore window sizes
+      "winpos" # Restore window positions
+      "terminal" # Remember terminal windows
+      "localoptions" # Crucial for Projections: Remember local buffer/window options
+    ];
   };
 
   # opt.completeopt = { "menuone", "noselect", "noinsert" }
