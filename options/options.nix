@@ -47,7 +47,6 @@
       "tabpages" # Keep all your open tabs
       "winsize" # Restore window sizes
       "winpos" # Restore window positions
-      "terminal" # Remember terminal windows
       "localoptions" # Crucial for Projections: Remember local buffer/window options
     ];
   };

@@ -60,14 +60,14 @@
       action = lib.nixvim.mkRaw ''
         function()
           local cmd = "htop"
-          if vim.fn.executable("btop") == 1 then cmd = "btop" end
+          if vim.fn.executable("btop") == 1 then cmd = "btop -u 100" end
           if _Htop == nil then
             _Htop = require("toggleterm.terminal").Terminal:new({ cmd = cmd, hidden = true, direction = "float" })
           end
           _Htop:toggle()
         end
       '';
-      options.desc = "HTop";
+      options.desc = "System Monitor";
     }
 
     # Music (ncspot/spt)
