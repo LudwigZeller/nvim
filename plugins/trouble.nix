@@ -13,14 +13,9 @@
           desc = "Toggle Trouble";
         }
         {
-          __unkeyed-1 = "<leader>c<s-d>";
-          __unkeyed-3 = "<cmd>Trouble lsp_workspace_diagnostics<cr>";
-          desc = "Workspace Diagnostics";
-        }
-        {
           __unkeyed-1 = "<leader>cd";
-          __unkeyed-3 = "<cmd>Trouble lsp_document_diagnostics<cr>";
-          desc = "Document Diagnostic";
+          __unkeyed-3 = "<cmd>Trouble diagnostics<cr>";
+          desc = "Diagnostic";
         }
         {
           __unkeyed-1 = "<leader>cq";
