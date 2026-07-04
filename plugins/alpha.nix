@@ -81,20 +81,21 @@ in
               local timer = vim.uv.new_timer()
               local alpha_group = vim.api.nvim_create_augroup("AlphaAnimation", { clear = true })
               vim.api.nvim_create_autocmd("User", {
-                  group = alpha_group,
-                  pattern = "AlphaReady",
-                  callback = function() timer:start(0, 250, vim.schedule_wrap(function() 
-                    current_frame = current_frame + 1
-                    if current_frame > #AnimFrames then current_frame = 1 end
-                    if vim.api.nvim_buf_is_valid(0) and vim.bo.filetype == "alpha" then
-                      require("alpha").redraw() 
-                    end
+                group = alpha_group,
+                pattern = "AlphaReady",
+                callback = function() timer:start(0, 250, vim.schedule_wrap(function() 
+                  current_frame = current_frame + 1
+                  if current_frame > #AnimFrames then current_frame = 1 end
+                  
+                  pcall(function()
+                    require("alpha").redraw() 
+                  end)
                 end)) end,
               })
               vim.api.nvim_create_autocmd("User", {
-                  group = alpha_group,
-                  pattern = "AlphaClosed",
-                  callback = function() timer:stop() end,
+                group = alpha_group,
+                pattern = "AlphaClosed",
+                callback = function() timer:stop() end,
               })
 
 
