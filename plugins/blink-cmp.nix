@@ -1,7 +1,8 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   extraPlugins = with pkgs; [
     vimPlugins.friendly-snippets
+    vimPlugins.blink-nerdfont-nvim
   ];
 
   plugins = {
@@ -17,13 +18,30 @@
           "lsp"
           "path"
           "snippets"
-          "buffer"
+          "nerdfont"
           "emoji"
         ];
         providers = {
           emoji = {
             name = "Emoji";
             module = "blink-emoji";
+            # score_offset = 15;
+            opts = {
+              trigger = lib.nixvim.mkRaw ''function() return { ":" } end'';
+            };
+          };
+          nerdfont = {
+            module = "blink-nerdfont";
+            name = "Nerd Fonts";
+            # score_offset = 15;
+            opts = {
+              insert = true;
+              trigger = ":";
+            };
+          };
+          lsp = {
+            # score_offset = 15;
+            fallbacks = [ "buffer" ];
           };
         };
       };

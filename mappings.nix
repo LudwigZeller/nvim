@@ -248,7 +248,10 @@
     {
       action = "<gv";
       key = "<";
-      mode = [ "v" ];
+      mode = [
+        "n"
+        "v"
+      ];
       options = {
         nowait = true;
         silent = true;
@@ -257,7 +260,10 @@
     {
       action = ">gv";
       key = ">";
-      mode = [ "v" ];
+      mode = [
+        "n"
+        "v"
+      ];
       options = {
         nowait = true;
         silent = true;
