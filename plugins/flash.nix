@@ -5,7 +5,7 @@
   keymaps = [
     {
       action = lib.nixvim.mkRaw ''function() require("flash").jump() end'';
-      key = "s";
+      key = "f";
       mode = [
         "n"
         "x"
@@ -18,7 +18,7 @@
 
     {
       action = lib.nixvim.mkRaw ''function() require("flash").treesitter() end'';
-      key = "<S-s>";
+      key = "<S-f>";
       mode = [
         "n"
         "x"
@@ -31,7 +31,7 @@
 
     {
       action = lib.nixvim.mkRaw ''function() require("flash").remote() end'';
-      key = "r";
+      key = "s";
       mode = [
         "n"
         "x"
@@ -44,7 +44,7 @@
 
     {
       action = lib.nixvim.mkRaw ''function() require("flash").treesitter_search() end'';
-      key = "<S-r>";
+      key = "<S-s>";
       mode = [
         "n"
         "x"
@@ -57,7 +57,7 @@
 
     {
       action = lib.nixvim.mkRaw ''function() require("flash").toggle() end'';
-      key = "<C-s>";
+      key = "<C-f>";
       mode = [
         "n"
         "x"
