@@ -1,15 +1,12 @@
 {
-  description = "Nixvim Flake for my personilized setup";
+  description = "Nixvim Flake for my personalized setup";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
-
     nixvim.url = "github:nix-community/nixvim";
-    nixvim.inputs.nixpkgs.follows = "nixpkgs";
-
     flake-parts.url = "github:hercules-ci/flake-parts";
-
   };
+
   outputs =
     {
       nixpkgs,
@@ -28,30 +25,25 @@
         "aarch64-darwin"
       ];
 
+      imports = [ inputs.nixvim.flakeModules.default ];
+
       perSystem =
         { system, pkgs, ... }:
         let
-          nixvimLib = nixvim.lib.${system};
-          nixvim' = nixvim.legacyPackages.${system};
-
-          nixvimModule = {
-            inherit pkgs;
-            module = entry;
-            extraSpecialArgs = { };
+          nvimConfig = nixvim.lib.evalNixvim {
+            inherit system;
+            modules = [ entry ];
+            # extraSpecialArgs = { };
           };
-
-          nvim = nixvim'.makeNixvimWithModule nixvimModule;
         in
         {
           formatter = pkgs.nixfmt-tree;
 
-          checks = {
-            default = nixvimLib.check.mkTestDerivationFromNixvimModule nixvimModule;
-          };
+          nixvimConfigurations.nvim = nvimConfig;
 
-          packages = {
-            default = nvim;
-          };
+          packages.default = nvimConfig.config.build.package;
+
+          checks.default = nvimConfig.config.build.test;
         };
 
       flake = {

@@ -78,7 +78,8 @@ in
 
 
               local current_frame = 1
-              local timer = vim.uv.new_timer()
+              local timer = _G.AlphaAnimTimer or vim.uv.new_timer()
+              _G.AlphaAnimTimer = timer
               local alpha_group = vim.api.nvim_create_augroup("AlphaAnimation", { clear = true })
               vim.api.nvim_create_autocmd("User", {
                 group = alpha_group,

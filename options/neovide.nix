@@ -1,5 +1,6 @@
 { ... }:
 {
+
   globals = {
     neovide_animation_lenght = 0.3;
     neovide_confirm_quit = true;

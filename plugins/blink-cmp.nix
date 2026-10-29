@@ -25,19 +25,48 @@
           emoji = {
             name = "Emoji";
             module = "blink-emoji";
-            # score_offset = 15;
+            score_offset = 15;
             opts = {
-              trigger = lib.nixvim.mkRaw ''function() return { ":" } end'';
+              trigger = ":";
             };
+            should_show_items = lib.nixvim.mkRaw ''
+              function(ctx)
+                local ok, node = pcall(vim.treesitter.get_node)
+                if not ok or not node then return false end
+                while node do
+                  local t = node:type()
+                  if t:match("comment") or t:match("string") then
+                    return true
+                  end
+                  node = node:parent()
+                end
+                return false
+              end
+            '';
           };
+
           nerdfont = {
             module = "blink-nerdfont";
             name = "Nerd Fonts";
-            # score_offset = 15;
+            score_offset = 15;
             opts = {
               insert = true;
               trigger = ":";
             };
+            should_show_items = lib.nixvim.mkRaw ''
+              function(ctx)
+                local ok, node = pcall(vim.treesitter.get_node)
+                if not ok or not node then return false end
+                while node do
+                  local t = node:type()
+                  if t:match("comment") or t:match("string") then
+                    return true
+                  end
+                  node = node:parent()
+                end
+                return false
+              end
+            '';
           };
           lsp = {
             # score_offset = 15;
@@ -88,6 +117,7 @@
           "show_documentation"
           "hide_documentation"
         ];
+
         "<C-e>" = [
           "hide"
           "fallback"
