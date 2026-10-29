@@ -1,90 +1,107 @@
-{ lib, ... }:
+{ pkgs, lib, ... }:
 {
   lsp = {
     inlayHints.enable = true;
-    servers = {
-      nixd = {
-        enable = true;
-        config = {
-          nixpkgs.expr = "import <nixpkgs> { }";
-          formatting.command = [ "nixfmt" ];
-        };
-      };
-    };
+    codelens.enable = true;
     keymaps = [
       {
         key = "gd";
-        lspBufAction = "definition";
-        mode = [ "n" ];
+        action = "<cmd>lua vim.lsp.buf.definition()<CR>";
+        mode = "n";
       }
       {
-        key = "g<s-d>";
-        lspBufAction = "references";
-        mode = [ "n" ];
-      }
+        key = "gD";
+        action = "<cmd>lua vim.lsp.buf.references()<CR>";
+        mode = "n";
+      } # Fixed g<s-d>
       {
         key = "gt";
-        lspBufAction = "type_definition";
-        mode = [ "n" ];
+        action = "<cmd>lua vim.lsp.buf.type_definition()<CR>";
+        mode = "n";
       }
       {
         key = "gi";
-        lspBufAction = "implementation";
-        mode = [ "n" ];
+        action = "<cmd>lua vim.lsp.buf.implementation()<CR>";
+        mode = "n";
       }
       {
-        key = "<s-k>";
-        lspBufAction = "hover";
-        mode = [ "n" ];
+        key = "K";
+        action = "<cmd>lua vim.lsp.buf.hover()<CR>";
+        mode = "n";
+      } # Fixed <s-k>
+      {
+        key = "<leader>ca";
+        action = "<cmd>lua vim.lsp.buf.code_action()<CR>";
+        mode = "n";
       }
-      # { # TODO Code Action
-      #   key = "<leader>ca";
-      #   action = lib.nixvim.mkRaw "Lsp";
-      #   mode = [ "n" ];
-      #   options = {
-      #     desc = "Previous diagnostic";
-      #   };
-      # }
       {
         key = "<leader>ck";
-        action = lib.nixvim.mkRaw "function() vim.diagnostic.jump({ count=-1, float=true }) end";
-        mode = [ "n" ];
-        options = {
-          desc = "Previous diagnostic";
-        };
+        action = "<cmd>lua vim.diagnostic.jump({ count=-1, float=true })<CR>";
+        mode = "n";
+        options.desc = "Previous diagnostic";
       }
       {
         key = "<leader>cj";
-        action = lib.nixvim.mkRaw "function() vim.diagnostic.jump({ count=1, float=true }) end";
-        mode = [ "n" ];
-        options = {
-          desc = "Next diagnostic";
-        };
-      }
-      {
-        key = "<leader>clx";
-        action = "<CMD>LspStop<Enter>";
-        mode = [ "n" ];
-        options = {
-          desc = "Stop LSP";
-        };
-      }
-      {
-        key = "<leader>cls";
-        action = "<CMD>LspStart<Enter>";
-        mode = [ "n" ];
-        options = {
-          desc = "Start LSP";
-        };
-      }
-      {
-        key = "<leader>clr";
-        action = "<CMD>LspRestart<Enter>";
-        mode = [ "n" ];
-        options = {
-          desc = "Restart LSP";
-        };
+        action = "<cmd>lua vim.diagnostic.jump({ count=1, float=true })<CR>";
+        mode = "n";
+        options.desc = "Next diagnostic";
       }
     ];
+  };
+
+  plugins.direnv = {
+    enable = true;
+    settings.silent_load = 0;
+  };
+
+  lsp.servers = {
+    nixd = {
+      enable = true;
+      config = {
+        formatting.command = [ "nixfmt" ];
+      };
+    };
+  };
+  plugins.rustaceanvim = {
+    enable = true;
+    settings = {
+      tools = {
+        executor = "toggleterm";
+        create_graph = {
+          backend = "kitty";
+        };
+      };
+      server = {
+        default_settings = {
+          rust-analyzer = {
+            check = {
+              command = "clippy";
+              # Enable if buildfile locking becomes an issue
+              # extraArgs = [ "--target-dir" "target/nvim/" ]; };
+            };
+            lens = {
+              enable = true;
+              debug = true;
+              run = true;
+              implementations = true;
+            };
+
+            inlayHints = {
+              enable = true;
+              closureReturnTypeHints.enable = "always";
+              lifetimeElisionHints = {
+                enable = "always";
+                useParameterNames = true;
+              };
+            };
+
+            semanticHighlighting = {
+              strings.enable = true;
+              operator.enable = true;
+            };
+          };
+        };
+      };
+    };
   };
 }

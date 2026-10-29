@@ -303,5 +303,31 @@
         desc = "Close tab";
       };
     }
+    # LSP Management
+
+    {
+      key = "<leader>clx";
+      action = "<CMD>LspStop<Enter>";
+      mode = [ "n" ];
+      options = {
+        desc = "Stop LSP";
+      };
+    }
+    {
+      key = "<leader>cls";
+      action = "<CMD>LspStart<Enter>";
+      mode = [ "n" ];
+      options = {
+        desc = "Start LSP";
+      };
+    }
+    {
+      key = "<leader>clr";
+      action = "<CMD>LspRestart<Enter>";
+      mode = [ "n" ];
+      options = {
+        desc = "Restart LSP";
+      };
+    }
   ];
 }
