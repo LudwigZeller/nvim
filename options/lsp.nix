@@ -65,9 +65,7 @@
       },
 
       notifications = {
-        -- Log level (vim.log.levels.INFO, ERROR, etc.)
         level = vim.log.levels.INFO,
-        -- Don't show notifications during autoload
         silent_autoload = true,
       },
       silent = false, 
@@ -93,6 +91,7 @@
 
     }
   ];
+
   #####################################
   ###          LSP Servers          ###
   #####################################
@@ -101,24 +100,28 @@
     nixd = {
       enable = true;
       config = {
-        settings = {
+        settings.nix = {
           nixpkgs.expr = "import (builtins.getFlake (builtins.toString ./.)).inputs.nixpkgs { }";
           formatting.command = [ "nixfmt" ];
           options = {
-            flake-parts.expr = ''
-              let flake = builtins.getFlake (builtins.toString ./.);
-              in if flake ? debug.options then
-                flake.debug.options
-              else
-                { }
-            '';
-            flake-parts-currentSystem.expr = ''
-              let flake = builtins.getFlake (builtins.toString ./.);
-              in if flake ? currentSystem.options then
-                flake.currentSystem.options
-              else
-                { }
-            '';
+            "flake-parts" = {
+              expr = ''
+                let flake = builtins.getFlake (builtins.toString ./.);
+                in if flake ? debug.options then
+                  flake.debug.options
+                else
+                  { }
+              '';
+            };
+            "flake-parts-currentSystem" = {
+              expr = ''
+                let flake = builtins.getFlake (builtins.toString ./.);
+                in if flake ? currentSystem.options then
+                  flake.currentSystem.options
+                else
+                  { }
+              '';
+            };
           };
         };
       };

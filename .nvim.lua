@@ -3,7 +3,7 @@ vim.lsp.config("nixd", {
     nixd = {
       options = {
         nixvim = {
-          expr = '(builtins.getFlake (builtins.toString ./.)).packages.${builtins.currentSystem}.default.options',
+          expr = '(builtins.getFlake (builtins.toString ./.)).nixvimConfigurations.${builtins.currentSystem}.nvim.options'
         },
       },
     },
