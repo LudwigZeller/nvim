@@ -1,4 +1,4 @@
-{ ... }:
+{ lib, ... }:
 {
   plugins.navic = {
     enable = true;
@@ -23,11 +23,25 @@
         lualine_a = [ "mode" ];
         lualine_b = [ "branch" ];
         lualine_c = [
-          "filename"
           "diff"
         ];
         lualine_x = [
           "diagnostics"
+        ];
+        lualine_y = [
+          "encoding"
+          "fileformat"
+          "filetype"
+        ];
+        lualine_z = [ { __unkeyed-1 = "location"; } ];
+      };
+
+      winbar = {
+        lualine_a = [ ];
+        lualine_b = [ ];
+        lualine_c = [ { __unkeyed-1 = "navic"; } ];
+        lualine_x = [ ];
+        lualine_y = [
           {
             __unkeyed-1.__raw = ''
               function()
@@ -47,42 +61,16 @@
               end
             '';
             icon = "";
-            color.fg = "#ffffff";
+            # color.fg = "#ffffff";
           }
-          "encoding"
-          "fileformat"
-          "filetype"
         ];
-        lualine_y = [
+        lualine_z = [
           {
-            __unkeyed-1 = "aerial";
-            cond.__raw = ''
+            __unkeyed-2 = lib.nixvim.mkRaw ''
               function()
-                local buf_size_limit = 1024 * 1024
-                if vim.api.nvim_buf_get_offset(0, vim.api.nvim_buf_line_count(0)) > buf_size_limit then
-                  return false
-                end
-                return true
-              end
+                return "󱚟 direnv" .. require('direnv').statusline()
+              end,
             '';
-            sep = " ) ";
-            depth.__raw = "nil";
-            dense = false;
-            dense_sep = ".";
-            colored = true;
-          }
-        ];
-        lualine_z = [ { __unkeyed-1 = "location"; } ];
-      };
-
-      winbar = {
-        lualine_c = [ { __unkeyed-1 = "navic"; } ];
-        lualine_x = [
-          {
-            __unkeyed-1 = "filename";
-            newfile_status = true;
-            path = 3;
-            shorting_target = 150;
           }
         ];
       };

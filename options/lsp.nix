@@ -49,11 +49,50 @@
     ];
   };
 
-  plugins.direnv = {
-    enable = true;
-    settings.silent_load = 0;
-  };
+  extraPlugins = [
+    pkgs.vimPlugins.direnv-nvim
+  ];
 
+  extraConfigLua = ''
+    require("direnv").setup({
+      bin = "direnv",
+
+      autoload_direnv = true,
+
+      statusline = {
+        enabled = true,
+        icon = "",
+      },
+
+      notifications = {
+        -- Log level (vim.log.levels.INFO, ERROR, etc.)
+        level = vim.log.levels.INFO,
+        -- Don't show notifications during autoload
+        silent_autoload = true,
+      },
+      silent = false, 
+    })
+  '';
+
+  autoCmd = [
+    {
+      event = [ "User" ];
+      pattern = [ "DirenvLoaded" ];
+      callback = lib.nixvim.mkRaw ''
+        function()
+          for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+            if vim.api.nvim_buf_is_loaded(buf) then
+              local ft = vim.bo[buf].filetype
+              if ft and ft ~= "" then
+                vim.api.nvim_exec_autocmds("FileType", { buffer = buf, modeline = false })
+              end
+            end
+          end
+        end
+      '';
+
+    }
+  ];
   #####################################
   ###          LSP Servers          ###
   #####################################
