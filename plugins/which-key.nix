@@ -84,6 +84,11 @@
           icon = " ";
         }
         {
+          __unkeyed-1 = "<leader>ct";
+          group = "Tests";
+          icon = "󰚩 ";
+        }
+        {
           __unkeyed-1 = "<leader>g";
           group = "git";
           icon = " ";

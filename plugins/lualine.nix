@@ -121,6 +121,9 @@
             "toggleterm"
             "qf"
             "OverseerList"
+            "neotest-summary"
+            "neotest-output-panel"
+            "neotest-attach"
           ];
           winbar = [
             "help"
@@ -144,6 +147,9 @@
             "dapui_scopes"
             "dapui_console"
             "dap-repl"
+            "neotest-summary"
+            "neotest-output-panel"
+            "neotest-attach"
           ];
         };
         ignore_focus = [

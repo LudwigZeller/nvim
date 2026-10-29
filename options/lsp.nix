@@ -133,6 +133,8 @@
     settings = {
       tools = {
         executor = "toggleterm";
+        crate_test_executor = "neotest";
+        test_executor = "neotest";
         create_graph = {
           backend = "kitty";
         };
