@@ -54,6 +54,9 @@
     settings.silent_load = 0;
   };
 
+  #####################################
+  ###          LSP Servers          ###
+  #####################################
   lsp.servers = {
     nixd = {
       enable = true;
@@ -62,6 +65,7 @@
       };
     };
   };
+
   plugins.rustaceanvim = {
     enable = true;
     settings = {

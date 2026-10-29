@@ -8,6 +8,7 @@
     ripgrep
     fd
     lazygit
+    btop-rocm
   ];
 
   imports = [

@@ -129,6 +129,12 @@ in
             })
 
             (mkButton {
+              text = " Filetree";
+              shortcut = "t";
+              command = "Neotree";
+            })
+
+            (mkButton {
               text = " Files";
               shortcut = "f";
               command = "Telescope fd";
@@ -193,6 +199,11 @@ in
             action = "Telescope projections";
           }
           {
+            desc = "Open Tree ";
+            key = "t";
+            action = "<leader>st";
+          }
+          {
             desc = "Find Files ";
             key = "f";
             action = "Telescope fd";
@@ -202,11 +213,6 @@ in
             key = "s";
             action = "Telescope live_grep";
           }
-          # {
-          #   desc = "Last Session";
-          #   key = "s";
-          #   action = "<leader>sr";
-          # }
           # {
           #   desc = "List Sessions";
           #   key = "s";
