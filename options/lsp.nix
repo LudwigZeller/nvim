@@ -78,6 +78,7 @@
       pattern = [ "DirenvLoaded" ];
       callback = lib.nixvim.mkRaw ''
         function()
+          vim.notify("Direnv finished loading, restarting lsp...")
           for _, buf in ipairs(vim.api.nvim_list_bufs()) do
             if vim.api.nvim_buf_is_loaded(buf) then
               local ft = vim.bo[buf].filetype
