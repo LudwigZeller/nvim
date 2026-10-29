@@ -100,7 +100,7 @@
     nixd = {
       enable = true;
       config = {
-        settings.nix = {
+        settings.nixd = {
           nixpkgs.expr = "import (builtins.getFlake (builtins.toString ./.)).inputs.nixpkgs { }";
           formatting.command = [ "nixfmt" ];
           options = {
