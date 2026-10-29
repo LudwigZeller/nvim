@@ -53,6 +53,7 @@
     pkgs.vimPlugins.direnv-nvim
   ];
 
+  # TODO Disable keybinds
   extraConfigLua = ''
     require("direnv").setup({
       bin = "direnv",

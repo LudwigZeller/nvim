@@ -24,7 +24,7 @@
         }
 
         {
-          __unkeyed-1 = "<leader>ctr";
+          __unkeyed-1 = "<leader>ctf";
           __unkeyed-3 = "<CMD>Neotest run file<CR>";
           desc = "Run tests in file";
         }
@@ -33,12 +33,6 @@
           __unkeyed-1 = "<leader>cto";
           __unkeyed-3 = "<CMD>Neotest output-panel toggle<CR>";
           desc = "Test output panel";
-        }
-
-        {
-          __unkeyed-1 = "<leader>ctf";
-          __unkeyed-3 = "<CMD>Neotest output<CR>";
-          desc = "Floating test output";
         }
       ];
     };
