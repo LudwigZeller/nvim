@@ -31,13 +31,13 @@
 
         {
           __unkeyed-1 = "<leader>cto";
-          __unkeyed-3 = "<CMD>Neotest output_panel toggle<CR>";
+          __unkeyed-3 = "<CMD>Neotest output-panel toggle<CR>";
           desc = "Test output panel";
         }
 
         {
           __unkeyed-1 = "<leader>ctf";
-          __unkeyed-3 = "<CMD>Neotest output_panel toggle<CR>";
+          __unkeyed-3 = "<CMD>Neotest output<CR>";
           desc = "Floating test output";
         }
       ];
