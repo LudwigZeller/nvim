@@ -139,7 +139,7 @@
   ####################
   filetype.filename."devenv.nix" = "devenv";
   plugins.treesitter.languageRegister.nix = [ "devenv" ];
-  lsp.luaConfig.post = lib.nixvim.mkRaw ''
+  lsp.luaConfig.post = ''
     vim.lsp.config['devenv_lsp'] = {
       cmd = { "devenv", "lsp" },
       filetypes = { "devenv" },
