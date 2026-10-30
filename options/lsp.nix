@@ -49,51 +49,6 @@
     ];
   };
 
-  extraPlugins = [
-    pkgs.vimPlugins.direnv-nvim
-  ];
-
-  # TODO Disable keybinds
-  extraConfigLua = ''
-    require("direnv").setup({
-      bin = "direnv",
-
-      autoload_direnv = true,
-
-      statusline = {
-        enabled = true,
-        icon = "",
-      },
-
-      notifications = {
-        level = vim.log.levels.INFO,
-        silent_autoload = true,
-      },
-      silent = false, 
-    })
-  '';
-
-  autoCmd = [
-    {
-      event = [ "User" ];
-      pattern = [ "DirenvLoaded" ];
-      callback = lib.nixvim.mkRaw ''
-        function()
-          vim.notify("Direnv finished loading, restarting lsp...")
-          for _, buf in ipairs(vim.api.nvim_list_bufs()) do
-            if vim.api.nvim_buf_is_loaded(buf) then
-              local ft = vim.bo[buf].filetype
-              if ft and ft ~= "" then
-                vim.api.nvim_exec_autocmds("FileType", { buffer = buf, modeline = false })
-              end
-            end
-          end
-        end
-      '';
-
-    }
-  ];
-
   #####################################
   ###          LSP Servers          ###
   #####################################
