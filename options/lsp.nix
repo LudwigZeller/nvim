@@ -97,6 +97,10 @@
   #####################################
   ###          LSP Servers          ###
   #####################################
+
+  ####################
+  ###     nixd     ###
+  ####################
   opts.exrc = true; # Enable support for per project nixd config - move if not only used for nixd anymore
   lsp.servers = {
     nixd = {
@@ -130,6 +134,23 @@
     };
   };
 
+  ####################
+  ###    devenv    ###
+  ####################
+  filetype.filename."devenv.nix" = "devenv";
+  plugins.treesitter.languageRegister.nix = [ "devenv" ];
+  lsp.luaConfig.post = lib.nixvim.mkRaw ''
+    vim.lsp.config['devenv_lsp'] = {
+      cmd = { "devenv", "lsp" },
+      filetypes = { "devenv" },
+      root_markers = { "devenv.nix", ".git" },
+    }
+    vim.lsp.enable('devenv_lsp')
+  '';
+
+  ####################
+  ### rust-analzer ###
+  ####################
   plugins.rustaceanvim = {
     enable = true;
     settings = {
