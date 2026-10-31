@@ -66,11 +66,6 @@
         ];
         lualine_z = [
           {
-            __unkeyed-2 = lib.nixvim.mkRaw ''
-              function()
-                return "󱚟 direnv" .. require('direnv').statusline()
-              end,
-            '';
           }
         ];
       };

@@ -22,6 +22,7 @@
       formatters_by_ft = {
         rust = [ "rustfmt" ];
         nix = [ "nixfmt" ];
+        devenv = [ "nixfmt" ];
         javascript = [
           "prettierd"
           "prettier"

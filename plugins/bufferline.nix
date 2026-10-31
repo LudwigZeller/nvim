@@ -1,9 +1,47 @@
 { ... }:
 {
+  autoCmd = [
+    {
+      event = "BufDelete";
+      callback.__raw = ''
+        function()
+          vim.schedule(function()
+            local buffers = vim.fn.getbufinfo({ buflisted = 1 })
+            if #buffers == 1 then
+              local buf = buffers[1]
+              if buf.name == "" and vim.bo[buf.bufnr].filetype == "" and not vim.bo[buf.bufnr].modified then
+                pcall(function() require("alpha").start(true) end)
+                pcall(function() vim.api.nvim_buf_delete(buf.bufnr, { force = true }) end)
+              end
+            end
+          end)
+        end
+      '';
+      desc = "Open Dashboard when no buffers remain";
+    }
+  ];
+
   plugins = {
     bufdelete.enable = true;
     web-devicons.enable = true;
-    bufferline.enable = true;
+  };
+
+  plugins.bufferline = {
+    enable = true;
+    settings.options = {
+      custom_filter = ''
+        function(buf_number)
+          local name = vim.api.nvim_buf_get_name(buf_number)
+          local ft = vim.bo[buf_number].filetype
+          -- Hide if unnamed, no filetype, and unmodified
+          if name == "" and ft == "" and not vim.bo[buf_number].modified then
+            return false
+          end
+          return true
+        end
+      '';
+      show_buffer_close_icons = false;
+    };
   };
 
   keymaps = [
