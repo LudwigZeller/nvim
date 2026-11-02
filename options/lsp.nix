@@ -1,8 +1,20 @@
 { pkgs, lib, ... }:
 {
   lsp = {
-    inlayHints.enable = true;
     codelens.enable = true;
+    completion.enable = false; # Managed by blink.nvim
+    documentColor = {
+      enable = true;
+      settings = {
+        style = "background";
+      };
+    };
+    inlayHints.enable = true;
+    inlineCompletion.enable = false; # Also handled by blink.nvim
+    linkedEditingRange.enable = true;
+    onTypeFormatting.enable = true;
+    semanticTokens.enable = true;
+
     keymaps = [
       {
         key = "gd";
