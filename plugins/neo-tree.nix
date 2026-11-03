@@ -47,14 +47,14 @@
       };
     };
   };
-  keymaps = [
-    {
-      action = "<cmd>Neotree toggle<cr>";
-      key = "<leader>ft";
-      mode = [ "n" ];
-      options = {
-        desc = "File Tree";
-      };
-    }
-  ];
+  # keymaps = [
+  #   {
+  #     action = "<cmd>Neotree toggle<cr>";
+  #     key = "<leader>ft";
+  #     mode = [ "n" ];
+  #     options = {
+  #       desc = "File Tree";
+  #     };
+  #   }
+  # ];
 }

@@ -19,8 +19,9 @@
       winbar.enabled = false;
 
       float_opts = {
-        border = "curved";
-        winblend = 3;
+        # border = "curved";
+        border = "rounded";
+        # winblend = 3;
         width = lib.nixvim.mkRaw "function() return math.ceil(vim.o.columns * 0.75) end";
         height = lib.nixvim.mkRaw "function() return math.ceil(vim.o.lines * 0.75) end";
       };

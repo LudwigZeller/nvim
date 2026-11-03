@@ -37,7 +37,7 @@
     fillchars = "eob: ";
 
     winminwidth = 10;
-    winblend = 30;
+    winblend = 10;
     sessionoptions = [
       "blank" # Keep empty windows
       "buffers" # Remember all open files/buffers
