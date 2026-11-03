@@ -1,4 +1,4 @@
-{ lib, ... }:
+{ ... }:
 {
   plugins.treesitter.nixvimInjections = true;
   plugins = {
@@ -10,8 +10,6 @@
   };
   lsp.servers.lua_ls = {
     enable = true;
-    settings = {
-
-    };
+    config = { };
   };
 }
