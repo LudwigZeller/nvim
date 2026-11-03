@@ -14,7 +14,7 @@
   '';
 
   plugins.neo-tree = {
-    enable = true;
+    enable = false; # true;
     settings = {
       filesystem = {
         bind_to_cwd = true;

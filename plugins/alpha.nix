@@ -132,7 +132,8 @@ in
             (mkButton {
               text = " Filetree";
               shortcut = "t";
-              command = "Neotree";
+              # command = "Neotree";
+              command = "Oil";
             })
 
             (mkButton {
