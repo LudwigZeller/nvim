@@ -3,7 +3,15 @@
   plugins.navic = {
     enable = true;
     settings = {
-      lsp.autoAttach = true;
+
+      lsp = {
+        autoAttach = true;
+        preference = [
+          "nixd" # Such that otter-ls does not take priority on nixvim files
+          "lua_ls"
+          "otter-ls"
+        ];
+      };
       highlight = true;
       separator = "  ";
       depth_limit = 5;

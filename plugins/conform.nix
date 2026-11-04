@@ -1,12 +1,8 @@
 { pkgs, ... }:
 {
   extraPackages = with pkgs; [
-    rustfmt
     nixfmt
-    prettierd
-    prettier
-    isort
-    black
+    stylua
   ];
   plugins.conform-nvim = {
     enable = true;
@@ -20,9 +16,16 @@
         timeout_ms = 500;
       };
       formatters_by_ft = {
+        nix = [
+          "nixfmt"
+          "injected"
+        ];
+        devenv = [
+          "nixfmt"
+          "injected"
+        ];
+        lua = [ "stylua" ];
         rust = [ "rustfmt" ];
-        nix = [ "nixfmt" ];
-        devenv = [ "nixfmt" ];
         javascript = [
           "prettierd"
           "prettier"

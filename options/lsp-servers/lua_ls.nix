@@ -10,6 +10,13 @@
   };
   lsp.servers.lua_ls = {
     enable = true;
-    config = { };
+    config = {
+      diagnostics = {
+        disable = [
+          "missing-name"
+          # "missing-fields"
+        ];
+      };
+    };
   };
 }
