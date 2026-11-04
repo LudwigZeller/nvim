@@ -48,24 +48,36 @@
         lualine_a = [ ];
         lualine_b = [ ];
         lualine_c = [ { __unkeyed-1 = "navic"; } ];
-        lualine_x = [ ];
+        lualine_x = [
+          {
+            __unkeyed-1 = lib.nixvim.mkRaw ''
+              function ()
+              	local dev = require("devenv")
+              	if dev.status() ~= "unloaded" then
+              		return "devenv.nix: " .. dev.status()
+              	end
+              	return ""
+              end'';
+            icon = "";
+          }
+        ];
         lualine_y = [
           {
-            __unkeyed-1.__raw = ''
+            __unkeyed-1 = lib.nixvim.mkRaw ''
               function()
-                local msg = ""
-                local buf_ft = vim.bo[0].filetype
-                local clients = vim.lsp.get_clients({ bufnr = 0 })
-                if next(clients) == nil then
-                    return msg
-                end
-                for _, client in ipairs(clients) do
-                    local filetypes = client.config.filetypes
-                    if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                  return client.name
-                    end
-                end
-                return msg
+              	local names = {}
+              	local buf_ft = vim.bo[0].filetype
+              	local clients = vim.lsp.get_clients({ bufnr = 0 })
+              	if next(clients) == nil then
+              		return ""
+              	end
+              	for _, client in ipairs(clients) do
+              		local filetypes = client.config.filetypes
+              		if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
+              			table.insert(names, client.name)
+              		end
+              	end
+              	return table.concat(names, ", ")
               end
             '';
             icon = "";

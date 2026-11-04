@@ -1,9 +1,9 @@
-{ ... }:
+{ lib, ... }:
 {
   autoCmd = [
     {
       event = "BufDelete";
-      callback.__raw = ''
+      callback = lib.nixvim.mkRaw ''
         function()
           vim.schedule(function()
             local buffers = vim.fn.getbufinfo({ buflisted = 1 })
@@ -29,7 +29,7 @@
   plugins.bufferline = {
     enable = true;
     settings.options = {
-      custom_filter = ''
+      custom_filter = lib.nixvim.mkRaw ''
         function(buf_number)
           local name = vim.api.nvim_buf_get_name(buf_number)
           local ft = vim.bo[buf_number].filetype
