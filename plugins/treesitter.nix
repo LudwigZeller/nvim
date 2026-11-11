@@ -20,6 +20,8 @@
       vimdoc
       xml
       yaml
+      html
+      latex
 
       rust
       c

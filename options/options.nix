@@ -49,6 +49,9 @@
       "winpos" # Restore window positions
       "localoptions" # Crucial for Projections: Remember local buffer/window options
     ];
+
+    # conceallevel = 2;
+    # concealcursor = "nc";
   };
 
   # opt.completeopt = { "menuone", "noselect", "noinsert" }

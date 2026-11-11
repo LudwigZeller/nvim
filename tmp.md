@@ -10,6 +10,21 @@
 
 
 
-$\bigcap_{i \in I}$
+$$\bigcap_{i \in I}^{j \in J}$$
+
+
+$$E = mc^2$$
+
+$D[x(t)] dif$
+
+
+```typst
+#eq(hat(a) + vec(b))
+
+```
+
+
+
+> [!lemma] 2.7
 
 
