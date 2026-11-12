@@ -304,27 +304,24 @@
       };
     }
     # LSP Management
-
     {
       key = "<leader>clx";
-      action = "<CMD>LspStop<Enter>";
-      mode = [ "n" ];
+      action = "<CMD>lsp stop<Enter>";
+      mode = [
+        "n"
+        "v"
+      ];
       options = {
         desc = "Stop LSP";
       };
     }
     {
-      key = "<leader>cls";
-      action = "<CMD>LspStart<Enter>";
-      mode = [ "n" ];
-      options = {
-        desc = "Start LSP";
-      };
-    }
-    {
       key = "<leader>clr";
-      action = "<CMD>LspRestart<Enter>";
-      mode = [ "n" ];
+      action = "<CMD>lsp restart<Enter>";
+      mode = [
+        "n"
+        "v"
+      ];
       options = {
         desc = "Restart LSP";
       };

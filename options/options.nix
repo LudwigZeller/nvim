@@ -33,6 +33,7 @@
 
     shell = "fish";
     mousemodel = "extend";
+    mousemoveevent = true;
 
     fillchars = "eob: ";
 

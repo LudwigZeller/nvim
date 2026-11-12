@@ -1,15 +1,14 @@
 { lib, ... }:
 {
   plugins.navic = {
-    enable = true;
+    enable = false;
     settings = {
 
       lsp = {
-        autoAttach = true;
+        auto_attach = true;
         preference = [
           "nixd" # Such that otter-ls does not take priority on nixvim files
           "lua_ls"
-          "otter-ls"
         ];
       };
       highlight = true;
@@ -18,12 +17,23 @@
       # lazy_update_context = true; # enable if perfomance collapses
     };
   };
-  lsp.onAttach = ''
-    if client.server_capabilities.documentSymbolProvider then
-      require("nvim-navic").attach(client, bufnr)
-    end
-  '';
+  autoCmd = lib.singleton {
+    event = "LspAttach";
+    callback = lib.nixvim.mkRaw ''
+      function (args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
 
+        if not client or client.name:match("^otter%-ls") then
+          return
+        end
+
+        if client.server_capabilities.documentSymbolProvider then
+          require("nvim-navic").attach(client, args.data.buf)
+        end
+      end
+
+    '';
+  };
   plugins.lualine = {
     enable = true;
     settings = {
