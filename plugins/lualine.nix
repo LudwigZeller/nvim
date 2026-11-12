@@ -1,11 +1,11 @@
 { lib, ... }:
 {
   plugins.navic = {
-    enable = false;
+    enable = true;
     settings = {
 
       lsp = {
-        auto_attach = true;
+        auto_attach = false;
         preference = [
           "nixd" # Such that otter-ls does not take priority on nixvim files
           "lua_ls"
@@ -28,7 +28,7 @@
         end
 
         if client.server_capabilities.documentSymbolProvider then
-          require("nvim-navic").attach(client, args.data.buf)
+          -- require("nvim-navic").attach(client, args.data.buf)
         end
       end
 
