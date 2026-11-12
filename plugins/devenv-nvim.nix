@@ -8,18 +8,19 @@
       desc = "Autoload devenv";
       callback = lib.nixvim.mkRaw ''
         function ()
-        	local devenv = require("devenv")
-        	local path = devenv.find_root()
+          local devenv = require("devenv")
+          local path = devenv.find_root()
+          devenv.unwatch()
 
-        	if path == devenv.loaded_devenv then
-        		return
-        	end
+          if path == devenv.loaded_devenv then
+            return
+          end
 
-        	devenv.unload()
+          devenv.unload()
 
-        	if not path then
-        		return
-        	end
+          if not path then
+            return
+          end
 
           if devenv.auto_load then
             if not vim.secure.read(path .. "/devenv.nix") then
@@ -68,7 +69,6 @@
         function (lead, cmdline, cursorpos)
           local words = vim.split(cmdline, "%s+", { trimempty = false })
           local matches = {}
-          vim.notify(words)
 
           if #words == 2 then
             local choices = { "load", "unload", "reload", "autoload" }
@@ -127,8 +127,8 @@
         return
       end
 
-      local cmd = { "sh", "-c", "devenv shell -- sh -c 'env -0 >&3' 3>&1 1>/dev/null 2>/dev/null" }
-      vim.system(cmd, { text = true }, function(out)
+      local cmd = { "sh", "-c", "devenv shell -- sh -c 'env -0 >&3' 3>&1 1>/dev/null" }
+      vim.system(cmd, { text = true, cwd = path }, function(out)
         vim.schedule(function()
           if out.code ~= 0 or out.stdout == "" then
             M.devenv_status = "failed"
@@ -176,12 +176,20 @@
             if vim.list_contains(M.special_env_keys, key) then
               -- PREPEND
               local index = string.find(val, vim.env[key], 1, true)
-              local pre = string.sub(val, 1, index - 1)
-              local post = string.sub(val, index + #vim.env[key])
+              if index then
+                local pre = string.sub(val, 1, index - 1)
+                local post = string.sub(val, index + #vim.env[key])
 
-              vim.env[key] = pre .. vim.env[key] .. post
+                vim.env[key] = pre .. vim.env[key] .. post
 
-              M.devenv.modified_env[key] = { pre, post }
+                M.devenv.modified_env[key] = { pre, post }
+              else
+                vim.notify(
+                  "Could not find older env in" .. tostring(key) .. ", devenv will not be loaded completely",
+                  vim.log.levels.ERROR
+                )
+              end
+
             -- M.devenv.modified_env[key].pre = pre
             -- M.devenv.modified_env[key].post = post
             else
@@ -198,21 +206,24 @@
     end
 
     M.watch = function(path)
-      if M.file_watcher then
-        M.file_watcher:stop()
-        M.file_watcher:close()
-      end
-
       M.file_watcher = vim.uv.new_fs_event()
-      M.file_watcher:start(path .. "/devenv.nix", {}, function(err, filename, events)
-        if err then
+      M.file_watcher:start(path, {}, function(err, filename, events)
+        if err or filename ~= "devenv.nix" then
           return
         end
+
         vim.schedule(function()
           vim.notify("devenv.nix changed, reloading devenv", vim.log.levels.INFO)
           require("devenv").reload()
         end)
       end)
+    end
+
+    M.unwatch = function()
+      if M.file_watcher then
+        M.file_watcher:stop()
+        M.file_watcher:close()
+      end
     end
 
     M.unload = function()
@@ -226,7 +237,16 @@
         if vim.list_contains(M.special_env_keys, key) then
           vim.iter(val):each(function(mod)
             local index = string.find(vim.env[key], mod, 1, true)
-            vim.env[key] = string.sub(vim.env[key], 1, index - 1) .. string.sub(vim.env[key], index + #mod)
+            if index then
+              vim.env[key] = string.sub(vim.env[key], 1, index - 1) .. string.sub(vim.env[key], index + #mod)
+            else
+              vim.notify(
+                "Could not find "
+                  .. tostring(key)
+                  .. " modifications in environment, devenv will not be unloaded completely",
+                vim.log.levels.ERROR
+              )
+            end
           end)
         else
           vim.env[key] = val
@@ -245,5 +265,4 @@
 
     return M
   '';
-
 }
