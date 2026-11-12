@@ -48,6 +48,8 @@
             devenv.load()
           elseif subcmd == "unload" then
             devenv.unload()
+          elseif subcmd == "reload" then
+            devenv.reload()
           elseif subcmd == "autoload" then
             if param == "on" then
               devenv.auto_load = true
@@ -57,7 +59,7 @@
               devenv.auto_load = not devenv.auto_load
             end
           else
-            vim.notify("Unknown command, usage: Devenv [load|unload|autoload [on|off|toggle]]", vim.log.levels.ERROR)
+            vim.notify("Unknown command, usage: Devenv [load|unload|reload|autoload [on|off|toggle]]", vim.log.levels.ERROR)
           end
         end
       '';
@@ -69,7 +71,7 @@
           vim.notify(words)
 
           if #words == 2 then
-            local choices = { "load", "unload", "autoload" }
+            local choices = { "load", "unload", "reload", "autoload" }
             for _, choice in ipairs(choices) do
               if vim.startswith(choice, lead) then
                 table.insert(matches, choice)
@@ -127,23 +129,25 @@
 
       local cmd = { "sh", "-c", "devenv shell -- sh -c 'env -0 >&3' 3>&1 1>/dev/null 2>/dev/null" }
       vim.system(cmd, { text = true }, function(out)
-        if out.stdout == "" then
-          M.devenv_status = "failed"
-          vim.schedule(function()
-            vim.notify("devenv shell failed to initialize, couldnt load devenv", vim.log.levels.ERROR)
-          end)
-          return
-        end
-        local devenv = vim.split(out.stdout, "\0", { plain = true })
-        devenv = vim.iter(devenv):fold({}, function(acc, v)
-          local delimiter = string.find(v, "=", 1, true)
-          if not delimiter then
-            return acc
-          end
-          acc[string.sub(v, 1, delimiter - 1)] = string.sub(v, delimiter + 1)
-          return acc
-        end)
         vim.schedule(function()
+          if out.code ~= 0 or out.stdout == "" then
+            M.devenv_status = "failed"
+            vim.notify(
+              "devenv shell failed to initialize (error: " .. tostring(out.code) .. ")\nSTDERR:\n" .. tostring(out.stderr),
+              vim.log.levels.ERROR
+            )
+            return
+          end
+
+          local devenv = vim.split(out.stdout, "\0", { plain = true })
+          devenv = vim.iter(devenv):fold({}, function(acc, v)
+            local delimiter = string.find(v, "=", 1, true)
+            if not delimiter then
+              return acc
+            end
+            acc[string.sub(v, 1, delimiter - 1)] = string.sub(v, delimiter + 1)
+            return acc
+          end)
           local modified_entries = vim
             .iter(devenv)
             :filter(function(k, v)
@@ -215,8 +219,9 @@
       M.devenv_status = "unloading"
       vim.iter(M.devenv.added_env):each(function(key, _)
         vim.env[key] = nil
-        M.devenv.added_env[key] = nil
       end)
+      M.devenv.added_env = {}
+
       vim.iter(M.devenv.modified_env):each(function(key, val)
         if vim.list_contains(M.special_env_keys, key) then
           vim.iter(val):each(function(mod)
@@ -226,8 +231,9 @@
         else
           vim.env[key] = val
         end
-        M.devenv.modified_env = nil
       end)
+      M.devenv.modified_env = {}
+
       M.devenv_status = "unloaded"
       M.loaded_devenv = nil
     end
