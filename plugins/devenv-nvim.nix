@@ -97,6 +97,7 @@
       file_watcher = nil,
       loaded_devenv = nil,
       auto_load = true,
+      last_reload = nil,
       devenv_status = "unloaded",
       special_env_keys = { "PATH", "XDG_DATA_DIRS" },
       devenv = {
@@ -132,8 +133,11 @@
         vim.schedule(function()
           if out.code ~= 0 or out.stdout == "" then
             M.devenv_status = "failed"
+            local lines = vim.split("\n", tostring(out.stderr), { trimempty = true })
+            local tail = table.concat(unpack(lines, math.max(1, #lines - 9), #lines), "\n") -- Last 10 lines
+
             vim.notify(
-              "devenv shell failed to initialize (error: " .. tostring(out.code) .. ")\nSTDERR:\n" .. tostring(out.stderr),
+              "devenv shell failed to initialize (error: " .. tostring(out.code) .. ")\nSTDERR:\n" .. tail,
               vim.log.levels.ERROR
             )
             return
@@ -212,9 +216,16 @@
           return
         end
 
+        local time_ms = vim.uv.hrtime() / 1e6
+        if not M.last_reload and time_ms - M.last_reload < 200
+          return -- Debounce
+        end
+
+
         vim.schedule(function()
           vim.notify("devenv.nix changed, reloading devenv", vim.log.levels.INFO)
           require("devenv").reload()
+          M.last_reload = vim.uv.hrtime / 1e6
         end)
       end)
     end
