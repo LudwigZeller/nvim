@@ -217,10 +217,9 @@
         end
 
         local time_ms = vim.uv.hrtime() / 1e6
-        if not M.last_reload and time_ms - M.last_reload < 200
+        if not M.last_reload and time_ms - M.last_reload < 200 then
           return -- Debounce
         end
-
 
         vim.schedule(function()
           vim.notify("devenv.nix changed, reloading devenv", vim.log.levels.INFO)
