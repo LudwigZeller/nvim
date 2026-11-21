@@ -28,7 +28,7 @@
         end
 
         if client.server_capabilities.documentSymbolProvider then
-          -- require("nvim-navic").attach(client, args.data.buf)
+          require("nvim-navic").attach(client, args.data.buf)
         end
       end
 
@@ -75,19 +75,16 @@
           {
             __unkeyed-1 = lib.nixvim.mkRaw ''
               function()
-              	local names = {}
-              	local buf_ft = vim.bo[0].filetype
-              	local clients = vim.lsp.get_clients({ bufnr = 0 })
-              	if next(clients) == nil then
-              		return ""
-              	end
-              	for _, client in ipairs(clients) do
-              		local filetypes = client.config.filetypes
-              		if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-              			table.insert(names, client.name)
-              		end
-              	end
-              	return table.concat(names, ", ")
+                local names = {}
+                local buf_ft = vim.bo[0].filetype
+                local clients = vim.lsp.get_clients({ bufnr = 0 })
+                if next(clients) == nil then
+                  return ""
+                end
+                for _, client in ipairs(clients) do
+                  table.insert(names, client.name)
+                end
+                return table.concat(names, ", ")
               end
             '';
             icon = "";
