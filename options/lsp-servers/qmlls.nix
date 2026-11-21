@@ -3,9 +3,11 @@
     enable = true;
     packageFallback = true;
     config = {
-      capabilities = {
-        textDocument.semanticTokens = lib.nixvim.mkRaw "vim.NIL";
-        workspace.semanticTokens = lib.nixvim.mkRaw "vim.NIL";
+      settings.nixd = {
+        capabilities = {
+          textDocument.semanticTokens = lib.nixvim.mkRaw "vim.NIL";
+          workspace.semanticTokens = lib.nixvim.mkRaw "vim.NIL";
+        };
       };
     };
   };
