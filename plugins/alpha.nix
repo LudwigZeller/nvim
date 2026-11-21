@@ -42,9 +42,9 @@ in
               local json_path = vim.api.nvim_get_runtime_file("lua/data/${animation}.json", false)[1]
 
               if not json_path then
-                  error("Could not find blackhole.json in runtime path!")
+                error("Could not find blackhole.json in runtime path!")
               end
-              
+
               local f = io.open(json_path, "r")
               local json_content = f:read("*a")
               f:close()
@@ -67,7 +67,7 @@ in
                 for _, line_colors in ipairs(frame.colors) do
                   local line_hl = {}
                   for _, color_block in ipairs(line_colors) do
-                    table.insert(line_hl, { get_hl_group(color_block[1]), color_block[2], color_block[3] }) 
+                    table.insert(line_hl, { get_hl_group(color_block[1]), color_block[2], color_block[3] })
                   end
                   if #line_hl == 0 then
                     table.insert(line_hl, { "Normal", 0, 0 })
@@ -76,7 +76,6 @@ in
                 end
               end
 
-
               local current_frame = 1
               local timer = _G.AlphaAnimTimer or vim.uv.new_timer()
               _G.AlphaAnimTimer = timer
@@ -84,21 +83,30 @@ in
               vim.api.nvim_create_autocmd("User", {
                 group = alpha_group,
                 pattern = "AlphaReady",
-                callback = function() timer:start(0, 250, vim.schedule_wrap(function() 
-                  current_frame = current_frame + 1
-                  if current_frame > #AnimFrames then current_frame = 1 end
-                  
-                  pcall(function()
-                    require("alpha").redraw() 
-                  end)
-                end)) end,
+                callback = function()
+                  timer:start(
+                    0,
+                    250,
+                    vim.schedule_wrap(function()
+                      current_frame = current_frame + 1
+                      if current_frame > #AnimFrames then
+                        current_frame = 1
+                      end
+
+                      pcall(function()
+                        require("alpha").redraw()
+                      end)
+                    end)
+                  )
+                end,
               })
               vim.api.nvim_create_autocmd("User", {
                 group = alpha_group,
                 pattern = "AlphaClosed",
-                callback = function() timer:stop() end,
+                callback = function()
+                  timer:stop()
+                end,
               })
-
 
               return function()
                 local frame = AnimFrames[current_frame]
@@ -109,8 +117,8 @@ in
                     opts = {
                       position = "center",
                       hl = frame.alpha_hl,
-                    }
-                  }
+                    },
+                  },
                 }
               end
             end)()
@@ -132,8 +140,8 @@ in
             (mkButton {
               text = " Filetree";
               shortcut = "t";
-              # command = "Neotree";
-              command = "Oil";
+              command = "Neotree";
+              # command = "Oil";
             })
 
             (mkButton {

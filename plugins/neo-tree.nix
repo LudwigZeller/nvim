@@ -14,7 +14,7 @@
   '';
 
   plugins.neo-tree = {
-    enable = false; # true;
+    enable = true;
     settings = {
       filesystem = {
         bind_to_cwd = true;
@@ -47,14 +47,14 @@
       };
     };
   };
-  # keymaps = [
-  #   {
-  #     action = "<cmd>Neotree toggle<cr>";
-  #     key = "<leader>ft";
-  #     mode = [ "n" ];
-  #     options = {
-  #       desc = "File Tree";
-  #     };
-  #   }
-  # ];
+  keymaps = [
+    {
+      action = "<cmd>Neotree toggle<cr>";
+      key = "<leader>ft";
+      mode = [ "n" ];
+      options = {
+        desc = "File Tree";
+      };
+    }
+  ];
 }

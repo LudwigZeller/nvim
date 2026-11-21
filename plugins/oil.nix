@@ -2,7 +2,7 @@
   plugins.mini-icons.enable = true; # Icon support
   plugins.oil-git-status.enable = true;
   plugins.oil = {
-    enable = true;
+    enable = false;
     settings = {
       default_file_explorer = true;
       delete_to_trash = true;

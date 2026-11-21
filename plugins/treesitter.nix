@@ -28,6 +28,8 @@
       cpp
       python
       julia
+      qmljs
+      javascript
     ];
   };
 }
