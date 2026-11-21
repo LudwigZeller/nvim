@@ -6,16 +6,19 @@
   ];
   plugins.conform-nvim = {
     enable = true;
+    autoInstall = {
+      enable = false; # TODO DECIDE IF WANTED
+      enableWarnings = true;
+    };
     settings = {
-      autoInstall = {
-        enable = true;
-        enableWarnings = true;
-      };
       format_on_save = {
         lsp_fallback = true;
         timeout_ms = 500;
       };
       formatters_by_ft = {
+        qml = [
+          "qmlformat"
+        ];
         nix = [
           "nixfmt"
           "injected"
@@ -37,6 +40,13 @@
         "_" = [ "trim_whitespace" ];
       };
       formatters = {
+        qmlformat = {
+          prepend_args = [
+            "-w"
+            "2"
+            "--normalize"
+          ];
+        };
         custom-stylua = {
           command = "stylua";
           args = [

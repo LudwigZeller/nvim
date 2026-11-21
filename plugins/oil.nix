@@ -1,6 +1,6 @@
 { lib, ... }: {
-  plugins.mini-icons.enable = true; # Icon support
-  plugins.oil-git-status.enable = true;
+  # plugins.mini-icons.enable = true; # Icon support
+  # plugins.oil-git-status.enable = true;
   plugins.oil = {
     enable = false;
     settings = {
