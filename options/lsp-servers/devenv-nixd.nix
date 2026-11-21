@@ -23,7 +23,7 @@
                   nixd_settings.nixd.nixpkgs = vim.deepcopy(devenv_settings.nixd.nixpkgs)
                   nixd_settings.nixd.options = vim.deepcopy(devenv_settings.nixd.options)
                   vim.lsp.start({
-                    name = "devenv",
+                    name = "devenv-nixd",
                     settings = nixd_settings,
                     root_dir = root_dir,
                     cmd = { "devenv", "lsp" },
