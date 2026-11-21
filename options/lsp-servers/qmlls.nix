@@ -4,8 +4,8 @@
     packageFallback = true;
     config = {
       capabilities = {
-        textDocument.semanticTokens = lib.mkRaw "vim.nil";
-        workspace.semanticTokes = lib.mkRaw "vim.nil";
+        textDocument.semanticTokens = lib.nixvim.mkRaw "vim.nil";
+        workspace.semanticTokes = lib.nixvim.mkRaw "vim.nil";
       };
     };
   };
