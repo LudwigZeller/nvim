@@ -1,14 +1,12 @@
 { lib, ... }: {
   lsp.servers.qmlls = {
     enable = true;
-    packageFallback = false;
+    packageFallback = true;
     config = {
-      on_init = lib.mkRaw ''
-        function(client)
-          client.server_capabilities.semanticTokensProvider = nil
-        end
-      '';
-
+      capabilities = {
+        textDocument.semanticTokens = lib.mkRaw "vim.nil";
+        workspace.semanticTokes = lib.mkRaw "vim.nil";
+      };
     };
   };
 }
