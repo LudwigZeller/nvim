@@ -28,7 +28,7 @@
         end
 
         if client.server_capabilities.documentSymbolProvider then
-          require("nvim-navic").attach(client, args.data.buf)
+          -- require("nvim-navic").attach(client, args.data.buf)
         end
       end
 
@@ -57,7 +57,7 @@
       winbar = {
         lualine_a = [ ];
         lualine_b = [ ];
-        lualine_c = [ { __unkeyed-1 = "navic"; } ];
+        # lualine_c = [ { __unkeyed-1 = "navic"; } ];
         lualine_x = [
           {
             __unkeyed-1 = lib.nixvim.mkRaw ''
