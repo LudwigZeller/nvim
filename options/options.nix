@@ -40,11 +40,11 @@
     winminwidth = 10;
     winblend = 10;
     sessionoptions = [
-      "blank" # Keep empty windows
+      # "blank" # Keep empty windows
       "buffers" # Remember all open files/buffers
       "curdir" # Crucial: Remember the current working directory (the project root)
       "folds" # Remember folded code blocks
-      "help" # Remember the help window
+      # "help" # Remember the help window
       "tabpages" # Keep all your open tabs
       "winsize" # Restore window sizes
       "winpos" # Restore window positions
