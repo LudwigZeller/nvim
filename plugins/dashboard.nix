@@ -1,31 +1,18 @@
 { lib, pkgs, ... }:
 let
-  # animation = "blackhole";
-  mkButton =
-    {
-      text,
-      shortcut,
-      command,
-    }:
-    {
-      type = "button";
-      val = text;
-      on_press = lib.nixvim.mkRaw ''function() vim.cmd("${command}") end'';
-      opts = {
-        keymap = [
-          "n"
-          shortcut
-          "<CMD>${command}<CR>"
-          { }
-        ];
-        position = "center";
-        shortcut = shortcut;
-        cursor = 0;
-        width = 50;
-        align_shortcut = "right";
-        hl_shortcut = "Bold";
-      };
-    };
+  mkRemoveBlackBackground =
+    animation:
+    pkgs.runCommand "transparent-${baseNameOf animation}.gif" { } ''
+      ${lib.getExe pkgs.imagemagick} ${animation} \
+        -coalesce \
+        -fuzz 10% \
+        -transparent black \
+        -layers Optimize \
+        -loop 0 \
+        $out
+    '';
+
+  blackhole = mkRemoveBlackBackground ../data/blackhole.gif;
 in
 {
   plugins.snacks = {
@@ -82,9 +69,10 @@ in
 
         {
           section = "terminal";
-          # cmd = "chafa ~/.config/wall.png --format symbols --symbols vhalf --size 60x17 --stretch; sleep .1";
-          cmd = "${lib.getExe pkgs.hello}";
-          height = 17;
+          cmd = "${lib.getExe pkgs.chafa} --fg-only --symbols ascii -f symbols --speed 0.30 --clear -s 60x24 ${blackhole}";
+          height = 24;
+          width = 60;
+          ttl = 0;
           padding = 1;
         }
         {
@@ -94,9 +82,9 @@ in
             gap = 1;
             padding = 1;
           };
-          __unkeyes-2 = {
-            section = "startup";
-          };
+          # __unkeyed-2 = {
+          #   section = "startup";
+          # };
         }
       ];
     };
