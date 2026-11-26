@@ -1,3 +1,6 @@
 { ... }: {
-  plugins.precognition.enable = true;
+  plugins.precognition = {
+    enable = true;
+    lazyLoad.settings.event = "DeferredUIEnter";
+  };
 }

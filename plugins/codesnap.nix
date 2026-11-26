@@ -14,15 +14,21 @@
         background = "#00000000";
       };
     };
+    lazyLoad.settings = {
+      cmd = "CodeSnap";
+      keys = [
+        {
+          __unkeyed-2 = "<cmd>CodeSnap<cr>";
+          __unkeyed-1 = "<leader>uc";
+          mode = [ "v" ];
+          options = {
+            desc = "Take Snapshot";
+          };
+        }
+      ];
+    };
+
   };
   keymaps = [
-    {
-      action = "<cmd>CodeSnap<cr>";
-      key = "<leader>uc";
-      mode = [ "v" ];
-      options = {
-        desc = "Take Snapshot";
-      };
-    }
   ];
 }

@@ -14,13 +14,17 @@
         end
       '';
     };
+    lazyLoad = {
+    };
   };
 
   extraConfigLuaPre = ''
     vim.api.nvim_create_autocmd("VimEnter", {
       desc = "Restore project session if present",
       callback = function()
-        if vim.fn.argc() ~= 0 then return end
+        if vim.fn.argc() ~= 0 then
+          return
+        end
         require("projections.session").restore(vim.uv.cwd())
       end,
     })
@@ -43,7 +47,9 @@
     local original_switch = switcher.switch
 
     switcher.switch = function(project_path)
-      if _G.AlphaAnimTimer then _G.AlphaAnimTimer:stop() end
+      if _G.AlphaAnimTimer then
+        _G.AlphaAnimTimer:stop()
+      end
       original_switch(project_path)
       vim.api.nvim_exec_autocmds("DirChanged", { pattern = "global" })
     end

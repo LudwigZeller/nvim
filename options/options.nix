@@ -28,7 +28,7 @@
     expandtab = true;
     shiftwidth = 2;
     relativenumber = true;
-    timeoutlen = 1000;
+    timeoutlen = 500;
     autoread = true;
 
     shell = "fish";

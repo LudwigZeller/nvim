@@ -1,5 +1,6 @@
 { ... }:
 {
+  # TODO: Migrate to snacks.nvim
   plugins.indent-blankline = {
     enable = true;
     settings = {
@@ -18,6 +19,12 @@
         "alpha"
         "neo-tree"
         "Trouble"
+      ];
+    };
+    lazyLoad.settings = {
+      event = [
+        "BufReadPost"
+        "BufNewFile"
       ];
     };
   };

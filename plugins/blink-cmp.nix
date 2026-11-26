@@ -137,6 +137,12 @@
         };
       };
     };
+    lazyLoad.settings = {
+      event = [
+        "InsertEnter"
+        "CmdlineEnter"
+      ];
+    };
   };
 
 }
