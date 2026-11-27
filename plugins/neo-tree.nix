@@ -46,15 +46,17 @@
         required_width = 122;
       };
     };
+    lazyLoad.settings = {
+      cmd = "Neotree";
+      keys = [
+        {
+          __unkeyed-1 = "<leader>ft";
+          __unkeyed-3 = "<CMD>Neotree toggle<CR>";
+          desc = "File Tree";
+        }
+      ];
+    };
   };
   keymaps = [
-    {
-      action = "<cmd>Neotree toggle<cr>";
-      key = "<leader>ft";
-      mode = [ "n" ];
-      options = {
-        desc = "File Tree";
-      };
-    }
   ];
 }

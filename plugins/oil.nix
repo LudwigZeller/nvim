@@ -43,13 +43,13 @@
   };
 
   keymaps = [
-    {
-      action = "<cmd>lua require(\"oil\").toggle_float()<cr>";
-      key = "<leader>ft";
-      mode = [ "n" ];
-      options = {
-        desc = "File Buffer";
-      };
-    }
+    # {
+    # action = "<cmd>lua require(\"oil\").toggle_float()<cr>";
+    # key = "<leader>ft";
+    # mode = [ "n" ];
+    # options = {
+    #   desc = "File Buffer";
+    # };
+    # }
   ];
 }

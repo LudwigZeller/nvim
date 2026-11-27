@@ -25,10 +25,16 @@ in
       preset = {
         keys = [
           {
+            icon = "󰙅 ";
+            key = "t";
+            desc = "File Tree";
+            action = ":Neotree";
+          }
+          {
             icon = " ";
             key = "f";
             desc = "Find File";
-            action = ":lua Snacks.dashboard.pick('files')";
+            action = ":Telescope find_files";
           }
           {
             icon = " ";
@@ -40,19 +46,29 @@ in
             icon = " ";
             key = "g";
             desc = "Find Text";
-            action = ":lua Snacks.dashboard.pick('live_grep')";
+            action = ":Telescope live_grep";
           }
           {
             icon = " ";
             key = "r";
             desc = "Recent Files";
-            action = ":lua Snacks.dashboard.pick('oldfiles')";
+            action = ":Telescope oldfiles";
           }
           {
             icon = " ";
             key = "s";
             desc = "Restore Session";
-            section = "session";
+            action = lib.nixvim.mkRaw ''
+              function()
+                require("lz.n").trigger_load("projections")
+                require("projections.session").restore(vim.uv.cwd())
+              end
+            '';
+            enabled = lib.nixvim.mkRaw ''
+              function()
+                require("lz.n").trigger_load("projections")
+                return require("projections.session").info(vim.uv.cwd()) ~= nil
+              end'';
           }
           {
             icon = " ";

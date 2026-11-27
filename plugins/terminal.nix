@@ -90,14 +90,14 @@
     {
       mode = "n";
       key = "<leader>tm";
-      action = '':lua Snacks.terminal.toggle("ncspot", { win = { style = "terminal_float", keys = { term_normal_alternative = false,  q_override = { "q", function(term) term:hide() end, mode = "t" } } } })<CR>'';
+      action = lib.nixvim.mkRaw ''function() Snacks.terminal.toggle("ncspot", { win = { style = "terminal_float", keys = { term_normal_alternative = false,  q_override = { "q", function(term) term:hide() end, mode = "t" } } } }) end'';
       options.desc = "Music";
     }
 
     {
       mode = "n";
       key = "<leader>gl";
-      action = '':lua Snacks.lazygit.open({ win = { style = "terminal_float", keys = { term_normal_alternative = false,  q_override = { "q", function(term) term:hide() end, mode = "t" } } } })<CR>'';
+      action = lib.nixvim.mkRaw ''function() Snacks.lazygit.open({ win = { style = "terminal_float", keys = { term_normal_alternative = false,  q_override = { "q", function(term) term:hide() end, mode = "t" } } } }) end'';
       options.desc = "LazyGit";
     }
 
