@@ -12,6 +12,12 @@
         width = 0.75;
         height = 0.75;
       };
+      lazygit = {
+        position = "float";
+        border = "rounded";
+        width = 0.75;
+        height = 0.75;
+      };
       terminal = {
         bo = {
           filetype = "snacks_terminal";
@@ -84,8 +90,22 @@
     {
       mode = "n";
       key = "<leader>tm";
-      action = '':lua Snacks.terminal.toggle("ncspot", { win = { style = "terminal_float", keys = { term_normal_alternative = nil,  q_override = { "q", function(term) term:hide() end, mode = "t" } } } })<CR>'';
+      action = '':lua Snacks.terminal.toggle("ncspot", { win = { style = "terminal_float", keys = { term_normal_alternative = false,  q_override = { "q", function(term) term:hide() end, mode = "t" } } } })<CR>'';
       options.desc = "Music";
     }
+
+    {
+      mode = "n";
+      key = "<leader>gl";
+      action = '':lua Snacks.lazygit.open({ win = { style = "terminal_float", keys = { term_normal_alternative = false,  q_override = { "q", function(term) term:hide() end, mode = "t" } } } })<CR>'';
+      options.desc = "LazyGit";
+    }
+
+    # {
+    #   mode = "n";
+    #   key = "<leader>gh";
+    #   action = ":lua Snacks.gh.open()<CR>";
+    #   options.desc = "LazyGit";
+    # }
   ];
 }
