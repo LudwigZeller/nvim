@@ -88,7 +88,7 @@ in
           padding = 1;
         }
         {
-          pane = 2;
+          # pane = 2;
           section = "keys";
           gap = 1;
           padding = 1;
@@ -112,12 +112,12 @@ in
             return {
               align = "center",
               padding =  1,
-              pane =  2,
+              -- pane =  2,
               text = {
                 { "❄️ NixVim loaded ", hl = "SnacksDashboardFooter" },
                 { loaded .. "/" .. total, hl = "SnacksDashboardSpecial" },
                 { " plugins in ", hl = "SnacksDashboardFooter" },
-                { (_G.startup_ms or "NIL") .. "ms", hl = "SnacksDashboardSpecial" },
+                { (_G.startup_ms or "󰥔 ") .. "ms", hl = "SnacksDashboardSpecial" },
                 { " ⚡", hl = "SnacksDashboardFooter" },
               },
             }
@@ -126,15 +126,35 @@ in
       ];
     };
   };
-  extraConfigLuaPre = ''
-    local nvim_start_time = vim.uv.hrtime()
+
+  # WITH SOME AI GENERATED HELP ON THE FFI
+  extraConfigLuaPost = ''
+    local ffi = require("ffi")
+    ffi.cdef([[
+      typedef int clockid_t;
+      struct timespec { long tv_sec; long tv_nsec; };
+      int clock_gettime(clockid_t clk_id, struct timespec *tp);
+    ]])
+
+    local CLOCK_PROCESS_CPUTIME_ID = jit.os == "OSX" and 12 or 2
+    local ts = ffi.new("struct timespec[1]")
+
+    local function process_cputime_ms()
+      if ffi.C.clock_gettime(CLOCK_PROCESS_CPUTIME_ID, ts) == 0 then
+        return tonumber(ts[0].tv_sec) * 1e3 + tonumber(ts[0].tv_nsec) / 1e6
+      end
+      return nil
+    end
 
     vim.api.nvim_create_autocmd("UIEnter", {
       once = true,
       callback = function()
-        if not _G.startup_ms and nvim_start_time then
-          local elapsed = ((vim.uv or vim.loop).hrtime() - nvim_start_time) / 1e6
-          _G.startup_ms = string.format("%.2f", elapsed)
+        if not _G.startup_ms then
+          local ms = process_cputime_ms()
+          if ms then
+            _G.startup_ms = string.format("%.0f", ms)
+            Snacks.dashboard.update()
+          end
         end
       end,
     })

@@ -56,6 +56,7 @@
       "winpos" # Restore window positions
       "localoptions" # Crucial for Projections: Remember local buffer/window options
     ];
+    shada = "!,'50,<50,s10,h";
 
     # conceallevel = 2;
     # concealcursor = "nc";

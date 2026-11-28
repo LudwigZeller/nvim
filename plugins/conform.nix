@@ -85,6 +85,11 @@
           };
         };
       };
+
+    };
+    lazyLoad.settings = {
+      event = [ "BufWritePre" ];
+      cmd = [ "ConformInfo" ];
     };
   };
 }
