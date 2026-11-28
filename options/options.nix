@@ -6,6 +6,12 @@
 
     loaded_netrw = 1;
     loaded_netrwPlugin = 1;
+    loaded_matchit = 1;
+    loaded_matchparen = 1;
+    loaded_tarPlugin = 1;
+    loaded_zipPlugin = 1;
+    loaded_gzip = 1;
+    loaded_tutor_mode_plugin = 1;
   };
 
   clipboard = {

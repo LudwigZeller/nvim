@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   # plugins.image.enable = true;
   extraPlugins = with pkgs.vimPlugins; [
@@ -7,19 +7,26 @@
   ];
 
   extraConfigLua = ''
-    require("lsp-file-operations").setup({
-      display_operations = true,
-    })
-    require("window-picker").setup({})
+    for _, arg in ipairs(vim.fn.argv()) do
+      if vim.fn.isdirectory(arg) then
+        require("lz.n").trigger_load("neo-tree.nvim")
+        break
+      end
+    end
   '';
-
   plugins.neo-tree = {
     enable = true;
     settings = {
       filesystem = {
+        follow_current_file = {
+          enabled = true;
+          leave_dirs_open = false;
+        };
+      };
+      filesystem = {
         bind_to_cwd = true;
-        hijackNetrwBehavior = "open_current"; # Options: "open_current", "open_default", "disabled"
-        useLibuvFileWatcher = true; # Better performance for large projects
+        hijack_netrw_behavior = "open_current"; # Options: "open_current", "open_default", "disabled"
+        use_libuv_file_watcher = true; # Better performance for large projects
       };
       close_if_last_window = true;
       popup_border_style = "rounded";
@@ -55,6 +62,12 @@
           desc = "File Tree";
         }
       ];
+      before = lib.nixvim.mkRaw ''
+        function ()
+          require("lsp-file-operations").setup({ display_operations = true })
+          require("window-picker").setup({})
+        end
+      '';
     };
   };
   keymaps = [

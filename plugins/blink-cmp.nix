@@ -1,12 +1,25 @@
 { lib, pkgs, ... }:
 {
-  extraPlugins = with pkgs; [
-    vimPlugins.friendly-snippets
-    vimPlugins.blink-nerdfont-nvim
+  extraPlugins = [
+    {
+      plugin = pkgs.vimPlugins.friendly-snippets;
+      optional = true;
+    }
+    {
+      plugin = pkgs.vimPlugins.blink-nerdfont-nvim;
+      optional = true;
+    }
+  ];
+  plugins.lz-n.plugins = [
+    { __unkeyed-1 = "blink-nerdfont.nvim"; }
+    { __unkeyed-1 = "friendly-snippets"; }
   ];
 
   plugins = {
-    blink-emoji.enable = true;
+    blink-emoji = {
+      enable = true;
+      lazyLoad.settings.enable = true;
+    };
   };
 
   plugins.blink-cmp = {
@@ -142,7 +155,14 @@
         "InsertEnter"
         "CmdlineEnter"
       ];
+      before = lib.nixvim.mkRaw ''
+        function ()
+          local lazy = require("lz.n")
+          lazy.trigger_load("blink-nerdfont")
+          lazy.trigger_load("friendly-snippets")
+        end
+
+      '';
     };
   };
-
 }

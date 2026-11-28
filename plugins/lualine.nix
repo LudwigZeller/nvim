@@ -185,5 +185,8 @@
         ];
       };
     };
+    lazyLoad.settings = {
+      event = "DeferredUIEnter";
+    };
   };
 }

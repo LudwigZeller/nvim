@@ -24,6 +24,7 @@
   plugins = {
     bufdelete.enable = true;
     web-devicons.enable = true;
+    # web-devicons.lazyLoad.settings = { cmd = "Neotest"; keys = «thunk»; };;
   };
 
   plugins.bufferline = {
@@ -41,6 +42,13 @@
         end
       '';
       show_buffer_close_icons = false;
+
+    };
+    lazyLoad.settings = {
+      event = [
+        "BufReadPost"
+        "BufNewFile"
+      ];
     };
   };
 

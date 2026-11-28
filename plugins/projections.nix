@@ -10,23 +10,16 @@
       ];
       store_hook.pre = lib.nixvim.mkRaw ''
         function()
-          if pcall(require, "neo-tree") then vim.cmd [[Neotree action=close]] end
+          vim.cmd("Neotree action=close")
+          for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+            if vim.api.nvim_buf_is_valid(buf) and vim.bo[buf].filetype == "snacks_dashboard" then
+              pcall(vim.api.nvim_buf_delete, buf, { force = true })
+            end
+          end
         end
       '';
     };
   };
-
-  extraConfigLuaPre = ''
-    vim.api.nvim_create_autocmd("VimEnter", {
-      desc = "Restore project session if present",
-      callback = function()
-        if vim.fn.argc() ~= 0 then
-          return
-        end
-        require("projections.session").restore(vim.uv.cwd())
-      end,
-    })
-  '';
 
   autoCmd = [
     {
@@ -45,9 +38,6 @@
     local original_switch = switcher.switch
 
     switcher.switch = function(project_path)
-      if _G.AlphaAnimTimer then
-        _G.AlphaAnimTimer:stop()
-      end
       original_switch(project_path)
       vim.api.nvim_exec_autocmds("DirChanged", { pattern = "global" })
     end

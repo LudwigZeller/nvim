@@ -20,5 +20,9 @@
         lsp_doc_border = false;
       };
     };
+    lazyLoad.settings = {
+      event = "DeferredUIEnter";
+    };
+
   };
 }
